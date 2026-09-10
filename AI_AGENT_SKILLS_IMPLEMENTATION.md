@@ -57,65 +57,157 @@ Skills use **progressive disclosure**:
 
 This means skills cost almost nothing in context until they are needed.
 
-## Skills Installed
+## Skills Catalog
+
+All available skills organized by category. See the Installation section to pick a role package or build a custom set.
 
 ### Design & UI/UX
-| Skill | Purpose | Source |
-|-------|---------|--------|
-| checklist-design | 129 UI/UX checklists for web apps, mobile, design systems | Checklist-Design/skills |
-| design-review | Visual audit with before/after screenshots | hosseinmirzapur/opencode-skills |
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| checklist-design | 129 UI/UX checklists for web, mobile, design systems | frontend |
+| design-review | Visual audit with before/after screenshots | fullstack, frontend |
+| apple-hig | Apple Human Interface Guidelines | frontend |
+| brutalist-skill | Brutalist design patterns | frontend |
+| canvas-design | Canvas-based design | frontend |
+| color-expert | Color theory and palette generation | frontend |
+| design-brief | Design brief creation | frontend |
+| design-consultation | Design consultation workflows | frontend |
+| design-shotgun | Design exploration and ideation | frontend |
+| frontend-design | Frontend design patterns and best practices | frontend |
+| hand-drawn-diagrams | Hand-drawn diagram generation | frontend |
+| image-to-code-skill | Convert visual designs to code | frontend |
+| minimalist-skill | Minimalist design principles | frontend |
+| platform-design | Platform-specific design guidelines | frontend |
+| shadcn-ui | shadcn/ui component patterns | frontend |
+| ui-ux-pro-max | Advanced UI/UX workflows | frontend |
+| web-design-guidelines | Web design standards and patterns | frontend |
 
 ### Code Quality & Security
-| Skill | Purpose | Source |
-|-------|---------|--------|
-| code-reviewer | PR reviews, security vulnerabilities, code smells | hosseinmirzapur/opencode-skills |
-| security-reviewer | Vulnerability scanning, SAST, penetration testing | hosseinmirzapur/opencode-skills |
-| best-practices | Security (CSP, SRI, Trusted Types), browser compatibility | hosseinmirzapur/opencode-skills |
-| fullstack-guardian | Security-focused full-stack implementation | hosseinmirzapur/opencode-skills |
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| code-reviewer | PR reviews, security vulnerabilities, code smells | all |
+| security-reviewer | SAST, penetration testing, vulnerability scanning | fullstack, backend, security, architect |
+| best-practices | CSP, SRI, Trusted Types, browser compatibility | fullstack, frontend, backend |
+| fullstack-guardian | Security-focused full-stack implementation | fullstack, backend, security |
+| code-documenter | Documentation generation and standards | fullstack, backend |
+| prompt-engineer | AI prompt engineering patterns | data, fullstack |
+| secure-code-guardian | Secure coding patterns and review | security |
 
 ### Development Workflow
-| Skill | Purpose | Source |
-|-------|---------|--------|
-| feature-forge | Requirements workshops, user stories, EARS specs | hosseinmirzapur/opencode-skills |
-| executing-plans | Step-by-step plan execution | hosseinmirzapur/opencode-skills |
-| brainstorming | Idea generation and exploration | hosseinmirzapur/opencode-skills |
-| evaluation | Solution assessment and comparison | hosseinmirzapur/opencode-skills |
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| feature-forge | Requirements workshops, user stories, EARS specs | all |
+| executing-plans | Step-by-step plan execution | fullstack, backend, architect |
+| brainstorming | Idea generation and exploration | fullstack, frontend, mobile |
+| evaluation | Solution assessment and comparison | fullstack, backend, architect, data |
+| finishing-a-development-branch | Branch completion and merge workflows | fullstack, backend |
+| onboarding | Project onboarding for new contributors | fullstack, backend |
+| pr-feedback-quality-gate | PR feedback standards and quality checks | fullstack, backend, architect |
+| receiving-code-review | How to receive and apply review feedback | fullstack, backend |
+| requesting-code-review | How to request effective reviews | fullstack, backend |
+| systematic-debugging | Debugging methodology and process | fullstack, backend, mobile |
+| test-driven-development | TDD workflows and patterns | fullstack, backend |
+| using-git-worktrees | Git worktree patterns for parallel work | fullstack, backend |
+| verification-before-completion | Pre-ship verification checklists | all |
 
 ### Architecture & Design
-| Skill | Purpose | Source |
-|-------|---------|--------|
-| architecture-designer | System design, ADRs, scalability planning | hosseinmirzapur/opencode-skills |
-| api-designer | REST/GraphQL APIs, OpenAPI specs | hosseinmirzapur/opencode-skills |
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| architecture-designer | System design, ADRs, scalability planning | fullstack, backend, architect |
+| api-designer | REST/GraphQL APIs, OpenAPI specs | fullstack, backend, architect |
+| cloud-architect | Cloud infrastructure design and planning | devops, architect |
+| graphql-architect | GraphQL schema design and federation | backend, architect |
+| microservices-architect | Microservice patterns and decomposition | architect |
+| site-architecture | Site structure and information architecture | frontend, architect |
 
 ### Testing & Quality
-| Skill | Purpose | Source |
-|-------|---------|--------|
-| test-master | Unit, integration, E2E, performance testing | hosseinmirzapur/opencode-skills |
-| debugging-wizard | Systematic debugging methodology | hosseinmirzapur/opencode-skills |
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| test-master | Unit, integration, E2E, performance testing | fullstack, backend |
+| debugging-wizard | Systematic debugging methodology | fullstack, backend, mobile |
+| playwright-expert | Playwright test patterns and strategies | fullstack, frontend |
+| export-download-debugging | Export and download flow debugging | fullstack, frontend |
+| verification-before-completion | Pre-completion verification checks | all |
 
 ### Infrastructure & DevOps
-| Skill | Purpose | Source |
-|-------|---------|--------|
-| devops-engineer | CI/CD, Docker, Kubernetes, Terraform | hosseinmirzapur/opencode-skills |
-| database-optimizer | Query optimization, index design | hosseinmirzapur/opencode-skills |
-| chaos-engineer | Resilience testing, failure injection | hosseinmirzapur/opencode-skills |
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| devops-engineer | CI/CD, Docker, Kubernetes, Terraform | fullstack, backend, devops |
+| database-optimizer | Query optimization, index design | fullstack, backend, devops |
+| chaos-engineer | Resilience testing, failure injection | devops, security |
+| kubernetes-specialist | Kubernetes deep dive and operations | devops |
+| monitoring-expert | Observability, alerting, dashboards | devops |
+| postgres-pro | PostgreSQL advanced patterns | backend, devops |
+| redis-core | Redis patterns and data structures | backend, devops |
+| redis-query-engine | Redis query optimization | backend, devops |
+| sre-engineer | Site reliability engineering | devops |
+| spark-engineer | Apache Spark data processing | data, devops |
+| sql-pro | SQL optimization and advanced queries | backend, devops, data |
+| terraform-engineer | Terraform infrastructure as code | devops |
 
-### Language-Specific
-| Skill | Purpose | Source |
-|-------|---------|--------|
-| react-expert | React 19, Server Components, hooks | hosseinmirzapur/opencode-skills |
-| typescript-pro | Advanced types, type guards, tRPC | hosseinmirzapur/opencode-skills |
+### Language & Frameworks
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| react-expert | React 19, Server Components, hooks | fullstack, frontend |
+| typescript-pro | Advanced types, type guards, tRPC | fullstack, frontend, backend |
+| vue-expert | Vue.js 3, Composition API, Nuxt | frontend |
+| angular-architect | Angular patterns and architecture | frontend |
+| nextjs-developer | Next.js App Router, Server Components | frontend |
+| nestjs-expert | NestJS patterns and architecture | backend |
+| python-pro | Python patterns, asyncio, packaging | data, backend |
+| javascript-pro | Modern JavaScript patterns | fullstack, frontend |
+| golang-pro | Go concurrency, patterns, stdlib | backend |
+| rust-engineer | Rust ownership, async, systems programming | backend |
+| java-architect | Java patterns, Spring ecosystem | backend |
+| kotlin-specialist | Kotlin coroutines, Android, patterns | mobile, backend |
+| swift-expert | Swift, SwiftUI, iOS patterns | mobile |
+| php-pro | PHP patterns, modern PHP 8+ | backend |
+| csharp-developer | C#/.NET patterns and best practices | backend |
+| cpp-pro | C++ modern patterns, performance | backend |
+| dart-expert | Dart/Flutter language patterns | mobile |
+| rails-expert | Ruby on Rails patterns and conventions | backend |
+| laravel-specialist | Laravel patterns and best practices | backend |
+| spring-boot-engineer | Spring Boot patterns and configuration | backend |
+| dotnet-core-expert | .NET Core patterns and middleware | backend |
+| django-expert | Django patterns, ORM, views | backend |
+| fastapi-expert | FastAPI patterns, async, validation | backend |
+| react-native-expert | React Native patterns and debugging | mobile |
+| wordpress-pro | WordPress plugin and theme development | backend |
+| shopify-expert | Shopify Liquid, Storefront API | backend |
 
 ### Content & Marketing
-| Skill | Purpose | Source |
-|-------|---------|--------|
-| copywriting | Marketing copy, landing pages, CTAs | hosseinmirzapur/opencode-skills |
-| copy-editing | Polishing existing copy | hosseinmirzapur/opencode-skills |
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| copywriting | Marketing copy, landing pages, CTAs | content |
+| copy-editing | Polish and refine existing copy | content |
+| cold-email | Cold email writing and sequences | content |
+| emails | Email copywriting and automation | content |
+| seo | SEO optimization and strategy | content |
+
+### AI & Machine Learning
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| fine-tuning-expert | Model fine-tuning strategies | data |
+| ml-pipeline | ML pipeline design and orchestration | data |
+| rag-architect | RAG system design and retrieval | data |
+
+### Data & Visualization
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| d3-visualization | D3.js chart and visualization patterns | data, frontend |
+| data-report | Data reporting and presentation | data |
+| pandas-pro | Pandas data analysis patterns | data |
 
 ### CLI & Tools
-| Skill | Purpose | Source |
-|-------|---------|--------|
-| cli-developer | CLI tools, argument parsing, completions | hosseinmirzapur/opencode-skills |
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| cli-developer | CLI tools, argument parsing, completions | fullstack |
+| mcp-developer | MCP server development patterns | backend |
+
+### Game Development
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| game-developer | Game development patterns and engines | (standalone) |
 
 ## Installation
 
@@ -124,57 +216,132 @@ This means skills cost almost nothing in context until they are needed.
 - Git installed
 - PowerShell (Windows) or bash (macOS/Linux)
 
-### Agent-Specific Installation
+### Step 1: Choose Your Role
 
-Determine your agent from the Agent Detection section, then follow its instructions:
+Pick the role that matches your work. Each role installs a curated set of skills.
+
+| Role | Skills | Best For |
+|------|--------|----------|
+| `fullstack` | 18 | Most developers (frontend + backend + tools) |
+| `frontend` | 15 | UI/UX development, React, Vue, Angular |
+| `backend` | 14 | API development, servers, databases |
+| `devops` | 12 | Infrastructure, CI/CD, monitoring, SRE |
+| `mobile` | 10 | iOS, Android, Flutter, React Native |
+| `data` | 10 | Data engineering, ML, analytics |
+| `security` | 8 | Application security, penetration testing |
+| `architect` | 10 | System design, tech leads |
+| `content` | 6 | Copywriting, SEO, marketing |
+
+You can add individual skills on top of any role. See the Skills Catalog for the full list.
+
+### Step 2: Configure Your Install
+
+Each agent section below includes a script with two variables at the top:
+
+```powershell
+# Uncomment the role that matches your work
+$role = "fullstack"
+
+# Add extra skills you want beyond your role (optional)
+$extras = @(
+    # "python-pro",
+    # "vue-expert",
+)
+```
+
+Change `$role` to your role. Add any extra skills to `$extras`. Delete or comment out lines you don't want.
+
+### Step 3: Run the Script
+
+Each agent has its own install script below. Copy and run the one for your agent.
 
 ---
 
 #### OpenCode
 
 **Personal (all projects):**
-```bash
+```powershell
 mkdir -p ~/.config/opencode/skills
 ```
 
 **Install Checklist-Design:**
-```bash
+```powershell
 git clone https://github.com/Checklist-Design/skills.git /tmp/checklist-skills
 cp -r /tmp/checklist-skills/skills/checklist-design ~/.config/opencode/skills/
 ```
 
-**Install additional skills (PowerShell):**
-```bash
-$skills = @("code-reviewer", "security-reviewer", "best-practices", "fullstack-guardian",
-            "feature-forge", "architecture-designer", "api-designer", "test-master",
-            "debugging-wizard", "devops-engineer", "database-optimizer", "chaos-engineer",
-            "react-expert", "typescript-pro", "copywriting", "cli-developer",
-            "design-review", "executing-plans", "brainstorming", "evaluation")
+**Install skills (PowerShell):**
+```powershell
+# STEP 1: Pick your role (uncomment ONE)
+$role = "fullstack"
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content
+
+# STEP 2: Add extra skills you want (optional)
+$extras = @(
+    # "python-pro",
+    # "vue-expert",
+    # "d3-visualization",
+)
+
+# Role-to-skills mapping
+$roleSkills = @{
+    fullstack = @("code-reviewer","security-reviewer","best-practices","fullstack-guardian",
+                  "feature-forge","executing-plans","brainstorming","evaluation",
+                  "architecture-designer","api-designer","test-master","debugging-wizard",
+                  "devops-engineer","database-optimizer","react-expert","typescript-pro",
+                  "copywriting","cli-developer","design-review","verification-before-completion")
+    frontend  = @("checklist-design","design-review","apple-hig","color-expert","shadcn-ui",
+                  "frontend-design","ui-ux-pro-max","web-design-guidelines",
+                  "code-reviewer","best-practices","feature-forge","brainstorming",
+                  "evaluation","react-expert","typescript-pro","verification-before-completion")
+    backend   = @("code-reviewer","security-reviewer","best-practices","fullstack-guardian",
+                  "feature-forge","executing-plans","evaluation",
+                  "architecture-designer","api-designer","test-master","debugging-wizard",
+                  "devops-engineer","database-optimizer","sql-pro","verification-before-completion")
+    devops    = @("devops-engineer","database-optimizer","chaos-engineer",
+                  "kubernetes-specialist","monitoring-expert","sre-engineer",
+                  "terraform-engineer","postgres-pro","redis-core",
+                  "code-reviewer","best-practices","feature-forge","verification-before-completion")
+    mobile    = @("code-reviewer","security-reviewer","best-practices",
+                  "feature-forge","executing-plans","brainstorming",
+                  "test-master","debugging-wizard",
+                  "react-native-expert","typescript-pro","verification-before-completion")
+    data      = @("code-reviewer","best-practices","feature-forge","evaluation",
+                  "python-pro","sql-pro","pandas-pro",
+                  "d3-visualization","data-report","verification-before-completion")
+    security  = @("security-reviewer","secure-code-guardian","fullstack-guardian",
+                  "best-practices","code-reviewer","architecture-designer",
+                  "chaos-engineer","devops-engineer","verification-before-completion")
+    architect = @("architecture-designer","api-designer","microservices-architect",
+                  "cloud-architect","graphql-architect",
+                  "code-reviewer","security-reviewer",
+                  "feature-forge","executing-plans","evaluation","verification-before-completion")
+    content   = @("copywriting","copy-editing","cold-email","emails","seo",
+                  "code-reviewer","verification-before-completion")
+}
+
+$skills = $roleSkills[$role] + $extras
 
 foreach ($skill in $skills) {
     $url = "https://raw.githubusercontent.com/hosseinmirzapur/opencode-skills/main/skills/$skill/SKILL.md"
     $outputDir = "$env:USERPROFILE\.config\opencode\skills\$skill"
-
     New-Item -ItemType Directory -Force -Path $outputDir | Out-Null
     Invoke-WebRequest -Uri $url -OutFile "$outputDir\SKILL.md"
 }
 ```
 
 **Install references (optional):**
-```bash
-$skillsWithReferences = @("code-reviewer", "security-reviewer", "fullstack-guardian",
-                          "feature-forge", "architecture-designer", "api-designer",
-                          "test-master", "debugging-wizard", "devops-engineer",
-                          "database-optimizer", "chaos-engineer", "react-expert",
-                          "typescript-pro", "cli-developer")
+```powershell
+$skillsWithReferences = @("code-reviewer","security-reviewer","fullstack-guardian",
+                          "feature-forge","architecture-designer","api-designer",
+                          "test-master","debugging-wizard","devops-engineer",
+                          "database-optimizer","react-expert","typescript-pro","cli-developer")
 
 foreach ($skill in $skillsWithReferences) {
     $baseUrl = "https://api.github.com/repos/hosseinmirzapur/opencode-skills/contents/skills/$skill/references"
     $response = Invoke-RestMethod -Uri $baseUrl
     $outputDir = "$env:USERPROFILE\.config\opencode\skills\$skill\references"
-
     New-Item -ItemType Directory -Force -Path $outputDir | Out-Null
-
     foreach ($file in $response) {
         if ($file.type -eq "file") {
             Invoke-WebRequest -Uri $file.download_url -OutFile "$outputDir\$($file.name)"
@@ -199,20 +366,60 @@ mkdir -p .claude/skills
 
 **Install skills (bash):**
 ```bash
+# STEP 1: Pick your role (uncomment ONE)
+ROLE="fullstack"
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content
+
+# STEP 2: Add extra skills you want (optional)
+EXTRAS=()
+# EXTRAS=("python-pro" "vue-expert" "d3-visualization")
+
 SKILLS_DIR="$HOME/.claude/skills"  # or ".claude/skills" for project-local
 
 # Checklist-Design
 git clone https://github.com/Checklist-Design/skills.git /tmp/checklist-skills
 cp -r /tmp/checklist-skills/skills/checklist-design "$SKILLS_DIR/"
 
-# Additional skills
-SKILLS=("code-reviewer" "security-reviewer" "best-practices" "fullstack-guardian"
-        "feature-forge" "architecture-designer" "api-designer" "test-master"
-        "debugging-wizard" "devops-engineer" "database-optimizer" "chaos-engineer"
-        "react-expert" "typescript-pro" "copywriting" "cli-developer"
-        "design-review" "executing-plans" "brainstorming" "evaluation")
+# Role-to-skills mapping
+case $ROLE in
+  fullstack) SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+                     feature-forge executing-plans brainstorming evaluation
+                     architecture-designer api-designer test-master debugging-wizard
+                     devops-engineer database-optimizer react-expert typescript-pro
+                     copywriting cli-developer design-review verification-before-completion) ;;
+  frontend)  SKILLS=(checklist-design design-review apple-hig color-expert shadcn-ui
+                     frontend-design ui-ux-pro-max web-design-guidelines
+                     code-reviewer best-practices feature-forge brainstorming
+                     evaluation react-expert typescript-pro verification-before-completion) ;;
+  backend)   SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+                     feature-forge executing-plans evaluation
+                     architecture-designer api-designer test-master debugging-wizard
+                     devops-engineer database-optimizer sql-pro verification-before-completion) ;;
+  devops)    SKILLS=(devops-engineer database-optimizer chaos-engineer
+                     kubernetes-specialist monitoring-expert sre-engineer
+                     terraform-engineer postgres-pro redis-core
+                     code-reviewer best-practices feature-forge verification-before-completion) ;;
+  mobile)    SKILLS=(code-reviewer security-reviewer best-practices
+                     feature-forge executing-plans brainstorming
+                     test-master debugging-wizard
+                     react-native-expert typescript-pro verification-before-completion) ;;
+  data)      SKILLS=(code-reviewer best-practices feature-forge evaluation
+                     python-pro sql-pro pandas-pro
+                     d3-visualization data-report verification-before-completion) ;;
+  security)  SKILLS=(security-reviewer secure-code-guardian fullstack-guardian
+                     best-practices code-reviewer architecture-designer
+                     chaos-engineer devops-engineer verification-before-completion) ;;
+  architect) SKILLS=(architecture-designer api-designer microservices-architect
+                     cloud-architect graphql-architect
+                     code-reviewer security-reviewer
+                     feature-forge executing-plans evaluation verification-before-completion) ;;
+  content)   SKILLS=(copywriting copy-editing cold-email emails seo
+                     code-reviewer verification-before-completion) ;;
+esac
 
-for skill in "${SKILLS[@]}"; do
+ALL_SKILLS=("${SKILLS[@]}" "${EXTRAS[@]}")
+
+for skill in "${ALL_SKILLS[@]}"; do
     mkdir -p "$SKILLS_DIR/$skill"
     curl -sL "https://raw.githubusercontent.com/hosseinmirzapur/opencode-skills/main/skills/$skill/SKILL.md" \
         -o "$SKILLS_DIR/$skill/SKILL.md"
@@ -237,19 +444,60 @@ mkdir -p .cursor/skills
 
 **Install skills (bash):**
 ```bash
-SKILLS_DIR="$HOME/.cursor/skills"  # or ".cursor/skills" for project-local
+# STEP 1: Pick your role (uncomment ONE)
+ROLE="fullstack"
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content
 
-SKILLS=("code-reviewer" "security-reviewer" "best-practices" "fullstack-guardian"
-        "feature-forge" "architecture-designer" "api-designer" "test-master"
-        "debugging-wizard" "devops-engineer" "database-optimizer" "chaos-engineer"
-        "react-expert" "typescript-pro" "copywriting" "cli-developer"
-        "design-review" "executing-plans" "brainstorming" "evaluation")
+# STEP 2: Add extra skills you want (optional)
+EXTRAS=()
+# EXTRAS=("python-pro" "vue-expert" "d3-visualization")
+
+SKILLS_DIR="$HOME/.cursor/skills"  # or ".cursor/skills" for project-local
 
 # Checklist-Design
 git clone https://github.com/Checklist-Design/skills.git /tmp/checklist-skills
 cp -r /tmp/checklist-skills/skills/checklist-design "$SKILLS_DIR/"
 
-for skill in "${SKILLS[@]}"; do
+# Role-to-skills mapping
+case $ROLE in
+  fullstack) SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+                     feature-forge executing-plans brainstorming evaluation
+                     architecture-designer api-designer test-master debugging-wizard
+                     devops-engineer database-optimizer react-expert typescript-pro
+                     copywriting cli-developer design-review verification-before-completion) ;;
+  frontend)  SKILLS=(checklist-design design-review apple-hig color-expert shadcn-ui
+                     frontend-design ui-ux-pro-max web-design-guidelines
+                     code-reviewer best-practices feature-forge brainstorming
+                     evaluation react-expert typescript-pro verification-before-completion) ;;
+  backend)   SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+                     feature-forge executing-plans evaluation
+                     architecture-designer api-designer test-master debugging-wizard
+                     devops-engineer database-optimizer sql-pro verification-before-completion) ;;
+  devops)    SKILLS=(devops-engineer database-optimizer chaos-engineer
+                     kubernetes-specialist monitoring-expert sre-engineer
+                     terraform-engineer postgres-pro redis-core
+                     code-reviewer best-practices feature-forge verification-before-completion) ;;
+  mobile)    SKILLS=(code-reviewer security-reviewer best-practices
+                     feature-forge executing-plans brainstorming
+                     test-master debugging-wizard
+                     react-native-expert typescript-pro verification-before-completion) ;;
+  data)      SKILLS=(code-reviewer best-practices feature-forge evaluation
+                     python-pro sql-pro pandas-pro
+                     d3-visualization data-report verification-before-completion) ;;
+  security)  SKILLS=(security-reviewer secure-code-guardian fullstack-guardian
+                     best-practices code-reviewer architecture-designer
+                     chaos-engineer devops-engineer verification-before-completion) ;;
+  architect) SKILLS=(architecture-designer api-designer microservices-architect
+                     cloud-architect graphql-architect
+                     code-reviewer security-reviewer
+                     feature-forge executing-plans evaluation verification-before-completion) ;;
+  content)   SKILLS=(copywriting copy-editing cold-email emails seo
+                     code-reviewer verification-before-completion) ;;
+esac
+
+ALL_SKILLS=("${SKILLS[@]}" "${EXTRAS[@]}")
+
+for skill in "${ALL_SKILLS[@]}"; do
     mkdir -p "$SKILLS_DIR/$skill"
     curl -sL "https://raw.githubusercontent.com/hosseinmirzapur/opencode-skills/main/skills/$skill/SKILL.md" \
         -o "$SKILLS_DIR/$skill/SKILL.md"
@@ -274,19 +522,60 @@ mkdir -p .agents/skills
 
 **Install skills (bash):**
 ```bash
-SKILLS_DIR="$HOME/.agents/skills"  # or ".agents/skills" for project-local
+# STEP 1: Pick your role (uncomment ONE)
+ROLE="fullstack"
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content
 
-SKILLS=("code-reviewer" "security-reviewer" "best-practices" "fullstack-guardian"
-        "feature-forge" "architecture-designer" "api-designer" "test-master"
-        "debugging-wizard" "devops-engineer" "database-optimizer" "chaos-engineer"
-        "react-expert" "typescript-pro" "copywriting" "cli-developer"
-        "design-review" "executing-plans" "brainstorming" "evaluation")
+# STEP 2: Add extra skills you want (optional)
+EXTRAS=()
+# EXTRAS=("python-pro" "vue-expert" "d3-visualization")
+
+SKILLS_DIR="$HOME/.agents/skills"  # or ".agents/skills" for project-local
 
 # Checklist-Design
 git clone https://github.com/Checklist-Design/skills.git /tmp/checklist-skills
 cp -r /tmp/checklist-skills/skills/checklist-design "$SKILLS_DIR/"
 
-for skill in "${SKILLS[@]}"; do
+# Role-to-skills mapping
+case $ROLE in
+  fullstack) SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+                     feature-forge executing-plans brainstorming evaluation
+                     architecture-designer api-designer test-master debugging-wizard
+                     devops-engineer database-optimizer react-expert typescript-pro
+                     copywriting cli-developer design-review verification-before-completion) ;;
+  frontend)  SKILLS=(checklist-design design-review apple-hig color-expert shadcn-ui
+                     frontend-design ui-ux-pro-max web-design-guidelines
+                     code-reviewer best-practices feature-forge brainstorming
+                     evaluation react-expert typescript-pro verification-before-completion) ;;
+  backend)   SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+                     feature-forge executing-plans evaluation
+                     architecture-designer api-designer test-master debugging-wizard
+                     devops-engineer database-optimizer sql-pro verification-before-completion) ;;
+  devops)    SKILLS=(devops-engineer database-optimizer chaos-engineer
+                     kubernetes-specialist monitoring-expert sre-engineer
+                     terraform-engineer postgres-pro redis-core
+                     code-reviewer best-practices feature-forge verification-before-completion) ;;
+  mobile)    SKILLS=(code-reviewer security-reviewer best-practices
+                     feature-forge executing-plans brainstorming
+                     test-master debugging-wizard
+                     react-native-expert typescript-pro verification-before-completion) ;;
+  data)      SKILLS=(code-reviewer best-practices feature-forge evaluation
+                     python-pro sql-pro pandas-pro
+                     d3-visualization data-report verification-before-completion) ;;
+  security)  SKILLS=(security-reviewer secure-code-guardian fullstack-guardian
+                     best-practices code-reviewer architecture-designer
+                     chaos-engineer devops-engineer verification-before-completion) ;;
+  architect) SKILLS=(architecture-designer api-designer microservices-architect
+                     cloud-architect graphql-architect
+                     code-reviewer security-reviewer
+                     feature-forge executing-plans evaluation verification-before-completion) ;;
+  content)   SKILLS=(copywriting copy-editing cold-email emails seo
+                     code-reviewer verification-before-completion) ;;
+esac
+
+ALL_SKILLS=("${SKILLS[@]}" "${EXTRAS[@]}")
+
+for skill in "${ALL_SKILLS[@]}"; do
     mkdir -p "$SKILLS_DIR/$skill"
     curl -sL "https://raw.githubusercontent.com/hosseinmirzapur/opencode-skills/main/skills/$skill/SKILL.md" \
         -o "$SKILLS_DIR/$skill/SKILL.md"
@@ -306,19 +595,60 @@ mkdir -p .agents/skills
 
 **Install skills (bash):**
 ```bash
-SKILLS_DIR=".agents/skills"
+# STEP 1: Pick your role (uncomment ONE)
+ROLE="fullstack"
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content
 
-SKILLS=("code-reviewer" "security-reviewer" "best-practices" "fullstack-guardian"
-        "feature-forge" "architecture-designer" "api-designer" "test-master"
-        "debugging-wizard" "devops-engineer" "database-optimizer" "chaos-engineer"
-        "react-expert" "typescript-pro" "copywriting" "cli-developer"
-        "design-review" "executing-plans" "brainstorming" "evaluation")
+# STEP 2: Add extra skills you want (optional)
+EXTRAS=()
+# EXTRAS=("python-pro" "vue-expert" "d3-visualization")
+
+SKILLS_DIR=".agents/skills"
 
 # Checklist-Design
 git clone https://github.com/Checklist-Design/skills.git /tmp/checklist-skills
 cp -r /tmp/checklist-skills/skills/checklist-design "$SKILLS_DIR/"
 
-for skill in "${SKILLS[@]}"; do
+# Role-to-skills mapping
+case $ROLE in
+  fullstack) SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+                     feature-forge executing-plans brainstorming evaluation
+                     architecture-designer api-designer test-master debugging-wizard
+                     devops-engineer database-optimizer react-expert typescript-pro
+                     copywriting cli-developer design-review verification-before-completion) ;;
+  frontend)  SKILLS=(checklist-design design-review apple-hig color-expert shadcn-ui
+                     frontend-design ui-ux-pro-max web-design-guidelines
+                     code-reviewer best-practices feature-forge brainstorming
+                     evaluation react-expert typescript-pro verification-before-completion) ;;
+  backend)   SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+                     feature-forge executing-plans evaluation
+                     architecture-designer api-designer test-master debugging-wizard
+                     devops-engineer database-optimizer sql-pro verification-before-completion) ;;
+  devops)    SKILLS=(devops-engineer database-optimizer chaos-engineer
+                     kubernetes-specialist monitoring-expert sre-engineer
+                     terraform-engineer postgres-pro redis-core
+                     code-reviewer best-practices feature-forge verification-before-completion) ;;
+  mobile)    SKILLS=(code-reviewer security-reviewer best-practices
+                     feature-forge executing-plans brainstorming
+                     test-master debugging-wizard
+                     react-native-expert typescript-pro verification-before-completion) ;;
+  data)      SKILLS=(code-reviewer best-practices feature-forge evaluation
+                     python-pro sql-pro pandas-pro
+                     d3-visualization data-report verification-before-completion) ;;
+  security)  SKILLS=(security-reviewer secure-code-guardian fullstack-guardian
+                     best-practices code-reviewer architecture-designer
+                     chaos-engineer devops-engineer verification-before-completion) ;;
+  architect) SKILLS=(architecture-designer api-designer microservices-architect
+                     cloud-architect graphql-architect
+                     code-reviewer security-reviewer
+                     feature-forge executing-plans evaluation verification-before-completion) ;;
+  content)   SKILLS=(copywriting copy-editing cold-email emails seo
+                     code-reviewer verification-before-completion) ;;
+esac
+
+ALL_SKILLS=("${SKILLS[@]}" "${EXTRAS[@]}")
+
+for skill in "${ALL_SKILLS[@]}"; do
     mkdir -p "$SKILLS_DIR/$skill"
     curl -sL "https://raw.githubusercontent.com/hosseinmirzapur/opencode-skills/main/skills/$skill/SKILL.md" \
         -o "$SKILLS_DIR/$skill/SKILL.md"
@@ -343,19 +673,60 @@ mkdir -p .agents/skills    # Universal path (also works)
 
 **Install skills (bash):**
 ```bash
-SKILLS_DIR="$HOME/.copilot/skills"  # or ".agents/skills" for project-local
+# STEP 1: Pick your role (uncomment ONE)
+ROLE="fullstack"
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content
 
-SKILLS=("code-reviewer" "security-reviewer" "best-practices" "fullstack-guardian"
-        "feature-forge" "architecture-designer" "api-designer" "test-master"
-        "debugging-wizard" "devops-engineer" "database-optimizer" "chaos-engineer"
-        "react-expert" "typescript-pro" "copywriting" "cli-developer"
-        "design-review" "executing-plans" "brainstorming" "evaluation")
+# STEP 2: Add extra skills you want (optional)
+EXTRAS=()
+# EXTRAS=("python-pro" "vue-expert" "d3-visualization")
+
+SKILLS_DIR="$HOME/.copilot/skills"  # or ".agents/skills" for project-local
 
 # Checklist-Design
 git clone https://github.com/Checklist-Design/skills.git /tmp/checklist-skills
 cp -r /tmp/checklist-skills/skills/checklist-design "$SKILLS_DIR/"
 
-for skill in "${SKILLS[@]}"; do
+# Role-to-skills mapping
+case $ROLE in
+  fullstack) SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+                     feature-forge executing-plans brainstorming evaluation
+                     architecture-designer api-designer test-master debugging-wizard
+                     devops-engineer database-optimizer react-expert typescript-pro
+                     copywriting cli-developer design-review verification-before-completion) ;;
+  frontend)  SKILLS=(checklist-design design-review apple-hig color-expert shadcn-ui
+                     frontend-design ui-ux-pro-max web-design-guidelines
+                     code-reviewer best-practices feature-forge brainstorming
+                     evaluation react-expert typescript-pro verification-before-completion) ;;
+  backend)   SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+                     feature-forge executing-plans evaluation
+                     architecture-designer api-designer test-master debugging-wizard
+                     devops-engineer database-optimizer sql-pro verification-before-completion) ;;
+  devops)    SKILLS=(devops-engineer database-optimizer chaos-engineer
+                     kubernetes-specialist monitoring-expert sre-engineer
+                     terraform-engineer postgres-pro redis-core
+                     code-reviewer best-practices feature-forge verification-before-completion) ;;
+  mobile)    SKILLS=(code-reviewer security-reviewer best-practices
+                     feature-forge executing-plans brainstorming
+                     test-master debugging-wizard
+                     react-native-expert typescript-pro verification-before-completion) ;;
+  data)      SKILLS=(code-reviewer best-practices feature-forge evaluation
+                     python-pro sql-pro pandas-pro
+                     d3-visualization data-report verification-before-completion) ;;
+  security)  SKILLS=(security-reviewer secure-code-guardian fullstack-guardian
+                     best-practices code-reviewer architecture-designer
+                     chaos-engineer devops-engineer verification-before-completion) ;;
+  architect) SKILLS=(architecture-designer api-designer microservices-architect
+                     cloud-architect graphql-architect
+                     code-reviewer security-reviewer
+                     feature-forge executing-plans evaluation verification-before-completion) ;;
+  content)   SKILLS=(copywriting copy-editing cold-email emails seo
+                     code-reviewer verification-before-completion) ;;
+esac
+
+ALL_SKILLS=("${SKILLS[@]}" "${EXTRAS[@]}")
+
+for skill in "${ALL_SKILLS[@]}"; do
     mkdir -p "$SKILLS_DIR/$skill"
     curl -sL "https://raw.githubusercontent.com/hosseinmirzapur/opencode-skills/main/skills/$skill/SKILL.md" \
         -o "$SKILLS_DIR/$skill/SKILL.md"
@@ -378,19 +749,60 @@ mkdir -p .agents/skills
 
 **Install skills (bash):**
 ```bash
-SKILLS_DIR="$HOME/.agents/skills"  # or ".agents/skills" for project-local
+# STEP 1: Pick your role (uncomment ONE)
+ROLE="fullstack"
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content
 
-SKILLS=("code-reviewer" "security-reviewer" "best-practices" "fullstack-guardian"
-        "feature-forge" "architecture-designer" "api-designer" "test-master"
-        "debugging-wizard" "devops-engineer" "database-optimizer" "chaos-engineer"
-        "react-expert" "typescript-pro" "copywriting" "cli-developer"
-        "design-review" "executing-plans" "brainstorming" "evaluation")
+# STEP 2: Add extra skills you want (optional)
+EXTRAS=()
+# EXTRAS=("python-pro" "vue-expert" "d3-visualization")
+
+SKILLS_DIR="$HOME/.agents/skills"  # or ".agents/skills" for project-local
 
 # Checklist-Design
 git clone https://github.com/Checklist-Design/skills.git /tmp/checklist-skills
 cp -r /tmp/checklist-skills/skills/checklist-design "$SKILLS_DIR/"
 
-for skill in "${SKILLS[@]}"; do
+# Role-to-skills mapping
+case $ROLE in
+  fullstack) SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+                     feature-forge executing-plans brainstorming evaluation
+                     architecture-designer api-designer test-master debugging-wizard
+                     devops-engineer database-optimizer react-expert typescript-pro
+                     copywriting cli-developer design-review verification-before-completion) ;;
+  frontend)  SKILLS=(checklist-design design-review apple-hig color-expert shadcn-ui
+                     frontend-design ui-ux-pro-max web-design-guidelines
+                     code-reviewer best-practices feature-forge brainstorming
+                     evaluation react-expert typescript-pro verification-before-completion) ;;
+  backend)   SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+                     feature-forge executing-plans evaluation
+                     architecture-designer api-designer test-master debugging-wizard
+                     devops-engineer database-optimizer sql-pro verification-before-completion) ;;
+  devops)    SKILLS=(devops-engineer database-optimizer chaos-engineer
+                     kubernetes-specialist monitoring-expert sre-engineer
+                     terraform-engineer postgres-pro redis-core
+                     code-reviewer best-practices feature-forge verification-before-completion) ;;
+  mobile)    SKILLS=(code-reviewer security-reviewer best-practices
+                     feature-forge executing-plans brainstorming
+                     test-master debugging-wizard
+                     react-native-expert typescript-pro verification-before-completion) ;;
+  data)      SKILLS=(code-reviewer best-practices feature-forge evaluation
+                     python-pro sql-pro pandas-pro
+                     d3-visualization data-report verification-before-completion) ;;
+  security)  SKILLS=(security-reviewer secure-code-guardian fullstack-guardian
+                     best-practices code-reviewer architecture-designer
+                     chaos-engineer devops-engineer verification-before-completion) ;;
+  architect) SKILLS=(architecture-designer api-designer microservices-architect
+                     cloud-architect graphql-architect
+                     code-reviewer security-reviewer
+                     feature-forge executing-plans evaluation verification-before-completion) ;;
+  content)   SKILLS=(copywriting copy-editing cold-email emails seo
+                     code-reviewer verification-before-completion) ;;
+esac
+
+ALL_SKILLS=("${SKILLS[@]}" "${EXTRAS[@]}")
+
+for skill in "${ALL_SKILLS[@]}"; do
     mkdir -p "$SKILLS_DIR/$skill"
     curl -sL "https://raw.githubusercontent.com/hosseinmirzapur/opencode-skills/main/skills/$skill/SKILL.md" \
         -o "$SKILLS_DIR/$skill/SKILL.md"
@@ -856,21 +1268,40 @@ If you use multiple agents in the same project:
 
 ## Additional Skills
 
-To add more skills from the hosseinmirzapur/opencode-skills repository (322+ skills available):
+The Skills Catalog above lists all skills included in the role packages. The hosseinmirzapur/opencode-skills repository has 322+ skills total.
 
-1. Browse available skills: https://github.com/hosseinmirzapur/opencode-skills/tree/main/skills
-2. Download SKILL.md and references
-3. Place in your agent's skills directory under `<skill-name>/`
+### Browse All Skills
 
-### Recommended Additional Skills
-- **django-expert** — Django best practices
-- **fastapi-expert** — FastAPI APIs
-- **nestjs-expert** — NestJS APIs
-- **spring-boot-engineer** — Spring Boot
-- **kubernetes-specialist** — K8s deep dive
-- **terraform-engineer** — Terraform IaC
-- **sre-engineer** — Site reliability
-- **monitoring-expert** — Observability
+Full catalog: https://github.com/hosseinmirzapur/opencode-skills/tree/main/skills
+
+### Adding Skills Not in Your Role
+
+Use the `$extras` array (PowerShell) or `EXTRAS` (bash) in the install script to add any skill by name:
+
+```powershell
+# PowerShell (OpenCode)
+$extras = @("game-developer", "shopify-expert", "wordpress-pro")
+```
+
+```bash
+# Bash (all other agents)
+EXTRAS=("game-developer" "shopify-expert" "wordpress-pro")
+```
+
+### Popular Picks by Category
+
+| Category | Skills Worth Adding |
+|----------|-------------------|
+| Python | `python-pro`, `django-expert`, `fastapi-expert`, `pandas-pro` |
+| JavaScript/TS | `javascript-pro`, `vue-expert`, `angular-architect`, `nextjs-developer`, `nestjs-expert` |
+| Mobile | `flutter-expert`, `react-native-expert`, `swift-expert`, `kotlin-specialist` |
+| Go/Rust | `golang-pro`, `rust-engineer` |
+| Java/JVM | `java-architect`, `kotlin-specialist`, `spring-boot-engineer` |
+| PHP | `php-pro`, `laravel-specialist`, `wordpress-pro` |
+| .NET | `csharp-developer`, `dotnet-core-expert` |
+| Infrastructure | `kubernetes-specialist`, `terraform-engineer`, `sre-engineer`, `monitoring-expert` |
+| Data | `python-pro`, `sql-pro`, `pandas-pro`, `d3-visualization`, `ml-pipeline` |
+| Design | `frontend-design`, `shadcn-ui`, `ui-ux-pro-max`, `color-expert` |
 
 ## Contributing
 
