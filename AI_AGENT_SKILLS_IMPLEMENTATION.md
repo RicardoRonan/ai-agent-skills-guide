@@ -11,7 +11,7 @@ This guide works with **OpenCode, Claude Code, Cursor, Codex, Windsurf, GitHub C
 ## Goals
 
 1. **Global Installation**: Skills installed in your agent's personal directory are available across all projects
-2. **Comprehensive Coverage**: 114 curated skills covering design, code quality, security, architecture, testing, DevOps, languages, token optimization, and more
+2. **Comprehensive Coverage**: 159 curated skills covering design, code quality, security, architecture, testing, DevOps, languages, token optimization, automation, go-to-market, finance, and more
 3. **Workflow Enhancement**: Skills designed to increase developer productivity and code quality
 
 ## Agent Detection
@@ -65,7 +65,7 @@ This means skills cost almost nothing in context until they are needed.
 
 All available skills organized by category. See the Installation section to pick a role package or build a custom set.
 
-> **Catalog sync:** `Last synced: 2026-09-11` | `Upstream: hosseinmirzapur/opencode-skills`, `NeoLabHQ/context-engineering-kit` | `Tracked: 114 skills`.
+> **Catalog sync:** `Last synced: 2026-09-11` | `Upstream: hosseinmirzapur/opencode-skills`, `NeoLabHQ/context-engineering-kit`, `n8n-io/skills`, `LeadMagic/gtm-skills`, `GAJETOso/financeskills`, `gokulb20/crewm8-cfo-skills` | `Tracked: 159 skills`.
 > If you are an agent running this guide, run the **Keeping the Catalog Updated** section at the end before trusting these tables. The upstream repo adds skills regularly.
 
 ### Design & UI/UX
@@ -235,6 +235,63 @@ All available skills organized by category. See the Installation section to pick
 |-------|---------|----------|
 | game-developer | Game development patterns and engines | (standalone) |
 
+### Automation Platforms
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| n8n-workflow-lifecycle-official | n8n workflow design, organization, and lifecycle | automation |
+| n8n-subworkflows-official | Reusable and multi-step n8n sub-workflows | automation |
+| n8n-extending-mcp-official | Extend n8n MCP capabilities | automation |
+| n8n-expressions-official | n8n expressions and data references | automation |
+| n8n-node-configuration-official | Configuring n8n nodes | automation |
+| n8n-code-nodes-official | Custom logic in n8n Code nodes | automation |
+| n8n-loops-official | Loops, batching, and pagination | automation |
+| n8n-agents-official | LangChain Agent node, tools, structured output | automation |
+| n8n-error-handling-official | Error handling for production n8n workflows | automation |
+| n8n-credentials-and-security-official | Auth, API keys, and credentials in n8n | automation |
+| n8n-binary-and-data-official | Files, images, and attachments in n8n | automation |
+| n8n-data-tables-official | n8n Data Tables: schemas, dedup, state | automation |
+| n8n-debugging-official | Debugging n8n workflows | automation |
+| using-n8n-skills-official | Router for the official n8n skill set | automation |
+
+### Go-to-Market
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| gtm-context | Capture company, ICP, motion, and metrics context | gtm |
+| icp-scoring | ICP definition and account scoring | gtm |
+| positioning-messaging | Positioning and messaging hierarchy | gtm |
+| pricing-strategy | Pricing, packaging, and willingness to pay | gtm |
+| buyer-psychology | Buyer psychology for GTM decisions | gtm |
+| competitive-intel | Competitive intelligence and battlecards | gtm |
+| cold-email-strategy | Cold email strategy and sequences | gtm |
+| cold-email-copywriting | Cold email copywriting | gtm |
+| email-deliverability | Domain and inbox deliverability | gtm |
+| multi-channel-outreach | Multi-channel outreach cadence | gtm |
+| pipeline-management | Pipeline management and hygiene | gtm |
+| meeting-prep | Pre-call research and briefing | gtm |
+| objection-handling | Diagnose and handle objections | gtm |
+| sales-enablement | Sales asset and enablement creation | gtm |
+| gtm-metrics | GTM metrics and dashboards | gtm |
+| attribution | Marketing attribution modeling | gtm |
+
+### Financial
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| financial-analysis | Financial statement analysis and ratios | finance |
+| budget-forecast | Budgets, forecasts, and variance analysis | finance |
+| statement-preparation | Income statement, balance sheet, cash flow (IFRS/GAAP) | finance |
+| investment-analysis | NPV, IRR, payback, and sensitivity analysis | finance |
+| audit-checklist | Audit checklists, workpapers, and test procedures | finance |
+| automated-reconciliation | Bank and account reconciliation at scale | finance |
+| tax-planning | Tax position optimization and compliance | finance |
+| revenue-recognition | IFRS 15 / ASC 606 revenue recognition | finance |
+| risk-assessment | Credit, market, operational, and liquidity risk | finance |
+| treasury-management | Cash, working capital, and liquidity | finance |
+| wacc-computation | Weighted average cost of capital | finance |
+| credit-analysis | Credit risk and rating analysis | finance |
+| cash-forecasting | Rolling cash forecast and runway (startup CFO) | finance |
+| cap-table-management | Cap table, dilution, and option pool | finance |
+| unit-economics-analysis | CAC, LTV, and payback analysis | finance |
+
 ## Installation
 
 ### Prerequisites
@@ -244,7 +301,7 @@ All available skills organized by category. See the Installation section to pick
 
 ### Step 1: Choose Your Role
 
-Pick the role that matches your work. Each role installs a curated set of skills.
+Pick one or more roles that match your work. Each role installs a curated set of skills, and selecting several merges them.
 
 | Role | Skills | Best For |
 |------|--------|----------|
@@ -258,25 +315,28 @@ Pick the role that matches your work. Each role installs a curated set of skills
 | `architect` | 15 | System design, tech leads |
 | `content` | 11 | Copywriting, SEO, marketing |
 | `optimize` | 16 | Token cost and context window efficiency |
+| `automation` | 14 | n8n and workflow automation |
+| `gtm` | 16 | Go-to-market, sales, RevOps |
+| `finance` | 15 | Finance, accounting, FP&A, startup CFO |
 
-You can add individual skills on top of any role. See the Skills Catalog for the full list.
+You can combine roles (for example `("fullstack", "devops")`) and add individual skills on top. See the Skills Catalog for the full list.
 
 ### Step 2: Configure Your Install
 
-Each agent section below includes a script with two variables at the top:
+Each agent section below includes a script with variables at the top:
 
 ```powershell
-# Uncomment the role that matches your work
-$role = "fullstack"
+# Pick one or more roles
+$roles = @("fullstack", "devops")
 
-# Add extra skills you want beyond your role (optional)
+# Add extra skills you want beyond your roles (optional)
 $extras = @(
     # "python-pro",
     # "vue-expert",
 )
 ```
 
-Change `$role` to your role. Add any extra skills to `$extras`. Delete or comment out lines you don't want.
+List every role you want in the array. Add any extra skills to `$extras`. Delete or comment out lines you don't want. Duplicates across roles are removed automatically.
 
 ### Step 3: Run the Script
 
@@ -299,9 +359,10 @@ cp -r /tmp/checklist-skills/skills/checklist-design ~/.config/opencode/skills/
 
 **Install skills (PowerShell):**
 ```powershell
-# STEP 1: Pick your role (uncomment ONE)
-$role = "fullstack"
-# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize, optimize
+# STEP 1: Pick one or more roles
+$roles = @("fullstack")
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect,
+#          content, optimize, automation, gtm, finance
 
 # STEP 2: Add extra skills you want (optional)
 $extras = @(
@@ -315,70 +376,138 @@ $base = @("context-engineering","write-concisely","prompt-engineer","multi-agent
 
 # Role-to-skills mapping
 $roleSkills = @{
-    fullstack = @("code-reviewer","security-reviewer","best-practices","fullstack-guardian",
-                  "feature-forge","executing-plans","brainstorming","evaluation",
-                  "architecture-designer","api-designer","test-master","debugging-wizard",
-                  "devops-engineer","database-optimizer","react-expert","typescript-pro",
-                  "copywriting","cli-developer","design-review","verification-before-completion")
-    frontend  = @("checklist-design","design-review","apple-hig","color-expert","shadcn-ui",
-                  "frontend-design","ui-ux-pro-max","web-design-guidelines",
-                  "code-reviewer","best-practices","feature-forge","brainstorming",
-                  "evaluation","react-expert","typescript-pro","verification-before-completion")
-    backend   = @("code-reviewer","security-reviewer","best-practices","fullstack-guardian",
-                  "feature-forge","executing-plans","evaluation",
-                  "architecture-designer","api-designer","test-master","debugging-wizard",
-                  "devops-engineer","database-optimizer","sql-pro","verification-before-completion")
-    devops    = @("devops-engineer","database-optimizer","chaos-engineer",
-                  "kubernetes-specialist","monitoring-expert","sre-engineer",
-                  "terraform-engineer","postgres-pro","redis-core",
-                  "code-reviewer","best-practices","feature-forge","verification-before-completion")
-    mobile    = @("code-reviewer","security-reviewer","best-practices",
-                  "feature-forge","executing-plans","brainstorming",
-                  "test-master","debugging-wizard",
-                  "react-native-expert","flutter-expert","typescript-pro","verification-before-completion")
-    data      = @("code-reviewer","best-practices","feature-forge","evaluation",
-                  "python-pro","sql-pro","pandas-pro",
-                  "d3-visualization","data-report","verification-before-completion")
-    security  = @("security-reviewer","secure-code-guardian","fullstack-guardian",
-                  "best-practices","code-reviewer","architecture-designer",
-                  "chaos-engineer","devops-engineer","verification-before-completion")
-    architect = @("architecture-designer","api-designer","microservices-architect",
-                  "cloud-architect","graphql-architect",
-                  "code-reviewer","security-reviewer",
-                  "feature-forge","executing-plans","evaluation","verification-before-completion")
-    content   = @("copywriting","copy-editing","cold-email","emails","seo",
-                  "code-reviewer","verification-before-completion")
-    optimize  = @("context-engineering","multi-agent-patterns","launch-sub-agent","do-in-parallel",
-                  "memorize","decay","reset","write-concisely",
-                  "apply-anthropic-skill-best-practices","prompt-engineering","test-prompt",
-                  "setup-codemap-cli","setup-serena-mcp",
-                  "prompt-engineer","output-skill","graphify")
+    fullstack  = @("code-reviewer","security-reviewer","best-practices","fullstack-guardian",
+                   "feature-forge","executing-plans","brainstorming","evaluation",
+                   "architecture-designer","api-designer","test-master","debugging-wizard",
+                   "devops-engineer","database-optimizer","react-expert","typescript-pro",
+                   "copywriting","cli-developer","design-review","verification-before-completion")
+    frontend   = @("checklist-design","design-review","apple-hig","color-expert","shadcn-ui",
+                   "frontend-design","ui-ux-pro-max","web-design-guidelines",
+                   "code-reviewer","best-practices","feature-forge","brainstorming",
+                   "evaluation","react-expert","typescript-pro","verification-before-completion")
+    backend    = @("code-reviewer","security-reviewer","best-practices","fullstack-guardian",
+                   "feature-forge","executing-plans","evaluation",
+                   "architecture-designer","api-designer","test-master","debugging-wizard",
+                   "devops-engineer","database-optimizer","sql-pro","verification-before-completion")
+    devops     = @("devops-engineer","database-optimizer","chaos-engineer",
+                   "kubernetes-specialist","monitoring-expert","sre-engineer",
+                   "terraform-engineer","postgres-pro","redis-core",
+                   "code-reviewer","best-practices","feature-forge","verification-before-completion")
+    mobile     = @("code-reviewer","security-reviewer","best-practices",
+                   "feature-forge","executing-plans","brainstorming",
+                   "test-master","debugging-wizard",
+                   "react-native-expert","flutter-expert","typescript-pro","verification-before-completion")
+    data       = @("code-reviewer","best-practices","feature-forge","evaluation",
+                   "python-pro","sql-pro","pandas-pro",
+                   "d3-visualization","data-report","verification-before-completion")
+    security   = @("security-reviewer","secure-code-guardian","fullstack-guardian",
+                   "best-practices","code-reviewer","architecture-designer",
+                   "chaos-engineer","devops-engineer","verification-before-completion")
+    architect  = @("architecture-designer","api-designer","microservices-architect",
+                   "cloud-architect","graphql-architect",
+                   "code-reviewer","security-reviewer",
+                   "feature-forge","executing-plans","evaluation","verification-before-completion")
+    content    = @("copywriting","copy-editing","cold-email","emails","seo",
+                   "code-reviewer","verification-before-completion")
+    optimize   = @("context-engineering","multi-agent-patterns","launch-sub-agent","do-in-parallel",
+                   "memorize","decay","reset","write-concisely",
+                   "apply-anthropic-skill-best-practices","prompt-engineering","test-prompt",
+                   "setup-codemap-cli","setup-serena-mcp",
+                   "prompt-engineer","output-skill","graphify")
+    automation = @("n8n-workflow-lifecycle-official","n8n-subworkflows-official",
+                   "n8n-extending-mcp-official","n8n-expressions-official",
+                   "n8n-node-configuration-official","n8n-code-nodes-official",
+                   "n8n-loops-official","n8n-agents-official","n8n-error-handling-official",
+                   "n8n-credentials-and-security-official","n8n-binary-and-data-official",
+                   "n8n-data-tables-official","n8n-debugging-official","using-n8n-skills-official")
+    gtm        = @("gtm-context","icp-scoring","positioning-messaging","pricing-strategy",
+                   "buyer-psychology","competitive-intel","cold-email-strategy",
+                   "cold-email-copywriting","email-deliverability","multi-channel-outreach",
+                   "pipeline-management","meeting-prep","objection-handling","sales-enablement",
+                   "gtm-metrics","attribution")
+    finance    = @("financial-analysis","budget-forecast","statement-preparation",
+                   "investment-analysis","audit-checklist","automated-reconciliation",
+                   "tax-planning","revenue-recognition","risk-assessment","treasury-management",
+                   "wacc-computation","credit-analysis","cash-forecasting",
+                   "cap-table-management","unit-economics-analysis")
 }
 
-# Skills that come from a repo other than the default
+# Skills that come from a repo other than the default (format: repo/branch/path-prefix)
 $sourceMap = @{
-    "context-engineering"                  = "NeoLabHQ/context-engineering-kit@master"
-    "multi-agent-patterns"                 = "NeoLabHQ/context-engineering-kit@master"
-    "launch-sub-agent"                     = "NeoLabHQ/context-engineering-kit@master"
-    "do-in-parallel"                       = "NeoLabHQ/context-engineering-kit@master"
-    "memorize"                             = "NeoLabHQ/context-engineering-kit@master"
-    "decay"                                = "NeoLabHQ/context-engineering-kit@master"
-    "reset"                                = "NeoLabHQ/context-engineering-kit@master"
-    "write-concisely"                      = "NeoLabHQ/context-engineering-kit@master"
-    "apply-anthropic-skill-best-practices" = "NeoLabHQ/context-engineering-kit@master"
-    "prompt-engineering"                   = "NeoLabHQ/context-engineering-kit@master"
-    "test-prompt"                          = "NeoLabHQ/context-engineering-kit@master"
-    "setup-codemap-cli"                    = "NeoLabHQ/context-engineering-kit@master"
-    "setup-serena-mcp"                     = "NeoLabHQ/context-engineering-kit@master"
+    # Context engineering (NeoLabHQ)
+    "context-engineering"                  = "NeoLabHQ/context-engineering-kit/master/skills"
+    "multi-agent-patterns"                 = "NeoLabHQ/context-engineering-kit/master/skills"
+    "launch-sub-agent"                     = "NeoLabHQ/context-engineering-kit/master/skills"
+    "do-in-parallel"                       = "NeoLabHQ/context-engineering-kit/master/skills"
+    "memorize"                             = "NeoLabHQ/context-engineering-kit/master/skills"
+    "decay"                                = "NeoLabHQ/context-engineering-kit/master/skills"
+    "reset"                                = "NeoLabHQ/context-engineering-kit/master/skills"
+    "write-concisely"                      = "NeoLabHQ/context-engineering-kit/master/skills"
+    "apply-anthropic-skill-best-practices" = "NeoLabHQ/context-engineering-kit/master/skills"
+    "prompt-engineering"                   = "NeoLabHQ/context-engineering-kit/master/skills"
+    "test-prompt"                          = "NeoLabHQ/context-engineering-kit/master/skills"
+    "setup-codemap-cli"                    = "NeoLabHQ/context-engineering-kit/master/skills"
+    "setup-serena-mcp"                     = "NeoLabHQ/context-engineering-kit/master/skills"
+    # Automation (official n8n skills)
+    "n8n-workflow-lifecycle-official"      = "n8n-io/skills/main/skills"
+    "n8n-subworkflows-official"            = "n8n-io/skills/main/skills"
+    "n8n-extending-mcp-official"           = "n8n-io/skills/main/skills"
+    "n8n-expressions-official"             = "n8n-io/skills/main/skills"
+    "n8n-node-configuration-official"      = "n8n-io/skills/main/skills"
+    "n8n-code-nodes-official"              = "n8n-io/skills/main/skills"
+    "n8n-loops-official"                   = "n8n-io/skills/main/skills"
+    "n8n-agents-official"                  = "n8n-io/skills/main/skills"
+    "n8n-error-handling-official"          = "n8n-io/skills/main/skills"
+    "n8n-credentials-and-security-official"= "n8n-io/skills/main/skills"
+    "n8n-binary-and-data-official"         = "n8n-io/skills/main/skills"
+    "n8n-data-tables-official"             = "n8n-io/skills/main/skills"
+    "n8n-debugging-official"               = "n8n-io/skills/main/skills"
+    "using-n8n-skills-official"            = "n8n-io/skills/main/skills"
+    # Go-to-market (LeadMagic)
+    "gtm-context"                          = "LeadMagic/gtm-skills/main/skills/foundation"
+    "icp-scoring"                          = "LeadMagic/gtm-skills/main/skills/foundation"
+    "positioning-messaging"                = "LeadMagic/gtm-skills/main/skills/foundation"
+    "pricing-strategy"                     = "LeadMagic/gtm-skills/main/skills/foundation"
+    "buyer-psychology"                     = "LeadMagic/gtm-skills/main/skills/foundation"
+    "competitive-intel"                    = "LeadMagic/gtm-skills/main/skills/foundation"
+    "cold-email-strategy"                  = "LeadMagic/gtm-skills/main/skills/outbound"
+    "cold-email-copywriting"               = "LeadMagic/gtm-skills/main/skills/outbound"
+    "email-deliverability"                 = "LeadMagic/gtm-skills/main/skills/outbound"
+    "multi-channel-outreach"               = "LeadMagic/gtm-skills/main/skills/outbound"
+    "pipeline-management"                  = "LeadMagic/gtm-skills/main/skills/sales-revops"
+    "meeting-prep"                         = "LeadMagic/gtm-skills/main/skills/sales-revops"
+    "objection-handling"                   = "LeadMagic/gtm-skills/main/skills/sales-revops"
+    "sales-enablement"                     = "LeadMagic/gtm-skills/main/skills/sales-revops"
+    "gtm-metrics"                          = "LeadMagic/gtm-skills/main/skills/analytics"
+    "attribution"                          = "LeadMagic/gtm-skills/main/skills/analytics"
+    # Finance (GAJETOso professional finance)
+    "financial-analysis"                   = "GAJETOso/financeskills/main/skills"
+    "budget-forecast"                      = "GAJETOso/financeskills/main/skills"
+    "statement-preparation"                = "GAJETOso/financeskills/main/skills"
+    "investment-analysis"                  = "GAJETOso/financeskills/main/skills"
+    "audit-checklist"                      = "GAJETOso/financeskills/main/skills"
+    "automated-reconciliation"             = "GAJETOso/financeskills/main/skills"
+    "tax-planning"                         = "GAJETOso/financeskills/main/skills"
+    "revenue-recognition"                  = "GAJETOso/financeskills/main/skills"
+    "risk-assessment"                      = "GAJETOso/financeskills/main/skills"
+    "treasury-management"                  = "GAJETOso/financeskills/main/skills"
+    "wacc-computation"                     = "GAJETOso/financeskills/main/skills"
+    "credit-analysis"                      = "GAJETOso/financeskills/main/skills"
+    # Finance (startup CFO, crewm8)
+    "cash-forecasting"                     = "gokulb20/crewm8-cfo-skills/main/skills/cash-treasury"
+    "cap-table-management"                 = "gokulb20/crewm8-cfo-skills/main/skills/fundraising-capital"
+    "unit-economics-analysis"              = "gokulb20/crewm8-cfo-skills/main/skills/financial-planning-analysis"
 }
-$defaultSource = "hosseinmirzapur/opencode-skills@main"
+$defaultSource = "hosseinmirzapur/opencode-skills/main/skills"
 
-$skills = ($roleSkills[$role] + $base + $extras) | Select-Object -Unique
+# Merge selected roles, base, and extras, then de-duplicate
+$skills = @()
+foreach ($role in $roles) { $skills += $roleSkills[$role] }
+$skills = ($skills + $base + $extras) | Select-Object -Unique
 
 foreach ($skill in $skills) {
     $src = if ($sourceMap.ContainsKey($skill)) { $sourceMap[$skill] } else { $defaultSource }
-    $repo, $branch = $src -split '@'
-    $url = "https://raw.githubusercontent.com/$repo/$branch/skills/$skill/SKILL.md"
+    $url = "https://raw.githubusercontent.com/$src/$skill/SKILL.md"
     $outputDir = "$env:USERPROFILE\.config\opencode\skills\$skill"
     New-Item -ItemType Directory -Force -Path $outputDir | Out-Null
     Invoke-WebRequest -Uri $url -OutFile "$outputDir\SKILL.md"
@@ -421,9 +550,9 @@ mkdir -p .claude/skills
 
 **Install skills (bash):**
 ```bash
-# STEP 1: Pick your role (uncomment ONE)
-ROLE="fullstack"
-# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize
+# STEP 1: Pick one or more roles
+ROLES=("fullstack")
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize, automation, gtm, finance
 
 # STEP 2: Add extra skills you want (optional)
 EXTRAS=()
@@ -436,58 +565,96 @@ git clone https://github.com/Checklist-Design/skills.git /tmp/checklist-skills
 cp -r /tmp/checklist-skills/skills/checklist-design "$SKILLS_DIR/"
 
 # Role-to-skills mapping
+SKILLS=()
+for ROLE in "${ROLES[@]}"; do
 case $ROLE in
-  fullstack) SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+  fullstack) SKILLS+=(code-reviewer security-reviewer best-practices fullstack-guardian
                      feature-forge executing-plans brainstorming evaluation
                      architecture-designer api-designer test-master debugging-wizard
                      devops-engineer database-optimizer react-expert typescript-pro
                      copywriting cli-developer design-review verification-before-completion) ;;
-  frontend)  SKILLS=(checklist-design design-review apple-hig color-expert shadcn-ui
+  frontend)  SKILLS+=(checklist-design design-review apple-hig color-expert shadcn-ui
                      frontend-design ui-ux-pro-max web-design-guidelines
                      code-reviewer best-practices feature-forge brainstorming
                      evaluation react-expert typescript-pro verification-before-completion) ;;
-  backend)   SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+  backend)   SKILLS+=(code-reviewer security-reviewer best-practices fullstack-guardian
                      feature-forge executing-plans evaluation
                      architecture-designer api-designer test-master debugging-wizard
                      devops-engineer database-optimizer sql-pro verification-before-completion) ;;
-  devops)    SKILLS=(devops-engineer database-optimizer chaos-engineer
+  devops)    SKILLS+=(devops-engineer database-optimizer chaos-engineer
                      kubernetes-specialist monitoring-expert sre-engineer
                      terraform-engineer postgres-pro redis-core
                      code-reviewer best-practices feature-forge verification-before-completion) ;;
-  mobile)    SKILLS=(code-reviewer security-reviewer best-practices
+  mobile)    SKILLS+=(code-reviewer security-reviewer best-practices
                      feature-forge executing-plans brainstorming
                      test-master debugging-wizard
                      react-native-expert flutter-expert typescript-pro verification-before-completion) ;;
-  data)      SKILLS=(code-reviewer best-practices feature-forge evaluation
+  data)      SKILLS+=(code-reviewer best-practices feature-forge evaluation
                      python-pro sql-pro pandas-pro
                      d3-visualization data-report verification-before-completion) ;;
-  security)  SKILLS=(security-reviewer secure-code-guardian fullstack-guardian
+  security)  SKILLS+=(security-reviewer secure-code-guardian fullstack-guardian
                      best-practices code-reviewer architecture-designer
                      chaos-engineer devops-engineer verification-before-completion) ;;
-  architect) SKILLS=(architecture-designer api-designer microservices-architect
+  architect) SKILLS+=(architecture-designer api-designer microservices-architect
                      cloud-architect graphql-architect
                      code-reviewer security-reviewer
                      feature-forge executing-plans evaluation verification-before-completion) ;;
-  content)   SKILLS=(copywriting copy-editing cold-email emails seo
+  content)   SKILLS+=(copywriting copy-editing cold-email emails seo
                      code-reviewer verification-before-completion) ;;
-  optimize)  SKILLS=(context-engineering multi-agent-patterns launch-sub-agent do-in-parallel
+  optimize)  SKILLS+=(context-engineering multi-agent-patterns launch-sub-agent do-in-parallel
                      memorize decay reset write-concisely
                      apply-anthropic-skill-best-practices prompt-engineering test-prompt
                      setup-codemap-cli setup-serena-mcp
                      prompt-engineer output-skill graphify) ;;
+  automation) SKILLS+=(n8n-workflow-lifecycle-official n8n-subworkflows-official
+                     n8n-extending-mcp-official n8n-expressions-official
+                     n8n-node-configuration-official n8n-code-nodes-official
+                     n8n-loops-official n8n-agents-official n8n-error-handling-official
+                     n8n-credentials-and-security-official n8n-binary-and-data-official
+                     n8n-data-tables-official n8n-debugging-official using-n8n-skills-official) ;;
+  gtm)       SKILLS+=(gtm-context icp-scoring positioning-messaging pricing-strategy
+                     buyer-psychology competitive-intel cold-email-strategy
+                     cold-email-copywriting email-deliverability multi-channel-outreach
+                     pipeline-management meeting-prep objection-handling sales-enablement
+                     gtm-metrics attribution) ;;
+  finance)   SKILLS+=(financial-analysis budget-forecast statement-preparation investment-analysis
+                     audit-checklist automated-reconciliation tax-planning revenue-recognition
+                     risk-assessment treasury-management wacc-computation credit-analysis
+                     cash-forecasting cap-table-management unit-economics-analysis) ;;
 esac
+done
 
 # Skills included in every role (token optimization / context engineering)
 BASE=(context-engineering write-concisely prompt-engineer multi-agent-patterns)
 
-# Skills sourced from a repo other than the default
+# Full source prefix (repo/branch/path) for skills not in the default repo
 source_repo() {
     case "$1" in
         context-engineering|multi-agent-patterns|launch-sub-agent|do-in-parallel|\
         memorize|decay|reset|write-concisely|apply-anthropic-skill-best-practices|\
         prompt-engineering|test-prompt|setup-codemap-cli|setup-serena-mcp)
-            echo "NeoLabHQ/context-engineering-kit/master" ;;
-        *) echo "hosseinmirzapur/opencode-skills/main" ;;
+            echo "NeoLabHQ/context-engineering-kit/master/skills" ;;
+        n8n-*|using-n8n-skills-official)
+            echo "n8n-io/skills/main/skills" ;;
+        gtm-context|icp-scoring|positioning-messaging|pricing-strategy|buyer-psychology|competitive-intel)
+            echo "LeadMagic/gtm-skills/main/skills/foundation" ;;
+        cold-email-strategy|cold-email-copywriting|email-deliverability|multi-channel-outreach)
+            echo "LeadMagic/gtm-skills/main/skills/outbound" ;;
+        pipeline-management|meeting-prep|objection-handling|sales-enablement)
+            echo "LeadMagic/gtm-skills/main/skills/sales-revops" ;;
+        gtm-metrics|attribution)
+            echo "LeadMagic/gtm-skills/main/skills/analytics" ;;
+        financial-analysis|budget-forecast|statement-preparation|investment-analysis|\
+        audit-checklist|automated-reconciliation|tax-planning|revenue-recognition|\
+        risk-assessment|treasury-management|wacc-computation|credit-analysis)
+            echo "GAJETOso/financeskills/main/skills" ;;
+        cash-forecasting)
+            echo "gokulb20/crewm8-cfo-skills/main/skills/cash-treasury" ;;
+        cap-table-management)
+            echo "gokulb20/crewm8-cfo-skills/main/skills/fundraising-capital" ;;
+        unit-economics-analysis)
+            echo "gokulb20/crewm8-cfo-skills/main/skills/financial-planning-analysis" ;;
+        *) echo "hosseinmirzapur/opencode-skills/main/skills" ;;
     esac
 }
 
@@ -496,7 +663,7 @@ ALL_SKILLS=($(printf "%s\n" "${SKILLS[@]}" "${BASE[@]}" "${EXTRAS[@]}" | awk '!s
 for skill in "${ALL_SKILLS[@]}"; do
     src=$(source_repo "$skill")
     mkdir -p "$SKILLS_DIR/$skill"
-    curl -sL "https://raw.githubusercontent.com/$src/skills/$skill/SKILL.md" \
+    curl -sL "https://raw.githubusercontent.com/$src/$skill/SKILL.md" \
         -o "$SKILLS_DIR/$skill/SKILL.md"
 done
 ```
@@ -519,9 +686,9 @@ mkdir -p .cursor/skills
 
 **Install skills (bash):**
 ```bash
-# STEP 1: Pick your role (uncomment ONE)
-ROLE="fullstack"
-# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize
+# STEP 1: Pick one or more roles
+ROLES=("fullstack")
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize, automation, gtm, finance
 
 # STEP 2: Add extra skills you want (optional)
 EXTRAS=()
@@ -534,58 +701,96 @@ git clone https://github.com/Checklist-Design/skills.git /tmp/checklist-skills
 cp -r /tmp/checklist-skills/skills/checklist-design "$SKILLS_DIR/"
 
 # Role-to-skills mapping
+SKILLS=()
+for ROLE in "${ROLES[@]}"; do
 case $ROLE in
-  fullstack) SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+  fullstack) SKILLS+=(code-reviewer security-reviewer best-practices fullstack-guardian
                      feature-forge executing-plans brainstorming evaluation
                      architecture-designer api-designer test-master debugging-wizard
                      devops-engineer database-optimizer react-expert typescript-pro
                      copywriting cli-developer design-review verification-before-completion) ;;
-  frontend)  SKILLS=(checklist-design design-review apple-hig color-expert shadcn-ui
+  frontend)  SKILLS+=(checklist-design design-review apple-hig color-expert shadcn-ui
                      frontend-design ui-ux-pro-max web-design-guidelines
                      code-reviewer best-practices feature-forge brainstorming
                      evaluation react-expert typescript-pro verification-before-completion) ;;
-  backend)   SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+  backend)   SKILLS+=(code-reviewer security-reviewer best-practices fullstack-guardian
                      feature-forge executing-plans evaluation
                      architecture-designer api-designer test-master debugging-wizard
                      devops-engineer database-optimizer sql-pro verification-before-completion) ;;
-  devops)    SKILLS=(devops-engineer database-optimizer chaos-engineer
+  devops)    SKILLS+=(devops-engineer database-optimizer chaos-engineer
                      kubernetes-specialist monitoring-expert sre-engineer
                      terraform-engineer postgres-pro redis-core
                      code-reviewer best-practices feature-forge verification-before-completion) ;;
-  mobile)    SKILLS=(code-reviewer security-reviewer best-practices
+  mobile)    SKILLS+=(code-reviewer security-reviewer best-practices
                      feature-forge executing-plans brainstorming
                      test-master debugging-wizard
                      react-native-expert flutter-expert typescript-pro verification-before-completion) ;;
-  data)      SKILLS=(code-reviewer best-practices feature-forge evaluation
+  data)      SKILLS+=(code-reviewer best-practices feature-forge evaluation
                      python-pro sql-pro pandas-pro
                      d3-visualization data-report verification-before-completion) ;;
-  security)  SKILLS=(security-reviewer secure-code-guardian fullstack-guardian
+  security)  SKILLS+=(security-reviewer secure-code-guardian fullstack-guardian
                      best-practices code-reviewer architecture-designer
                      chaos-engineer devops-engineer verification-before-completion) ;;
-  architect) SKILLS=(architecture-designer api-designer microservices-architect
+  architect) SKILLS+=(architecture-designer api-designer microservices-architect
                      cloud-architect graphql-architect
                      code-reviewer security-reviewer
                      feature-forge executing-plans evaluation verification-before-completion) ;;
-  content)   SKILLS=(copywriting copy-editing cold-email emails seo
+  content)   SKILLS+=(copywriting copy-editing cold-email emails seo
                      code-reviewer verification-before-completion) ;;
-  optimize)  SKILLS=(context-engineering multi-agent-patterns launch-sub-agent do-in-parallel
+  optimize)  SKILLS+=(context-engineering multi-agent-patterns launch-sub-agent do-in-parallel
                      memorize decay reset write-concisely
                      apply-anthropic-skill-best-practices prompt-engineering test-prompt
                      setup-codemap-cli setup-serena-mcp
                      prompt-engineer output-skill graphify) ;;
+  automation) SKILLS+=(n8n-workflow-lifecycle-official n8n-subworkflows-official
+                     n8n-extending-mcp-official n8n-expressions-official
+                     n8n-node-configuration-official n8n-code-nodes-official
+                     n8n-loops-official n8n-agents-official n8n-error-handling-official
+                     n8n-credentials-and-security-official n8n-binary-and-data-official
+                     n8n-data-tables-official n8n-debugging-official using-n8n-skills-official) ;;
+  gtm)       SKILLS+=(gtm-context icp-scoring positioning-messaging pricing-strategy
+                     buyer-psychology competitive-intel cold-email-strategy
+                     cold-email-copywriting email-deliverability multi-channel-outreach
+                     pipeline-management meeting-prep objection-handling sales-enablement
+                     gtm-metrics attribution) ;;
+  finance)   SKILLS+=(financial-analysis budget-forecast statement-preparation investment-analysis
+                     audit-checklist automated-reconciliation tax-planning revenue-recognition
+                     risk-assessment treasury-management wacc-computation credit-analysis
+                     cash-forecasting cap-table-management unit-economics-analysis) ;;
 esac
+done
 
 # Skills included in every role (token optimization / context engineering)
 BASE=(context-engineering write-concisely prompt-engineer multi-agent-patterns)
 
-# Skills sourced from a repo other than the default
+# Full source prefix (repo/branch/path) for skills not in the default repo
 source_repo() {
     case "$1" in
         context-engineering|multi-agent-patterns|launch-sub-agent|do-in-parallel|\
         memorize|decay|reset|write-concisely|apply-anthropic-skill-best-practices|\
         prompt-engineering|test-prompt|setup-codemap-cli|setup-serena-mcp)
-            echo "NeoLabHQ/context-engineering-kit/master" ;;
-        *) echo "hosseinmirzapur/opencode-skills/main" ;;
+            echo "NeoLabHQ/context-engineering-kit/master/skills" ;;
+        n8n-*|using-n8n-skills-official)
+            echo "n8n-io/skills/main/skills" ;;
+        gtm-context|icp-scoring|positioning-messaging|pricing-strategy|buyer-psychology|competitive-intel)
+            echo "LeadMagic/gtm-skills/main/skills/foundation" ;;
+        cold-email-strategy|cold-email-copywriting|email-deliverability|multi-channel-outreach)
+            echo "LeadMagic/gtm-skills/main/skills/outbound" ;;
+        pipeline-management|meeting-prep|objection-handling|sales-enablement)
+            echo "LeadMagic/gtm-skills/main/skills/sales-revops" ;;
+        gtm-metrics|attribution)
+            echo "LeadMagic/gtm-skills/main/skills/analytics" ;;
+        financial-analysis|budget-forecast|statement-preparation|investment-analysis|\
+        audit-checklist|automated-reconciliation|tax-planning|revenue-recognition|\
+        risk-assessment|treasury-management|wacc-computation|credit-analysis)
+            echo "GAJETOso/financeskills/main/skills" ;;
+        cash-forecasting)
+            echo "gokulb20/crewm8-cfo-skills/main/skills/cash-treasury" ;;
+        cap-table-management)
+            echo "gokulb20/crewm8-cfo-skills/main/skills/fundraising-capital" ;;
+        unit-economics-analysis)
+            echo "gokulb20/crewm8-cfo-skills/main/skills/financial-planning-analysis" ;;
+        *) echo "hosseinmirzapur/opencode-skills/main/skills" ;;
     esac
 }
 
@@ -594,7 +799,7 @@ ALL_SKILLS=($(printf "%s\n" "${SKILLS[@]}" "${BASE[@]}" "${EXTRAS[@]}" | awk '!s
 for skill in "${ALL_SKILLS[@]}"; do
     src=$(source_repo "$skill")
     mkdir -p "$SKILLS_DIR/$skill"
-    curl -sL "https://raw.githubusercontent.com/$src/skills/$skill/SKILL.md" \
+    curl -sL "https://raw.githubusercontent.com/$src/$skill/SKILL.md" \
         -o "$SKILLS_DIR/$skill/SKILL.md"
 done
 ```
@@ -617,9 +822,9 @@ mkdir -p .agents/skills
 
 **Install skills (bash):**
 ```bash
-# STEP 1: Pick your role (uncomment ONE)
-ROLE="fullstack"
-# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize
+# STEP 1: Pick one or more roles
+ROLES=("fullstack")
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize, automation, gtm, finance
 
 # STEP 2: Add extra skills you want (optional)
 EXTRAS=()
@@ -632,58 +837,96 @@ git clone https://github.com/Checklist-Design/skills.git /tmp/checklist-skills
 cp -r /tmp/checklist-skills/skills/checklist-design "$SKILLS_DIR/"
 
 # Role-to-skills mapping
+SKILLS=()
+for ROLE in "${ROLES[@]}"; do
 case $ROLE in
-  fullstack) SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+  fullstack) SKILLS+=(code-reviewer security-reviewer best-practices fullstack-guardian
                      feature-forge executing-plans brainstorming evaluation
                      architecture-designer api-designer test-master debugging-wizard
                      devops-engineer database-optimizer react-expert typescript-pro
                      copywriting cli-developer design-review verification-before-completion) ;;
-  frontend)  SKILLS=(checklist-design design-review apple-hig color-expert shadcn-ui
+  frontend)  SKILLS+=(checklist-design design-review apple-hig color-expert shadcn-ui
                      frontend-design ui-ux-pro-max web-design-guidelines
                      code-reviewer best-practices feature-forge brainstorming
                      evaluation react-expert typescript-pro verification-before-completion) ;;
-  backend)   SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+  backend)   SKILLS+=(code-reviewer security-reviewer best-practices fullstack-guardian
                      feature-forge executing-plans evaluation
                      architecture-designer api-designer test-master debugging-wizard
                      devops-engineer database-optimizer sql-pro verification-before-completion) ;;
-  devops)    SKILLS=(devops-engineer database-optimizer chaos-engineer
+  devops)    SKILLS+=(devops-engineer database-optimizer chaos-engineer
                      kubernetes-specialist monitoring-expert sre-engineer
                      terraform-engineer postgres-pro redis-core
                      code-reviewer best-practices feature-forge verification-before-completion) ;;
-  mobile)    SKILLS=(code-reviewer security-reviewer best-practices
+  mobile)    SKILLS+=(code-reviewer security-reviewer best-practices
                      feature-forge executing-plans brainstorming
                      test-master debugging-wizard
                      react-native-expert flutter-expert typescript-pro verification-before-completion) ;;
-  data)      SKILLS=(code-reviewer best-practices feature-forge evaluation
+  data)      SKILLS+=(code-reviewer best-practices feature-forge evaluation
                      python-pro sql-pro pandas-pro
                      d3-visualization data-report verification-before-completion) ;;
-  security)  SKILLS=(security-reviewer secure-code-guardian fullstack-guardian
+  security)  SKILLS+=(security-reviewer secure-code-guardian fullstack-guardian
                      best-practices code-reviewer architecture-designer
                      chaos-engineer devops-engineer verification-before-completion) ;;
-  architect) SKILLS=(architecture-designer api-designer microservices-architect
+  architect) SKILLS+=(architecture-designer api-designer microservices-architect
                      cloud-architect graphql-architect
                      code-reviewer security-reviewer
                      feature-forge executing-plans evaluation verification-before-completion) ;;
-  content)   SKILLS=(copywriting copy-editing cold-email emails seo
+  content)   SKILLS+=(copywriting copy-editing cold-email emails seo
                      code-reviewer verification-before-completion) ;;
-  optimize)  SKILLS=(context-engineering multi-agent-patterns launch-sub-agent do-in-parallel
+  optimize)  SKILLS+=(context-engineering multi-agent-patterns launch-sub-agent do-in-parallel
                      memorize decay reset write-concisely
                      apply-anthropic-skill-best-practices prompt-engineering test-prompt
                      setup-codemap-cli setup-serena-mcp
                      prompt-engineer output-skill graphify) ;;
+  automation) SKILLS+=(n8n-workflow-lifecycle-official n8n-subworkflows-official
+                     n8n-extending-mcp-official n8n-expressions-official
+                     n8n-node-configuration-official n8n-code-nodes-official
+                     n8n-loops-official n8n-agents-official n8n-error-handling-official
+                     n8n-credentials-and-security-official n8n-binary-and-data-official
+                     n8n-data-tables-official n8n-debugging-official using-n8n-skills-official) ;;
+  gtm)       SKILLS+=(gtm-context icp-scoring positioning-messaging pricing-strategy
+                     buyer-psychology competitive-intel cold-email-strategy
+                     cold-email-copywriting email-deliverability multi-channel-outreach
+                     pipeline-management meeting-prep objection-handling sales-enablement
+                     gtm-metrics attribution) ;;
+  finance)   SKILLS+=(financial-analysis budget-forecast statement-preparation investment-analysis
+                     audit-checklist automated-reconciliation tax-planning revenue-recognition
+                     risk-assessment treasury-management wacc-computation credit-analysis
+                     cash-forecasting cap-table-management unit-economics-analysis) ;;
 esac
+done
 
 # Skills included in every role (token optimization / context engineering)
 BASE=(context-engineering write-concisely prompt-engineer multi-agent-patterns)
 
-# Skills sourced from a repo other than the default
+# Full source prefix (repo/branch/path) for skills not in the default repo
 source_repo() {
     case "$1" in
         context-engineering|multi-agent-patterns|launch-sub-agent|do-in-parallel|\
         memorize|decay|reset|write-concisely|apply-anthropic-skill-best-practices|\
         prompt-engineering|test-prompt|setup-codemap-cli|setup-serena-mcp)
-            echo "NeoLabHQ/context-engineering-kit/master" ;;
-        *) echo "hosseinmirzapur/opencode-skills/main" ;;
+            echo "NeoLabHQ/context-engineering-kit/master/skills" ;;
+        n8n-*|using-n8n-skills-official)
+            echo "n8n-io/skills/main/skills" ;;
+        gtm-context|icp-scoring|positioning-messaging|pricing-strategy|buyer-psychology|competitive-intel)
+            echo "LeadMagic/gtm-skills/main/skills/foundation" ;;
+        cold-email-strategy|cold-email-copywriting|email-deliverability|multi-channel-outreach)
+            echo "LeadMagic/gtm-skills/main/skills/outbound" ;;
+        pipeline-management|meeting-prep|objection-handling|sales-enablement)
+            echo "LeadMagic/gtm-skills/main/skills/sales-revops" ;;
+        gtm-metrics|attribution)
+            echo "LeadMagic/gtm-skills/main/skills/analytics" ;;
+        financial-analysis|budget-forecast|statement-preparation|investment-analysis|\
+        audit-checklist|automated-reconciliation|tax-planning|revenue-recognition|\
+        risk-assessment|treasury-management|wacc-computation|credit-analysis)
+            echo "GAJETOso/financeskills/main/skills" ;;
+        cash-forecasting)
+            echo "gokulb20/crewm8-cfo-skills/main/skills/cash-treasury" ;;
+        cap-table-management)
+            echo "gokulb20/crewm8-cfo-skills/main/skills/fundraising-capital" ;;
+        unit-economics-analysis)
+            echo "gokulb20/crewm8-cfo-skills/main/skills/financial-planning-analysis" ;;
+        *) echo "hosseinmirzapur/opencode-skills/main/skills" ;;
     esac
 }
 
@@ -692,7 +935,7 @@ ALL_SKILLS=($(printf "%s\n" "${SKILLS[@]}" "${BASE[@]}" "${EXTRAS[@]}" | awk '!s
 for skill in "${ALL_SKILLS[@]}"; do
     src=$(source_repo "$skill")
     mkdir -p "$SKILLS_DIR/$skill"
-    curl -sL "https://raw.githubusercontent.com/$src/skills/$skill/SKILL.md" \
+    curl -sL "https://raw.githubusercontent.com/$src/$skill/SKILL.md" \
         -o "$SKILLS_DIR/$skill/SKILL.md"
 done
 ```
@@ -710,9 +953,9 @@ mkdir -p .agents/skills
 
 **Install skills (bash):**
 ```bash
-# STEP 1: Pick your role (uncomment ONE)
-ROLE="fullstack"
-# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize
+# STEP 1: Pick one or more roles
+ROLES=("fullstack")
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize, automation, gtm, finance
 
 # STEP 2: Add extra skills you want (optional)
 EXTRAS=()
@@ -725,58 +968,96 @@ git clone https://github.com/Checklist-Design/skills.git /tmp/checklist-skills
 cp -r /tmp/checklist-skills/skills/checklist-design "$SKILLS_DIR/"
 
 # Role-to-skills mapping
+SKILLS=()
+for ROLE in "${ROLES[@]}"; do
 case $ROLE in
-  fullstack) SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+  fullstack) SKILLS+=(code-reviewer security-reviewer best-practices fullstack-guardian
                      feature-forge executing-plans brainstorming evaluation
                      architecture-designer api-designer test-master debugging-wizard
                      devops-engineer database-optimizer react-expert typescript-pro
                      copywriting cli-developer design-review verification-before-completion) ;;
-  frontend)  SKILLS=(checklist-design design-review apple-hig color-expert shadcn-ui
+  frontend)  SKILLS+=(checklist-design design-review apple-hig color-expert shadcn-ui
                      frontend-design ui-ux-pro-max web-design-guidelines
                      code-reviewer best-practices feature-forge brainstorming
                      evaluation react-expert typescript-pro verification-before-completion) ;;
-  backend)   SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+  backend)   SKILLS+=(code-reviewer security-reviewer best-practices fullstack-guardian
                      feature-forge executing-plans evaluation
                      architecture-designer api-designer test-master debugging-wizard
                      devops-engineer database-optimizer sql-pro verification-before-completion) ;;
-  devops)    SKILLS=(devops-engineer database-optimizer chaos-engineer
+  devops)    SKILLS+=(devops-engineer database-optimizer chaos-engineer
                      kubernetes-specialist monitoring-expert sre-engineer
                      terraform-engineer postgres-pro redis-core
                      code-reviewer best-practices feature-forge verification-before-completion) ;;
-  mobile)    SKILLS=(code-reviewer security-reviewer best-practices
+  mobile)    SKILLS+=(code-reviewer security-reviewer best-practices
                      feature-forge executing-plans brainstorming
                      test-master debugging-wizard
                      react-native-expert flutter-expert typescript-pro verification-before-completion) ;;
-  data)      SKILLS=(code-reviewer best-practices feature-forge evaluation
+  data)      SKILLS+=(code-reviewer best-practices feature-forge evaluation
                      python-pro sql-pro pandas-pro
                      d3-visualization data-report verification-before-completion) ;;
-  security)  SKILLS=(security-reviewer secure-code-guardian fullstack-guardian
+  security)  SKILLS+=(security-reviewer secure-code-guardian fullstack-guardian
                      best-practices code-reviewer architecture-designer
                      chaos-engineer devops-engineer verification-before-completion) ;;
-  architect) SKILLS=(architecture-designer api-designer microservices-architect
+  architect) SKILLS+=(architecture-designer api-designer microservices-architect
                      cloud-architect graphql-architect
                      code-reviewer security-reviewer
                      feature-forge executing-plans evaluation verification-before-completion) ;;
-  content)   SKILLS=(copywriting copy-editing cold-email emails seo
+  content)   SKILLS+=(copywriting copy-editing cold-email emails seo
                      code-reviewer verification-before-completion) ;;
-  optimize)  SKILLS=(context-engineering multi-agent-patterns launch-sub-agent do-in-parallel
+  optimize)  SKILLS+=(context-engineering multi-agent-patterns launch-sub-agent do-in-parallel
                      memorize decay reset write-concisely
                      apply-anthropic-skill-best-practices prompt-engineering test-prompt
                      setup-codemap-cli setup-serena-mcp
                      prompt-engineer output-skill graphify) ;;
+  automation) SKILLS+=(n8n-workflow-lifecycle-official n8n-subworkflows-official
+                     n8n-extending-mcp-official n8n-expressions-official
+                     n8n-node-configuration-official n8n-code-nodes-official
+                     n8n-loops-official n8n-agents-official n8n-error-handling-official
+                     n8n-credentials-and-security-official n8n-binary-and-data-official
+                     n8n-data-tables-official n8n-debugging-official using-n8n-skills-official) ;;
+  gtm)       SKILLS+=(gtm-context icp-scoring positioning-messaging pricing-strategy
+                     buyer-psychology competitive-intel cold-email-strategy
+                     cold-email-copywriting email-deliverability multi-channel-outreach
+                     pipeline-management meeting-prep objection-handling sales-enablement
+                     gtm-metrics attribution) ;;
+  finance)   SKILLS+=(financial-analysis budget-forecast statement-preparation investment-analysis
+                     audit-checklist automated-reconciliation tax-planning revenue-recognition
+                     risk-assessment treasury-management wacc-computation credit-analysis
+                     cash-forecasting cap-table-management unit-economics-analysis) ;;
 esac
+done
 
 # Skills included in every role (token optimization / context engineering)
 BASE=(context-engineering write-concisely prompt-engineer multi-agent-patterns)
 
-# Skills sourced from a repo other than the default
+# Full source prefix (repo/branch/path) for skills not in the default repo
 source_repo() {
     case "$1" in
         context-engineering|multi-agent-patterns|launch-sub-agent|do-in-parallel|\
         memorize|decay|reset|write-concisely|apply-anthropic-skill-best-practices|\
         prompt-engineering|test-prompt|setup-codemap-cli|setup-serena-mcp)
-            echo "NeoLabHQ/context-engineering-kit/master" ;;
-        *) echo "hosseinmirzapur/opencode-skills/main" ;;
+            echo "NeoLabHQ/context-engineering-kit/master/skills" ;;
+        n8n-*|using-n8n-skills-official)
+            echo "n8n-io/skills/main/skills" ;;
+        gtm-context|icp-scoring|positioning-messaging|pricing-strategy|buyer-psychology|competitive-intel)
+            echo "LeadMagic/gtm-skills/main/skills/foundation" ;;
+        cold-email-strategy|cold-email-copywriting|email-deliverability|multi-channel-outreach)
+            echo "LeadMagic/gtm-skills/main/skills/outbound" ;;
+        pipeline-management|meeting-prep|objection-handling|sales-enablement)
+            echo "LeadMagic/gtm-skills/main/skills/sales-revops" ;;
+        gtm-metrics|attribution)
+            echo "LeadMagic/gtm-skills/main/skills/analytics" ;;
+        financial-analysis|budget-forecast|statement-preparation|investment-analysis|\
+        audit-checklist|automated-reconciliation|tax-planning|revenue-recognition|\
+        risk-assessment|treasury-management|wacc-computation|credit-analysis)
+            echo "GAJETOso/financeskills/main/skills" ;;
+        cash-forecasting)
+            echo "gokulb20/crewm8-cfo-skills/main/skills/cash-treasury" ;;
+        cap-table-management)
+            echo "gokulb20/crewm8-cfo-skills/main/skills/fundraising-capital" ;;
+        unit-economics-analysis)
+            echo "gokulb20/crewm8-cfo-skills/main/skills/financial-planning-analysis" ;;
+        *) echo "hosseinmirzapur/opencode-skills/main/skills" ;;
     esac
 }
 
@@ -785,7 +1066,7 @@ ALL_SKILLS=($(printf "%s\n" "${SKILLS[@]}" "${BASE[@]}" "${EXTRAS[@]}" | awk '!s
 for skill in "${ALL_SKILLS[@]}"; do
     src=$(source_repo "$skill")
     mkdir -p "$SKILLS_DIR/$skill"
-    curl -sL "https://raw.githubusercontent.com/$src/skills/$skill/SKILL.md" \
+    curl -sL "https://raw.githubusercontent.com/$src/$skill/SKILL.md" \
         -o "$SKILLS_DIR/$skill/SKILL.md"
 done
 ```
@@ -808,9 +1089,9 @@ mkdir -p .agents/skills    # Universal path (also works)
 
 **Install skills (bash):**
 ```bash
-# STEP 1: Pick your role (uncomment ONE)
-ROLE="fullstack"
-# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize
+# STEP 1: Pick one or more roles
+ROLES=("fullstack")
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize, automation, gtm, finance
 
 # STEP 2: Add extra skills you want (optional)
 EXTRAS=()
@@ -823,58 +1104,96 @@ git clone https://github.com/Checklist-Design/skills.git /tmp/checklist-skills
 cp -r /tmp/checklist-skills/skills/checklist-design "$SKILLS_DIR/"
 
 # Role-to-skills mapping
+SKILLS=()
+for ROLE in "${ROLES[@]}"; do
 case $ROLE in
-  fullstack) SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+  fullstack) SKILLS+=(code-reviewer security-reviewer best-practices fullstack-guardian
                      feature-forge executing-plans brainstorming evaluation
                      architecture-designer api-designer test-master debugging-wizard
                      devops-engineer database-optimizer react-expert typescript-pro
                      copywriting cli-developer design-review verification-before-completion) ;;
-  frontend)  SKILLS=(checklist-design design-review apple-hig color-expert shadcn-ui
+  frontend)  SKILLS+=(checklist-design design-review apple-hig color-expert shadcn-ui
                      frontend-design ui-ux-pro-max web-design-guidelines
                      code-reviewer best-practices feature-forge brainstorming
                      evaluation react-expert typescript-pro verification-before-completion) ;;
-  backend)   SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+  backend)   SKILLS+=(code-reviewer security-reviewer best-practices fullstack-guardian
                      feature-forge executing-plans evaluation
                      architecture-designer api-designer test-master debugging-wizard
                      devops-engineer database-optimizer sql-pro verification-before-completion) ;;
-  devops)    SKILLS=(devops-engineer database-optimizer chaos-engineer
+  devops)    SKILLS+=(devops-engineer database-optimizer chaos-engineer
                      kubernetes-specialist monitoring-expert sre-engineer
                      terraform-engineer postgres-pro redis-core
                      code-reviewer best-practices feature-forge verification-before-completion) ;;
-  mobile)    SKILLS=(code-reviewer security-reviewer best-practices
+  mobile)    SKILLS+=(code-reviewer security-reviewer best-practices
                      feature-forge executing-plans brainstorming
                      test-master debugging-wizard
                      react-native-expert flutter-expert typescript-pro verification-before-completion) ;;
-  data)      SKILLS=(code-reviewer best-practices feature-forge evaluation
+  data)      SKILLS+=(code-reviewer best-practices feature-forge evaluation
                      python-pro sql-pro pandas-pro
                      d3-visualization data-report verification-before-completion) ;;
-  security)  SKILLS=(security-reviewer secure-code-guardian fullstack-guardian
+  security)  SKILLS+=(security-reviewer secure-code-guardian fullstack-guardian
                      best-practices code-reviewer architecture-designer
                      chaos-engineer devops-engineer verification-before-completion) ;;
-  architect) SKILLS=(architecture-designer api-designer microservices-architect
+  architect) SKILLS+=(architecture-designer api-designer microservices-architect
                      cloud-architect graphql-architect
                      code-reviewer security-reviewer
                      feature-forge executing-plans evaluation verification-before-completion) ;;
-  content)   SKILLS=(copywriting copy-editing cold-email emails seo
+  content)   SKILLS+=(copywriting copy-editing cold-email emails seo
                      code-reviewer verification-before-completion) ;;
-  optimize)  SKILLS=(context-engineering multi-agent-patterns launch-sub-agent do-in-parallel
+  optimize)  SKILLS+=(context-engineering multi-agent-patterns launch-sub-agent do-in-parallel
                      memorize decay reset write-concisely
                      apply-anthropic-skill-best-practices prompt-engineering test-prompt
                      setup-codemap-cli setup-serena-mcp
                      prompt-engineer output-skill graphify) ;;
+  automation) SKILLS+=(n8n-workflow-lifecycle-official n8n-subworkflows-official
+                     n8n-extending-mcp-official n8n-expressions-official
+                     n8n-node-configuration-official n8n-code-nodes-official
+                     n8n-loops-official n8n-agents-official n8n-error-handling-official
+                     n8n-credentials-and-security-official n8n-binary-and-data-official
+                     n8n-data-tables-official n8n-debugging-official using-n8n-skills-official) ;;
+  gtm)       SKILLS+=(gtm-context icp-scoring positioning-messaging pricing-strategy
+                     buyer-psychology competitive-intel cold-email-strategy
+                     cold-email-copywriting email-deliverability multi-channel-outreach
+                     pipeline-management meeting-prep objection-handling sales-enablement
+                     gtm-metrics attribution) ;;
+  finance)   SKILLS+=(financial-analysis budget-forecast statement-preparation investment-analysis
+                     audit-checklist automated-reconciliation tax-planning revenue-recognition
+                     risk-assessment treasury-management wacc-computation credit-analysis
+                     cash-forecasting cap-table-management unit-economics-analysis) ;;
 esac
+done
 
 # Skills included in every role (token optimization / context engineering)
 BASE=(context-engineering write-concisely prompt-engineer multi-agent-patterns)
 
-# Skills sourced from a repo other than the default
+# Full source prefix (repo/branch/path) for skills not in the default repo
 source_repo() {
     case "$1" in
         context-engineering|multi-agent-patterns|launch-sub-agent|do-in-parallel|\
         memorize|decay|reset|write-concisely|apply-anthropic-skill-best-practices|\
         prompt-engineering|test-prompt|setup-codemap-cli|setup-serena-mcp)
-            echo "NeoLabHQ/context-engineering-kit/master" ;;
-        *) echo "hosseinmirzapur/opencode-skills/main" ;;
+            echo "NeoLabHQ/context-engineering-kit/master/skills" ;;
+        n8n-*|using-n8n-skills-official)
+            echo "n8n-io/skills/main/skills" ;;
+        gtm-context|icp-scoring|positioning-messaging|pricing-strategy|buyer-psychology|competitive-intel)
+            echo "LeadMagic/gtm-skills/main/skills/foundation" ;;
+        cold-email-strategy|cold-email-copywriting|email-deliverability|multi-channel-outreach)
+            echo "LeadMagic/gtm-skills/main/skills/outbound" ;;
+        pipeline-management|meeting-prep|objection-handling|sales-enablement)
+            echo "LeadMagic/gtm-skills/main/skills/sales-revops" ;;
+        gtm-metrics|attribution)
+            echo "LeadMagic/gtm-skills/main/skills/analytics" ;;
+        financial-analysis|budget-forecast|statement-preparation|investment-analysis|\
+        audit-checklist|automated-reconciliation|tax-planning|revenue-recognition|\
+        risk-assessment|treasury-management|wacc-computation|credit-analysis)
+            echo "GAJETOso/financeskills/main/skills" ;;
+        cash-forecasting)
+            echo "gokulb20/crewm8-cfo-skills/main/skills/cash-treasury" ;;
+        cap-table-management)
+            echo "gokulb20/crewm8-cfo-skills/main/skills/fundraising-capital" ;;
+        unit-economics-analysis)
+            echo "gokulb20/crewm8-cfo-skills/main/skills/financial-planning-analysis" ;;
+        *) echo "hosseinmirzapur/opencode-skills/main/skills" ;;
     esac
 }
 
@@ -883,7 +1202,7 @@ ALL_SKILLS=($(printf "%s\n" "${SKILLS[@]}" "${BASE[@]}" "${EXTRAS[@]}" | awk '!s
 for skill in "${ALL_SKILLS[@]}"; do
     src=$(source_repo "$skill")
     mkdir -p "$SKILLS_DIR/$skill"
-    curl -sL "https://raw.githubusercontent.com/$src/skills/$skill/SKILL.md" \
+    curl -sL "https://raw.githubusercontent.com/$src/$skill/SKILL.md" \
         -o "$SKILLS_DIR/$skill/SKILL.md"
 done
 ```
@@ -904,9 +1223,9 @@ mkdir -p .agents/skills
 
 **Install skills (bash):**
 ```bash
-# STEP 1: Pick your role (uncomment ONE)
-ROLE="fullstack"
-# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize
+# STEP 1: Pick one or more roles
+ROLES=("fullstack")
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize, automation, gtm, finance
 
 # STEP 2: Add extra skills you want (optional)
 EXTRAS=()
@@ -919,58 +1238,96 @@ git clone https://github.com/Checklist-Design/skills.git /tmp/checklist-skills
 cp -r /tmp/checklist-skills/skills/checklist-design "$SKILLS_DIR/"
 
 # Role-to-skills mapping
+SKILLS=()
+for ROLE in "${ROLES[@]}"; do
 case $ROLE in
-  fullstack) SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+  fullstack) SKILLS+=(code-reviewer security-reviewer best-practices fullstack-guardian
                      feature-forge executing-plans brainstorming evaluation
                      architecture-designer api-designer test-master debugging-wizard
                      devops-engineer database-optimizer react-expert typescript-pro
                      copywriting cli-developer design-review verification-before-completion) ;;
-  frontend)  SKILLS=(checklist-design design-review apple-hig color-expert shadcn-ui
+  frontend)  SKILLS+=(checklist-design design-review apple-hig color-expert shadcn-ui
                      frontend-design ui-ux-pro-max web-design-guidelines
                      code-reviewer best-practices feature-forge brainstorming
                      evaluation react-expert typescript-pro verification-before-completion) ;;
-  backend)   SKILLS=(code-reviewer security-reviewer best-practices fullstack-guardian
+  backend)   SKILLS+=(code-reviewer security-reviewer best-practices fullstack-guardian
                      feature-forge executing-plans evaluation
                      architecture-designer api-designer test-master debugging-wizard
                      devops-engineer database-optimizer sql-pro verification-before-completion) ;;
-  devops)    SKILLS=(devops-engineer database-optimizer chaos-engineer
+  devops)    SKILLS+=(devops-engineer database-optimizer chaos-engineer
                      kubernetes-specialist monitoring-expert sre-engineer
                      terraform-engineer postgres-pro redis-core
                      code-reviewer best-practices feature-forge verification-before-completion) ;;
-  mobile)    SKILLS=(code-reviewer security-reviewer best-practices
+  mobile)    SKILLS+=(code-reviewer security-reviewer best-practices
                      feature-forge executing-plans brainstorming
                      test-master debugging-wizard
                      react-native-expert flutter-expert typescript-pro verification-before-completion) ;;
-  data)      SKILLS=(code-reviewer best-practices feature-forge evaluation
+  data)      SKILLS+=(code-reviewer best-practices feature-forge evaluation
                      python-pro sql-pro pandas-pro
                      d3-visualization data-report verification-before-completion) ;;
-  security)  SKILLS=(security-reviewer secure-code-guardian fullstack-guardian
+  security)  SKILLS+=(security-reviewer secure-code-guardian fullstack-guardian
                      best-practices code-reviewer architecture-designer
                      chaos-engineer devops-engineer verification-before-completion) ;;
-  architect) SKILLS=(architecture-designer api-designer microservices-architect
+  architect) SKILLS+=(architecture-designer api-designer microservices-architect
                      cloud-architect graphql-architect
                      code-reviewer security-reviewer
                      feature-forge executing-plans evaluation verification-before-completion) ;;
-  content)   SKILLS=(copywriting copy-editing cold-email emails seo
+  content)   SKILLS+=(copywriting copy-editing cold-email emails seo
                      code-reviewer verification-before-completion) ;;
-  optimize)  SKILLS=(context-engineering multi-agent-patterns launch-sub-agent do-in-parallel
+  optimize)  SKILLS+=(context-engineering multi-agent-patterns launch-sub-agent do-in-parallel
                      memorize decay reset write-concisely
                      apply-anthropic-skill-best-practices prompt-engineering test-prompt
                      setup-codemap-cli setup-serena-mcp
                      prompt-engineer output-skill graphify) ;;
+  automation) SKILLS+=(n8n-workflow-lifecycle-official n8n-subworkflows-official
+                     n8n-extending-mcp-official n8n-expressions-official
+                     n8n-node-configuration-official n8n-code-nodes-official
+                     n8n-loops-official n8n-agents-official n8n-error-handling-official
+                     n8n-credentials-and-security-official n8n-binary-and-data-official
+                     n8n-data-tables-official n8n-debugging-official using-n8n-skills-official) ;;
+  gtm)       SKILLS+=(gtm-context icp-scoring positioning-messaging pricing-strategy
+                     buyer-psychology competitive-intel cold-email-strategy
+                     cold-email-copywriting email-deliverability multi-channel-outreach
+                     pipeline-management meeting-prep objection-handling sales-enablement
+                     gtm-metrics attribution) ;;
+  finance)   SKILLS+=(financial-analysis budget-forecast statement-preparation investment-analysis
+                     audit-checklist automated-reconciliation tax-planning revenue-recognition
+                     risk-assessment treasury-management wacc-computation credit-analysis
+                     cash-forecasting cap-table-management unit-economics-analysis) ;;
 esac
+done
 
 # Skills included in every role (token optimization / context engineering)
 BASE=(context-engineering write-concisely prompt-engineer multi-agent-patterns)
 
-# Skills sourced from a repo other than the default
+# Full source prefix (repo/branch/path) for skills not in the default repo
 source_repo() {
     case "$1" in
         context-engineering|multi-agent-patterns|launch-sub-agent|do-in-parallel|\
         memorize|decay|reset|write-concisely|apply-anthropic-skill-best-practices|\
         prompt-engineering|test-prompt|setup-codemap-cli|setup-serena-mcp)
-            echo "NeoLabHQ/context-engineering-kit/master" ;;
-        *) echo "hosseinmirzapur/opencode-skills/main" ;;
+            echo "NeoLabHQ/context-engineering-kit/master/skills" ;;
+        n8n-*|using-n8n-skills-official)
+            echo "n8n-io/skills/main/skills" ;;
+        gtm-context|icp-scoring|positioning-messaging|pricing-strategy|buyer-psychology|competitive-intel)
+            echo "LeadMagic/gtm-skills/main/skills/foundation" ;;
+        cold-email-strategy|cold-email-copywriting|email-deliverability|multi-channel-outreach)
+            echo "LeadMagic/gtm-skills/main/skills/outbound" ;;
+        pipeline-management|meeting-prep|objection-handling|sales-enablement)
+            echo "LeadMagic/gtm-skills/main/skills/sales-revops" ;;
+        gtm-metrics|attribution)
+            echo "LeadMagic/gtm-skills/main/skills/analytics" ;;
+        financial-analysis|budget-forecast|statement-preparation|investment-analysis|\
+        audit-checklist|automated-reconciliation|tax-planning|revenue-recognition|\
+        risk-assessment|treasury-management|wacc-computation|credit-analysis)
+            echo "GAJETOso/financeskills/main/skills" ;;
+        cash-forecasting)
+            echo "gokulb20/crewm8-cfo-skills/main/skills/cash-treasury" ;;
+        cap-table-management)
+            echo "gokulb20/crewm8-cfo-skills/main/skills/fundraising-capital" ;;
+        unit-economics-analysis)
+            echo "gokulb20/crewm8-cfo-skills/main/skills/financial-planning-analysis" ;;
+        *) echo "hosseinmirzapur/opencode-skills/main/skills" ;;
     esac
 }
 
@@ -979,7 +1336,7 @@ ALL_SKILLS=($(printf "%s\n" "${SKILLS[@]}" "${BASE[@]}" "${EXTRAS[@]}" | awk '!s
 for skill in "${ALL_SKILLS[@]}"; do
     src=$(source_repo "$skill")
     mkdir -p "$SKILLS_DIR/$skill"
-    curl -sL "https://raw.githubusercontent.com/$src/skills/$skill/SKILL.md" \
+    curl -sL "https://raw.githubusercontent.com/$src/$skill/SKILL.md" \
         -o "$SKILLS_DIR/$skill/SKILL.md"
 done
 ```
@@ -1133,6 +1490,9 @@ Match the request's intent and domain to a skill. Load only the narrowest fit.
 | generates or compares ideas | `brainstorming` | for a fixed task |
 | weighs options and picks one | `evaluation` | for a stated requirement |
 | onboards to an unfamiliar codebase | `onboarding`, `spec-miner` | for known code |
+| builds or debugs n8n workflows | `n8n-workflow-lifecycle-official`, `n8n-agents-official` | for plain scripts |
+| asks about go-to-market, ICP, positioning, or outbound | `gtm-context`, `icp-scoring`, `cold-email-strategy` | for code-only work |
+| asks about finance, accounting, FP&A, or valuation | `financial-analysis`, `budget-forecast`, `wacc-computation` | for unrelated math |
 | reduces tokens, cost, or context usage | `context-engineering`, `write-concisely`, `prompt-engineer` | for feature work |
 | shrinks a bloated `CLAUDE.md` or prompt | `context-engineering`, `prompt-engineering` | for code comments |
 | runs multi-agent or parallel work | `multi-agent-patterns`, `launch-sub-agent`, `do-in-parallel` | for a single edit |
@@ -1570,6 +1930,29 @@ EXTRAS=("game-developer" "shopify-expert" "wordpress-pro")
 | Design | `frontend-design`, `shadcn-ui`, `ui-ux-pro-max`, `color-expert` |
 | Token optimization | `context-engineering`, `setup-serena-mcp`, `memorize`, `write-concisely` |
 
+## Licensing and Attribution
+
+This guide is original work, licensed MIT (see `LICENSE`). It does not bundle third-party skill files. The install scripts fetch each skill directly from its source repo at install time, so every skill keeps its own license.
+
+### Sources and Licenses
+
+| Source | License | Used for |
+|--------|---------|----------|
+| hosseinmirzapur/opencode-skills | Apache-2.0 | most language, workflow, design, data, and content skills |
+| NeoLabHQ/context-engineering-kit | GPL-3.0 | token optimization and context engineering (the `optimize` role) |
+| n8n-io/skills | Apache-2.0 | automation platform skills |
+| LeadMagic/gtm-skills | MIT | go-to-market skills |
+| GAJETOso/financeskills | MIT | professional finance skills |
+| gokulb20/crewm8-cfo-skills | MIT | startup CFO skills |
+| Checklist-Design/skills | MIT | the checklist-design skill |
+
+### Notes
+
+- The MIT license on this repo covers only the guide and its scripts, not the downloaded skills.
+- Each skill carries its own author and license in its `SKILL.md` frontmatter.
+- If you redistribute downloaded skills, follow each skill's license. The GPL-3.0 skills from NeoLabHQ require GPL terms and source availability if you redistribute them. Do not relicense them as MIT.
+- This is not legal advice. Verify the licenses before any commercial use.
+
 ## Keeping the Catalog Updated
 
 **Agent instructions:** If you are an agent running this guide, run this section before acting on the catalog. It detects skills added to the upstream repo since the last sync, classifies them, and updates the tables. This makes the guide self-updating.
@@ -1585,7 +1968,9 @@ Set `SINCE` to the `Catalog Synced` date at the top of the Skills Catalog sectio
 **PowerShell (Windows):**
 ```powershell
 $since = "2026-09-11T00:00:00Z"   # <- set to the Catalog Synced date
-$repos = @("hosseinmirzapur/opencode-skills", "NeoLabHQ/context-engineering-kit")
+$repos = @("hosseinmirzapur/opencode-skills", "NeoLabHQ/context-engineering-kit",
+           "n8n-io/skills", "LeadMagic/gtm-skills",
+           "GAJETOso/financeskills", "gokulb20/crewm8-cfo-skills")
 $added = @()
 
 foreach ($repo in $repos) {
@@ -1593,8 +1978,8 @@ foreach ($repo in $repos) {
     foreach ($c in $commits) {
         $detail = Invoke-RestMethod "https://api.github.com/repos/$repo/commits/$($c.sha)"
         $added += $detail.files |
-            Where-Object { $_.status -eq 'added' -and $_.filename -match '^skills/[^/]+/SKILL\.md$' } |
-            ForEach-Object { "$repo  ->  " + ($_.filename -split '/')[1] }
+            Where-Object { $_.status -eq 'added' -and $_.filename -match '^skills/.+/SKILL\.md$' } |
+            ForEach-Object { $p = $_.filename -split '/'; "$repo  ->  " + $p[$p.Count - 2] }
     }
 }
 $added = $added | Sort-Object -Unique
@@ -1605,14 +1990,15 @@ $added
 **Bash (macOS/Linux):**
 ```bash
 SINCE="2026-09-11T00:00:00Z"   # <- set to the Catalog Synced date
-REPOS=("hosseinmirzapur/opencode-skills" "NeoLabHQ/context-engineering-kit")
+REPOS=("hosseinmirzapur/opencode-skills" "NeoLabHQ/context-engineering-kit" \
+       "n8n-io/skills" "LeadMagic/gtm-skills" "GAJETOso/financeskills" "gokulb20/crewm8-cfo-skills")
 
 for REPO in "${REPOS[@]}"; do
     echo "### $REPO"
     curl -sL "https://api.github.com/repos/$REPO/commits?path=skills&since=$SINCE&per_page=100" \
         | grep -oE '"sha": "[a-f0-9]{40}"' | sed -E 's/.*"sha": "([a-f0-9]+)".*/\1/' | sort -u | while read sha; do
             curl -sL "https://api.github.com/repos/$REPO/commits/$sha" \
-                | grep -oE '"filename": "skills/[^/]+/SKILL.md"' | sed -E 's|.*skills/([^/]+)/SKILL.md.*|\1|'
+                | grep -oE '"filename": "skills/[^"]+/SKILL.md"' | sed -E 's|.*/([^/]+)/SKILL.md.*|\1|'
         done | sort -u
 done
 ```
@@ -1621,17 +2007,21 @@ done
 
 **PowerShell (Windows):**
 ```powershell
-# All live skills across both upstream repos
+# All live skills across the upstream repos
 $repos = @(
     @{ name = "hosseinmirzapur/opencode-skills";  branch = "main" },
-    @{ name = "NeoLabHQ/context-engineering-kit"; branch = "master" }
+    @{ name = "NeoLabHQ/context-engineering-kit"; branch = "master" },
+    @{ name = "n8n-io/skills";                    branch = "main" },
+    @{ name = "LeadMagic/gtm-skills";             branch = "main" },
+    @{ name = "GAJETOso/financeskills";           branch = "main" },
+    @{ name = "gokulb20/crewm8-cfo-skills";       branch = "main" }
 )
 $live = @()
 foreach ($r in $repos) {
     $tree = Invoke-RestMethod "https://api.github.com/repos/$($r.name)/git/trees/$($r.branch)?recursive=1"
     $live += $tree.tree |
-        Where-Object { $_.path -match '^skills/[^/]+/SKILL\.md$' } |
-        ForEach-Object { ($_.path -split '/')[1] }
+        Where-Object { $_.path -match '^skills/.+/SKILL\.md$' } |
+        ForEach-Object { $p = $_.path -split '/'; $p[$p.Count - 2] }
 }
 $live = $live | Sort-Object -Unique
 
@@ -1652,9 +2042,17 @@ $removed
 ```bash
 LIVE=$(
   curl -sL "https://api.github.com/repos/hosseinmirzapur/opencode-skills/git/trees/main?recursive=1" \
-    | grep -oE '"path": "skills/[^/]+/SKILL.md"' | sed -E 's|.*skills/([^/]+)/SKILL.md.*|\1|'
+    | grep -oE '"path": "skills/[^"]+/SKILL.md"' | sed -E 's|.*/([^/]+)/SKILL.md.*|\1|'
   curl -sL "https://api.github.com/repos/NeoLabHQ/context-engineering-kit/git/trees/master?recursive=1" \
-    | grep -oE '"path": "skills/[^/]+/SKILL.md"' | sed -E 's|.*skills/([^/]+)/SKILL.md.*|\1|'
+    | grep -oE '"path": "skills/[^"]+/SKILL.md"' | sed -E 's|.*/([^/]+)/SKILL.md.*|\1|'
+  curl -sL "https://api.github.com/repos/n8n-io/skills/git/trees/main?recursive=1" \
+    | grep -oE '"path": "skills/[^"]+/SKILL.md"' | sed -E 's|.*/([^/]+)/SKILL.md.*|\1|'
+  curl -sL "https://api.github.com/repos/LeadMagic/gtm-skills/git/trees/main?recursive=1" \
+    | grep -oE '"path": "skills/[^"]+/SKILL.md"' | sed -E 's|.*/([^/]+)/SKILL.md.*|\1|'
+  curl -sL "https://api.github.com/repos/GAJETOso/financeskills/git/trees/main?recursive=1" \
+    | grep -oE '"path": "skills/[^"]+/SKILL.md"' | sed -E 's|.*/([^/]+)/SKILL.md.*|\1|'
+  curl -sL "https://api.github.com/repos/gokulb20/crewm8-cfo-skills/git/trees/main?recursive=1" \
+    | grep -oE '"path": "skills/[^"]+/SKILL.md"' | sed -E 's|.*/([^/]+)/SKILL.md.*|\1|'
 )
 LIVE=$(echo "$LIVE" | sort -u)
 
@@ -1800,7 +2198,7 @@ For issues or questions:
 ---
 
 **Last Updated**: September 11, 2026
-**Version**: 4.0.0
+**Version**: 5.0.0
 **Author**: [TheDevRicardo](https://thedevricardo.co.za)
-**Catalog Synced**: 2026-09-11 (114 skills tracked)
+**Catalog Synced**: 2026-09-11 (159 skills tracked)
 **Self-Update**: Run the "Keeping the Catalog Updated" section to pull new upstream skills

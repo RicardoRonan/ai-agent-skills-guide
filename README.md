@@ -8,7 +8,7 @@ A universal guide for implementing and managing AI agent skills across 7 major c
 
 This guide covers how to install, configure, and manage a skill library following the [Agent Skills standard](https://agentskills.io). It is written to be read by any AI coding agent: the agent detects which tool it is, then follows the correct paths and commands for that agent.
 
-The library ships with 114 curated skills drawn from a 322+ skill collection plus a context-engineering kit, organized into role-based packages so you install what fits your work instead of everything.
+The library ships with 159 curated skills drawn from six source repos, organized into role-based packages so you install what fits your work instead of everything.
 
 ## Who This Is For
 
@@ -23,7 +23,7 @@ The library ships with 114 curated skills drawn from a 322+ skill collection plu
 | Agent Detection | Self-identifying which agent is reading the guide |
 | Supported Agents | Directory paths, instruction files, and SKILL.md support per agent |
 | Agent Skills Standard | The portable YAML frontmatter + markdown body format |
-| Skills Catalog | 114 skills organized by category with role package tags |
+| Skills Catalog | 159 skills organized by category with role package tags |
 | Skill Activation | When the agent loads each skill, intent routing, and token-smart rules |
 | Installation | Role-based install scripts (OpenCode, Claude Code, Cursor, Codex, Windsurf, Copilot, Gemini) |
 | Directory Structure | Where skills live on disk per agent |
@@ -35,7 +35,7 @@ The library ships with 114 curated skills drawn from a 322+ skill collection plu
 
 ## Role-Based Packages
 
-Pick the role that matches your work. Each installs a curated set of skills.
+Pick one or more roles that match your work. Each installs a curated set of skills, and selecting several merges them.
 
 | Role | Skills | Best For |
 |------|--------|----------|
@@ -49,8 +49,11 @@ Pick the role that matches your work. Each installs a curated set of skills.
 | `architect` | 15 | System design, tech leads |
 | `content` | 11 | Copywriting, SEO, marketing |
 | `optimize` | 16 | Token cost and context window efficiency |
+| `automation` | 14 | n8n and workflow automation |
+| `gtm` | 16 | Go-to-market, sales, RevOps |
+| `finance` | 15 | Finance, accounting, FP&A, startup CFO |
 
-Add individual skills on top of any role with the `$extras` array. No long lists to delete through.
+Combine roles (for example `("fullstack", "devops")`) and add individual skills on top with the `$extras` array. Duplicates across roles are removed automatically.
 
 ## How Skills Activate
 
@@ -68,7 +71,7 @@ Examples: asking to write or edit copy loads `copywriting` then `copy-editing`. 
 
 ## Skills Catalog
 
-114 skills across 13 categories. Expand any category to see each skill, its purpose, and the role packages that include it. `all` means the skill is part of every role package.
+159 skills across 16 categories. Expand any category to see each skill, its purpose, and the role packages that include it. `all` means the skill is part of every role package.
 
 <details>
 <summary><strong>Design & UI/UX</strong> (17 skills)</summary>
@@ -96,7 +99,7 @@ Examples: asking to write or edit copy loads `copywriting` then `copy-editing`. 
 </details>
 
 <details>
-<summary><strong>Code Quality & Security</strong> (7 skills)</summary>
+<summary><strong>Code Quality & Security</strong> (6 skills)</summary>
 
 | Skill | Purpose | Packages |
 |-------|---------|----------|
@@ -105,7 +108,6 @@ Examples: asking to write or edit copy loads `copywriting` then `copy-editing`. 
 | `best-practices` | CSP, SRI, Trusted Types, browser compatibility | fullstack, frontend, backend |
 | `fullstack-guardian` | Security-focused full-stack implementation | fullstack, backend, security |
 | `code-documenter` | Documentation generation and standards | fullstack, backend |
-| `prompt-engineer` | AI prompt engineering patterns | data, fullstack |
 | `secure-code-guardian` | Secure coding patterns and review | security |
 
 </details>
@@ -290,13 +292,82 @@ Examples: asking to write or edit copy loads `copywriting` then `copy-editing`. 
 
 </details>
 
-The source of truth, including the full 322+ skill set and the self-update procedure, is in `AI_AGENT_SKILLS_IMPLEMENTATION.md`.
+<details>
+<summary><strong>Automation Platforms</strong> (14 skills)</summary>
+
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| `n8n-workflow-lifecycle-official` | n8n workflow design, organization, and lifecycle | automation |
+| `n8n-subworkflows-official` | Reusable and multi-step n8n sub-workflows | automation |
+| `n8n-extending-mcp-official` | Extend n8n MCP capabilities | automation |
+| `n8n-expressions-official` | n8n expressions and data references | automation |
+| `n8n-node-configuration-official` | Configuring n8n nodes | automation |
+| `n8n-code-nodes-official` | Custom logic in n8n Code nodes | automation |
+| `n8n-loops-official` | Loops, batching, and pagination | automation |
+| `n8n-agents-official` | LangChain Agent node, tools, structured output | automation |
+| `n8n-error-handling-official` | Error handling for production n8n workflows | automation |
+| `n8n-credentials-and-security-official` | Auth, API keys, and credentials in n8n | automation |
+| `n8n-binary-and-data-official` | Files, images, and attachments in n8n | automation |
+| `n8n-data-tables-official` | n8n Data Tables: schemas, dedup, state | automation |
+| `n8n-debugging-official` | Debugging n8n workflows | automation |
+| `using-n8n-skills-official` | Router for the official n8n skill set | automation |
+
+</details>
+
+<details>
+<summary><strong>Go-to-Market</strong> (16 skills)</summary>
+
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| `gtm-context` | Capture company, ICP, motion, and metrics context | gtm |
+| `icp-scoring` | ICP definition and account scoring | gtm |
+| `positioning-messaging` | Positioning and messaging hierarchy | gtm |
+| `pricing-strategy` | Pricing, packaging, and willingness to pay | gtm |
+| `buyer-psychology` | Buyer psychology for GTM decisions | gtm |
+| `competitive-intel` | Competitive intelligence and battlecards | gtm |
+| `cold-email-strategy` | Cold email strategy and sequences | gtm |
+| `cold-email-copywriting` | Cold email copywriting | gtm |
+| `email-deliverability` | Domain and inbox deliverability | gtm |
+| `multi-channel-outreach` | Multi-channel outreach cadence | gtm |
+| `pipeline-management` | Pipeline management and hygiene | gtm |
+| `meeting-prep` | Pre-call research and briefing | gtm |
+| `objection-handling` | Diagnose and handle objections | gtm |
+| `sales-enablement` | Sales asset and enablement creation | gtm |
+| `gtm-metrics` | GTM metrics and dashboards | gtm |
+| `attribution` | Marketing attribution modeling | gtm |
+
+</details>
+
+<details>
+<summary><strong>Financial</strong> (15 skills)</summary>
+
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| `financial-analysis` | Financial statement analysis and ratios | finance |
+| `budget-forecast` | Budgets, forecasts, and variance analysis | finance |
+| `statement-preparation` | Income statement, balance sheet, cash flow (IFRS/GAAP) | finance |
+| `investment-analysis` | NPV, IRR, payback, and sensitivity analysis | finance |
+| `audit-checklist` | Audit checklists, workpapers, and test procedures | finance |
+| `automated-reconciliation` | Bank and account reconciliation at scale | finance |
+| `tax-planning` | Tax position optimization and compliance | finance |
+| `revenue-recognition` | IFRS 15 / ASC 606 revenue recognition | finance |
+| `risk-assessment` | Credit, market, operational, and liquidity risk | finance |
+| `treasury-management` | Cash, working capital, and liquidity | finance |
+| `wacc-computation` | Weighted average cost of capital | finance |
+| `credit-analysis` | Credit risk and rating analysis | finance |
+| `cash-forecasting` | Rolling cash forecast and runway (startup CFO) | finance |
+| `cap-table-management` | Cap table, dilution, and option pool | finance |
+| `unit-economics-analysis` | CAC, LTV, and payback analysis | finance |
+
+</details>
+
+The source of truth, including the full upstream skill sets and the self-update procedure, is in `AI_AGENT_SKILLS_IMPLEMENTATION.md`.
 
 ## Quick Start
 
 1. Open `AI_AGENT_SKILLS_IMPLEMENTATION.md`
 2. Follow the Agent Detection section to identify your agent
-3. Pick your role and run the install script for your agent
+3. Pick one or more roles and run the install script for your agent
 4. Skills are now available across all your projects
 
 ## Universal Fallback
@@ -312,7 +383,7 @@ The guide keeps itself current. The Skills Catalog carries a `Last synced` date,
 3. Fetch each new skill's description
 4. Classify it into a category and role package
 
-Run the guide again after a while and the agent runs these checks before acting, so the catalog never drifts from upstream. The repo currently ships 114 curated skills out of 322+ available.
+Run the guide again after a while and the agent runs these checks before acting, so the catalog never drifts from upstream. The repo currently ships 159 curated skills across six upstream repos.
 
 ## Contributing
 
@@ -321,6 +392,25 @@ See the Contributing section in the guide for how to create custom skills using 
 ## Author
 
 Built by [TheDevRicardo](https://thedevricardo.co.za).
+
+## Licensing and Attribution
+
+This guide is original work, licensed MIT (see [LICENSE](LICENSE)). It does not bundle third-party skill files. The install scripts fetch each skill directly from its source repo at install time, so every skill keeps its own license.
+
+| Source | License | Used for |
+|--------|---------|----------|
+| hosseinmirzapur/opencode-skills | Apache-2.0 | language, workflow, design, data, content skills |
+| NeoLabHQ/context-engineering-kit | GPL-3.0 | token optimization and context engineering |
+| n8n-io/skills | Apache-2.0 | automation platform skills |
+| LeadMagic/gtm-skills | MIT | go-to-market skills |
+| GAJETOso/financeskills | MIT | professional finance skills |
+| gokulb20/crewm8-cfo-skills | MIT | startup CFO skills |
+| Checklist-Design/skills | MIT | checklist-design |
+
+- The MIT license here covers only this guide and its scripts, not the downloaded skills.
+- Each skill carries its own author and license in its `SKILL.md` frontmatter.
+- If you redistribute downloaded skills, follow each skill's license. The GPL-3.0 skills require GPL terms and source availability if redistributed.
+- Not legal advice. Verify licenses before commercial use.
 
 ## License
 
