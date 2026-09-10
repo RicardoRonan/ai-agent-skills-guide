@@ -9,7 +9,7 @@ This guide works with **OpenCode, Claude Code, Cursor, Codex, Windsurf, GitHub C
 ## Goals
 
 1. **Global Installation**: Skills installed in your agent's personal directory are available across all projects
-2. **Comprehensive Coverage**: 22+ skills covering design, code quality, security, architecture, testing, DevOps, and more
+2. **Comprehensive Coverage**: 114 curated skills covering design, code quality, security, architecture, testing, DevOps, languages, token optimization, and more
 3. **Workflow Enhancement**: Skills designed to increase developer productivity and code quality
 
 ## Agent Detection
@@ -61,7 +61,7 @@ This means skills cost almost nothing in context until they are needed.
 
 All available skills organized by category. See the Installation section to pick a role package or build a custom set.
 
-> **Catalog sync:** `Last synced: 2026-09-11` | `Upstream: hosseinmirzapur/opencode-skills` | `Tracked: 99 skills`.
+> **Catalog sync:** `Last synced: 2026-09-11` | `Upstream: hosseinmirzapur/opencode-skills`, `NeoLabHQ/context-engineering-kit` | `Tracked: 114 skills`.
 > If you are an agent running this guide, run the **Keeping the Catalog Updated** section at the end before trusting these tables. The upstream repo adds skills regularly.
 
 ### Design & UI/UX
@@ -93,7 +93,6 @@ All available skills organized by category. See the Installation section to pick
 | best-practices | CSP, SRI, Trusted Types, browser compatibility | fullstack, frontend, backend |
 | fullstack-guardian | Security-focused full-stack implementation | fullstack, backend, security |
 | code-documenter | Documentation generation and standards | fullstack, backend |
-| prompt-engineer | AI prompt engineering patterns | data, fullstack |
 | secure-code-guardian | Secure coding patterns and review | security |
 
 ### Development Workflow
@@ -194,6 +193,26 @@ All available skills organized by category. See the Installation section to pick
 | ml-pipeline | ML pipeline design and orchestration | data |
 | rag-architect | RAG system design and retrieval | data |
 
+### Token Optimization & Context Engineering
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| context-engineering | Context components, mechanics, and constraints in agent systems | all |
+| multi-agent-patterns | Multi-agent architectures for context isolation | all |
+| write-concisely | Concise writing rules to cut output tokens | all |
+| prompt-engineer | Prompt design and refactoring for token efficiency | all |
+| launch-sub-agent | Dispatch an isolated subagent for a task | optimize |
+| do-in-parallel | Run independent tasks in parallel subagents | optimize |
+| memorize | Curate insights into CLAUDE.md (agentic memory) | optimize |
+| decay | Prune stale memory and context | optimize |
+| reset | Reset context cleanly between tasks | optimize |
+| apply-anthropic-skill-best-practices | Token-efficient skill authoring | optimize |
+| prompt-engineering | Advanced prompt patterns for agents, hooks, and skills | optimize |
+| test-prompt | Test and iterate prompts | optimize |
+| setup-codemap-cli | Semantic code retrieval to cut file reads | optimize |
+| setup-serena-mcp | Serena MCP for semantic code retrieval | optimize |
+| output-skill | Full-output enforcement, handles token-limit splits | optimize |
+| graphify | Turn a codebase into a queryable knowledge graph | optimize |
+
 ### Data & Visualization
 | Skill | Purpose | Packages |
 |-------|---------|----------|
@@ -225,15 +244,16 @@ Pick the role that matches your work. Each role installs a curated set of skills
 
 | Role | Skills | Best For |
 |------|--------|----------|
-| `fullstack` | 20 | Most developers (frontend + backend + tools) |
-| `frontend` | 16 | UI/UX development, React, Vue, Angular |
-| `backend` | 15 | API development, servers, databases |
-| `devops` | 13 | Infrastructure, CI/CD, monitoring, SRE |
-| `mobile` | 12 | iOS, Android, Flutter, React Native |
-| `data` | 10 | Data engineering, ML, analytics |
-| `security` | 9 | Application security, penetration testing |
-| `architect` | 11 | System design, tech leads |
-| `content` | 7 | Copywriting, SEO, marketing |
+| `fullstack` | 24 | Most developers (frontend + backend + tools) |
+| `frontend` | 20 | UI/UX development, React, Vue, Angular |
+| `backend` | 19 | API development, servers, databases |
+| `devops` | 17 | Infrastructure, CI/CD, monitoring, SRE |
+| `mobile` | 16 | iOS, Android, Flutter, React Native |
+| `data` | 14 | Data engineering, ML, analytics |
+| `security` | 13 | Application security, penetration testing |
+| `architect` | 15 | System design, tech leads |
+| `content` | 11 | Copywriting, SEO, marketing |
+| `optimize` | 16 | Token cost and context window efficiency |
 
 You can add individual skills on top of any role. See the Skills Catalog for the full list.
 
@@ -277,7 +297,7 @@ cp -r /tmp/checklist-skills/skills/checklist-design ~/.config/opencode/skills/
 ```powershell
 # STEP 1: Pick your role (uncomment ONE)
 $role = "fullstack"
-# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize, optimize
 
 # STEP 2: Add extra skills you want (optional)
 $extras = @(
@@ -285,6 +305,9 @@ $extras = @(
     # "vue-expert",
     # "d3-visualization",
 )
+
+# Skills included in every role (token optimization / context engineering)
+$base = @("context-engineering","write-concisely","prompt-engineer","multi-agent-patterns")
 
 # Role-to-skills mapping
 $roleSkills = @{
@@ -321,12 +344,37 @@ $roleSkills = @{
                   "feature-forge","executing-plans","evaluation","verification-before-completion")
     content   = @("copywriting","copy-editing","cold-email","emails","seo",
                   "code-reviewer","verification-before-completion")
+    optimize  = @("context-engineering","multi-agent-patterns","launch-sub-agent","do-in-parallel",
+                  "memorize","decay","reset","write-concisely",
+                  "apply-anthropic-skill-best-practices","prompt-engineering","test-prompt",
+                  "setup-codemap-cli","setup-serena-mcp",
+                  "prompt-engineer","output-skill","graphify")
 }
 
-$skills = $roleSkills[$role] + $extras
+# Skills that come from a repo other than the default
+$sourceMap = @{
+    "context-engineering"                  = "NeoLabHQ/context-engineering-kit@master"
+    "multi-agent-patterns"                 = "NeoLabHQ/context-engineering-kit@master"
+    "launch-sub-agent"                     = "NeoLabHQ/context-engineering-kit@master"
+    "do-in-parallel"                       = "NeoLabHQ/context-engineering-kit@master"
+    "memorize"                             = "NeoLabHQ/context-engineering-kit@master"
+    "decay"                                = "NeoLabHQ/context-engineering-kit@master"
+    "reset"                                = "NeoLabHQ/context-engineering-kit@master"
+    "write-concisely"                      = "NeoLabHQ/context-engineering-kit@master"
+    "apply-anthropic-skill-best-practices" = "NeoLabHQ/context-engineering-kit@master"
+    "prompt-engineering"                   = "NeoLabHQ/context-engineering-kit@master"
+    "test-prompt"                          = "NeoLabHQ/context-engineering-kit@master"
+    "setup-codemap-cli"                    = "NeoLabHQ/context-engineering-kit@master"
+    "setup-serena-mcp"                     = "NeoLabHQ/context-engineering-kit@master"
+}
+$defaultSource = "hosseinmirzapur/opencode-skills@main"
+
+$skills = ($roleSkills[$role] + $base + $extras) | Select-Object -Unique
 
 foreach ($skill in $skills) {
-    $url = "https://raw.githubusercontent.com/hosseinmirzapur/opencode-skills/main/skills/$skill/SKILL.md"
+    $src = if ($sourceMap.ContainsKey($skill)) { $sourceMap[$skill] } else { $defaultSource }
+    $repo, $branch = $src -split '@'
+    $url = "https://raw.githubusercontent.com/$repo/$branch/skills/$skill/SKILL.md"
     $outputDir = "$env:USERPROFILE\.config\opencode\skills\$skill"
     New-Item -ItemType Directory -Force -Path $outputDir | Out-Null
     Invoke-WebRequest -Uri $url -OutFile "$outputDir\SKILL.md"
@@ -371,7 +419,7 @@ mkdir -p .claude/skills
 ```bash
 # STEP 1: Pick your role (uncomment ONE)
 ROLE="fullstack"
-# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize
 
 # STEP 2: Add extra skills you want (optional)
 EXTRAS=()
@@ -418,13 +466,33 @@ case $ROLE in
                      feature-forge executing-plans evaluation verification-before-completion) ;;
   content)   SKILLS=(copywriting copy-editing cold-email emails seo
                      code-reviewer verification-before-completion) ;;
+  optimize)  SKILLS=(context-engineering multi-agent-patterns launch-sub-agent do-in-parallel
+                     memorize decay reset write-concisely
+                     apply-anthropic-skill-best-practices prompt-engineering test-prompt
+                     setup-codemap-cli setup-serena-mcp
+                     prompt-engineer output-skill graphify) ;;
 esac
 
-ALL_SKILLS=("${SKILLS[@]}" "${EXTRAS[@]}")
+# Skills included in every role (token optimization / context engineering)
+BASE=(context-engineering write-concisely prompt-engineer multi-agent-patterns)
+
+# Skills sourced from a repo other than the default
+source_repo() {
+    case "$1" in
+        context-engineering|multi-agent-patterns|launch-sub-agent|do-in-parallel|\
+        memorize|decay|reset|write-concisely|apply-anthropic-skill-best-practices|\
+        prompt-engineering|test-prompt|setup-codemap-cli|setup-serena-mcp)
+            echo "NeoLabHQ/context-engineering-kit/master" ;;
+        *) echo "hosseinmirzapur/opencode-skills/main" ;;
+    esac
+}
+
+ALL_SKILLS=($(printf "%s\n" "${SKILLS[@]}" "${BASE[@]}" "${EXTRAS[@]}" | awk '!seen[$0]++'))
 
 for skill in "${ALL_SKILLS[@]}"; do
+    src=$(source_repo "$skill")
     mkdir -p "$SKILLS_DIR/$skill"
-    curl -sL "https://raw.githubusercontent.com/hosseinmirzapur/opencode-skills/main/skills/$skill/SKILL.md" \
+    curl -sL "https://raw.githubusercontent.com/$src/skills/$skill/SKILL.md" \
         -o "$SKILLS_DIR/$skill/SKILL.md"
 done
 ```
@@ -449,7 +517,7 @@ mkdir -p .cursor/skills
 ```bash
 # STEP 1: Pick your role (uncomment ONE)
 ROLE="fullstack"
-# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize
 
 # STEP 2: Add extra skills you want (optional)
 EXTRAS=()
@@ -496,13 +564,33 @@ case $ROLE in
                      feature-forge executing-plans evaluation verification-before-completion) ;;
   content)   SKILLS=(copywriting copy-editing cold-email emails seo
                      code-reviewer verification-before-completion) ;;
+  optimize)  SKILLS=(context-engineering multi-agent-patterns launch-sub-agent do-in-parallel
+                     memorize decay reset write-concisely
+                     apply-anthropic-skill-best-practices prompt-engineering test-prompt
+                     setup-codemap-cli setup-serena-mcp
+                     prompt-engineer output-skill graphify) ;;
 esac
 
-ALL_SKILLS=("${SKILLS[@]}" "${EXTRAS[@]}")
+# Skills included in every role (token optimization / context engineering)
+BASE=(context-engineering write-concisely prompt-engineer multi-agent-patterns)
+
+# Skills sourced from a repo other than the default
+source_repo() {
+    case "$1" in
+        context-engineering|multi-agent-patterns|launch-sub-agent|do-in-parallel|\
+        memorize|decay|reset|write-concisely|apply-anthropic-skill-best-practices|\
+        prompt-engineering|test-prompt|setup-codemap-cli|setup-serena-mcp)
+            echo "NeoLabHQ/context-engineering-kit/master" ;;
+        *) echo "hosseinmirzapur/opencode-skills/main" ;;
+    esac
+}
+
+ALL_SKILLS=($(printf "%s\n" "${SKILLS[@]}" "${BASE[@]}" "${EXTRAS[@]}" | awk '!seen[$0]++'))
 
 for skill in "${ALL_SKILLS[@]}"; do
+    src=$(source_repo "$skill")
     mkdir -p "$SKILLS_DIR/$skill"
-    curl -sL "https://raw.githubusercontent.com/hosseinmirzapur/opencode-skills/main/skills/$skill/SKILL.md" \
+    curl -sL "https://raw.githubusercontent.com/$src/skills/$skill/SKILL.md" \
         -o "$SKILLS_DIR/$skill/SKILL.md"
 done
 ```
@@ -527,7 +615,7 @@ mkdir -p .agents/skills
 ```bash
 # STEP 1: Pick your role (uncomment ONE)
 ROLE="fullstack"
-# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize
 
 # STEP 2: Add extra skills you want (optional)
 EXTRAS=()
@@ -574,13 +662,33 @@ case $ROLE in
                      feature-forge executing-plans evaluation verification-before-completion) ;;
   content)   SKILLS=(copywriting copy-editing cold-email emails seo
                      code-reviewer verification-before-completion) ;;
+  optimize)  SKILLS=(context-engineering multi-agent-patterns launch-sub-agent do-in-parallel
+                     memorize decay reset write-concisely
+                     apply-anthropic-skill-best-practices prompt-engineering test-prompt
+                     setup-codemap-cli setup-serena-mcp
+                     prompt-engineer output-skill graphify) ;;
 esac
 
-ALL_SKILLS=("${SKILLS[@]}" "${EXTRAS[@]}")
+# Skills included in every role (token optimization / context engineering)
+BASE=(context-engineering write-concisely prompt-engineer multi-agent-patterns)
+
+# Skills sourced from a repo other than the default
+source_repo() {
+    case "$1" in
+        context-engineering|multi-agent-patterns|launch-sub-agent|do-in-parallel|\
+        memorize|decay|reset|write-concisely|apply-anthropic-skill-best-practices|\
+        prompt-engineering|test-prompt|setup-codemap-cli|setup-serena-mcp)
+            echo "NeoLabHQ/context-engineering-kit/master" ;;
+        *) echo "hosseinmirzapur/opencode-skills/main" ;;
+    esac
+}
+
+ALL_SKILLS=($(printf "%s\n" "${SKILLS[@]}" "${BASE[@]}" "${EXTRAS[@]}" | awk '!seen[$0]++'))
 
 for skill in "${ALL_SKILLS[@]}"; do
+    src=$(source_repo "$skill")
     mkdir -p "$SKILLS_DIR/$skill"
-    curl -sL "https://raw.githubusercontent.com/hosseinmirzapur/opencode-skills/main/skills/$skill/SKILL.md" \
+    curl -sL "https://raw.githubusercontent.com/$src/skills/$skill/SKILL.md" \
         -o "$SKILLS_DIR/$skill/SKILL.md"
 done
 ```
@@ -600,7 +708,7 @@ mkdir -p .agents/skills
 ```bash
 # STEP 1: Pick your role (uncomment ONE)
 ROLE="fullstack"
-# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize
 
 # STEP 2: Add extra skills you want (optional)
 EXTRAS=()
@@ -647,13 +755,33 @@ case $ROLE in
                      feature-forge executing-plans evaluation verification-before-completion) ;;
   content)   SKILLS=(copywriting copy-editing cold-email emails seo
                      code-reviewer verification-before-completion) ;;
+  optimize)  SKILLS=(context-engineering multi-agent-patterns launch-sub-agent do-in-parallel
+                     memorize decay reset write-concisely
+                     apply-anthropic-skill-best-practices prompt-engineering test-prompt
+                     setup-codemap-cli setup-serena-mcp
+                     prompt-engineer output-skill graphify) ;;
 esac
 
-ALL_SKILLS=("${SKILLS[@]}" "${EXTRAS[@]}")
+# Skills included in every role (token optimization / context engineering)
+BASE=(context-engineering write-concisely prompt-engineer multi-agent-patterns)
+
+# Skills sourced from a repo other than the default
+source_repo() {
+    case "$1" in
+        context-engineering|multi-agent-patterns|launch-sub-agent|do-in-parallel|\
+        memorize|decay|reset|write-concisely|apply-anthropic-skill-best-practices|\
+        prompt-engineering|test-prompt|setup-codemap-cli|setup-serena-mcp)
+            echo "NeoLabHQ/context-engineering-kit/master" ;;
+        *) echo "hosseinmirzapur/opencode-skills/main" ;;
+    esac
+}
+
+ALL_SKILLS=($(printf "%s\n" "${SKILLS[@]}" "${BASE[@]}" "${EXTRAS[@]}" | awk '!seen[$0]++'))
 
 for skill in "${ALL_SKILLS[@]}"; do
+    src=$(source_repo "$skill")
     mkdir -p "$SKILLS_DIR/$skill"
-    curl -sL "https://raw.githubusercontent.com/hosseinmirzapur/opencode-skills/main/skills/$skill/SKILL.md" \
+    curl -sL "https://raw.githubusercontent.com/$src/skills/$skill/SKILL.md" \
         -o "$SKILLS_DIR/$skill/SKILL.md"
 done
 ```
@@ -678,7 +806,7 @@ mkdir -p .agents/skills    # Universal path (also works)
 ```bash
 # STEP 1: Pick your role (uncomment ONE)
 ROLE="fullstack"
-# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize
 
 # STEP 2: Add extra skills you want (optional)
 EXTRAS=()
@@ -725,13 +853,33 @@ case $ROLE in
                      feature-forge executing-plans evaluation verification-before-completion) ;;
   content)   SKILLS=(copywriting copy-editing cold-email emails seo
                      code-reviewer verification-before-completion) ;;
+  optimize)  SKILLS=(context-engineering multi-agent-patterns launch-sub-agent do-in-parallel
+                     memorize decay reset write-concisely
+                     apply-anthropic-skill-best-practices prompt-engineering test-prompt
+                     setup-codemap-cli setup-serena-mcp
+                     prompt-engineer output-skill graphify) ;;
 esac
 
-ALL_SKILLS=("${SKILLS[@]}" "${EXTRAS[@]}")
+# Skills included in every role (token optimization / context engineering)
+BASE=(context-engineering write-concisely prompt-engineer multi-agent-patterns)
+
+# Skills sourced from a repo other than the default
+source_repo() {
+    case "$1" in
+        context-engineering|multi-agent-patterns|launch-sub-agent|do-in-parallel|\
+        memorize|decay|reset|write-concisely|apply-anthropic-skill-best-practices|\
+        prompt-engineering|test-prompt|setup-codemap-cli|setup-serena-mcp)
+            echo "NeoLabHQ/context-engineering-kit/master" ;;
+        *) echo "hosseinmirzapur/opencode-skills/main" ;;
+    esac
+}
+
+ALL_SKILLS=($(printf "%s\n" "${SKILLS[@]}" "${BASE[@]}" "${EXTRAS[@]}" | awk '!seen[$0]++'))
 
 for skill in "${ALL_SKILLS[@]}"; do
+    src=$(source_repo "$skill")
     mkdir -p "$SKILLS_DIR/$skill"
-    curl -sL "https://raw.githubusercontent.com/hosseinmirzapur/opencode-skills/main/skills/$skill/SKILL.md" \
+    curl -sL "https://raw.githubusercontent.com/$src/skills/$skill/SKILL.md" \
         -o "$SKILLS_DIR/$skill/SKILL.md"
 done
 ```
@@ -754,7 +902,7 @@ mkdir -p .agents/skills
 ```bash
 # STEP 1: Pick your role (uncomment ONE)
 ROLE="fullstack"
-# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content
+# Options: fullstack, frontend, backend, devops, mobile, data, security, architect, content, optimize
 
 # STEP 2: Add extra skills you want (optional)
 EXTRAS=()
@@ -801,13 +949,33 @@ case $ROLE in
                      feature-forge executing-plans evaluation verification-before-completion) ;;
   content)   SKILLS=(copywriting copy-editing cold-email emails seo
                      code-reviewer verification-before-completion) ;;
+  optimize)  SKILLS=(context-engineering multi-agent-patterns launch-sub-agent do-in-parallel
+                     memorize decay reset write-concisely
+                     apply-anthropic-skill-best-practices prompt-engineering test-prompt
+                     setup-codemap-cli setup-serena-mcp
+                     prompt-engineer output-skill graphify) ;;
 esac
 
-ALL_SKILLS=("${SKILLS[@]}" "${EXTRAS[@]}")
+# Skills included in every role (token optimization / context engineering)
+BASE=(context-engineering write-concisely prompt-engineer multi-agent-patterns)
+
+# Skills sourced from a repo other than the default
+source_repo() {
+    case "$1" in
+        context-engineering|multi-agent-patterns|launch-sub-agent|do-in-parallel|\
+        memorize|decay|reset|write-concisely|apply-anthropic-skill-best-practices|\
+        prompt-engineering|test-prompt|setup-codemap-cli|setup-serena-mcp)
+            echo "NeoLabHQ/context-engineering-kit/master" ;;
+        *) echo "hosseinmirzapur/opencode-skills/main" ;;
+    esac
+}
+
+ALL_SKILLS=($(printf "%s\n" "${SKILLS[@]}" "${BASE[@]}" "${EXTRAS[@]}" | awk '!seen[$0]++'))
 
 for skill in "${ALL_SKILLS[@]}"; do
+    src=$(source_repo "$skill")
     mkdir -p "$SKILLS_DIR/$skill"
-    curl -sL "https://raw.githubusercontent.com/hosseinmirzapur/opencode-skills/main/skills/$skill/SKILL.md" \
+    curl -sL "https://raw.githubusercontent.com/$src/skills/$skill/SKILL.md" \
         -o "$SKILLS_DIR/$skill/SKILL.md"
 done
 ```
@@ -1271,11 +1439,10 @@ If you use multiple agents in the same project:
 
 ## Additional Skills
 
-The Skills Catalog above lists all skills included in the role packages. The hosseinmirzapur/opencode-skills repository has 322+ skills total.
+The Skills Catalog above lists all skills included in the role packages. It draws from two upstream repos:
 
-### Browse All Skills
-
-Full catalog: https://github.com/hosseinmirzapur/opencode-skills/tree/main/skills
+- **hosseinmirzapur/opencode-skills** (322+ skills): https://github.com/hosseinmirzapur/opencode-skills/tree/main/skills
+- **NeoLabHQ/context-engineering-kit** (context engineering and token optimization): https://github.com/NeoLabHQ/context-engineering-kit/tree/master/skills
 
 ### Adding Skills Not in Your Role
 
@@ -1305,6 +1472,7 @@ EXTRAS=("game-developer" "shopify-expert" "wordpress-pro")
 | Infrastructure | `kubernetes-specialist`, `terraform-engineer`, `sre-engineer`, `monitoring-expert` |
 | Data | `python-pro`, `sql-pro`, `pandas-pro`, `d3-visualization`, `ml-pipeline` |
 | Design | `frontend-design`, `shadcn-ui`, `ui-ux-pro-max`, `color-expert` |
+| Token optimization | `context-engineering`, `setup-serena-mcp`, `memorize`, `write-concisely` |
 
 ## Keeping the Catalog Updated
 
@@ -1316,20 +1484,22 @@ There are two checks. The first finds skills that were **added upstream since th
 
 #### 1a. New skills since last sync
 
-Set `SINCE` to the `Catalog Synced` date at the top of the Skills Catalog section.
+Set `SINCE` to the `Catalog Synced` date at the top of the Skills Catalog section. This checks every upstream repo the catalog pulls from.
 
 **PowerShell (Windows):**
 ```powershell
 $since = "2026-09-11T00:00:00Z"   # <- set to the Catalog Synced date
-$repo  = "hosseinmirzapur/opencode-skills"
+$repos = @("hosseinmirzapur/opencode-skills", "NeoLabHQ/context-engineering-kit")
 $added = @()
 
-$commits = Invoke-RestMethod "https://api.github.com/repos/$repo/commits?path=skills&since=$since&per_page=100"
-foreach ($c in $commits) {
-    $detail = Invoke-RestMethod "https://api.github.com/repos/$repo/commits/$($c.sha)"
-    $added += $detail.files |
-        Where-Object { $_.status -eq 'added' -and $_.filename -match '^skills/[^/]+/SKILL\.md$' } |
-        ForEach-Object { ($_.filename -split '/')[1] }
+foreach ($repo in $repos) {
+    $commits = Invoke-RestMethod "https://api.github.com/repos/$repo/commits?path=skills&since=$since&per_page=100"
+    foreach ($c in $commits) {
+        $detail = Invoke-RestMethod "https://api.github.com/repos/$repo/commits/$($c.sha)"
+        $added += $detail.files |
+            Where-Object { $_.status -eq 'added' -and $_.filename -match '^skills/[^/]+/SKILL\.md$' } |
+            ForEach-Object { "$repo  ->  " + ($_.filename -split '/')[1] }
+    }
 }
 $added = $added | Sort-Object -Unique
 Write-Host "Skills added since $since ($($added.Count)):"
@@ -1339,25 +1509,35 @@ $added
 **Bash (macOS/Linux):**
 ```bash
 SINCE="2026-09-11T00:00:00Z"   # <- set to the Catalog Synced date
-REPO="hosseinmirzapur/opencode-skills"
+REPOS=("hosseinmirzapur/opencode-skills" "NeoLabHQ/context-engineering-kit")
 
-curl -sL "https://api.github.com/repos/$REPO/commits?path=skills&since=$SINCE&per_page=100" \
-    | grep -oE '"sha": "[a-f0-9]{40}"' | sed -E 's/.*"sha": "([a-f0-9]+)".*/\1/' | sort -u | while read sha; do
-        curl -sL "https://api.github.com/repos/$REPO/commits/$sha" \
-            | grep -oE '"filename": "skills/[^/]+/SKILL.md"' | sed -E 's|.*skills/([^/]+)/SKILL.md.*|\1|'
-    done | sort -u
+for REPO in "${REPOS[@]}"; do
+    echo "### $REPO"
+    curl -sL "https://api.github.com/repos/$REPO/commits?path=skills&since=$SINCE&per_page=100" \
+        | grep -oE '"sha": "[a-f0-9]{40}"' | sed -E 's/.*"sha": "([a-f0-9]+)".*/\1/' | sort -u | while read sha; do
+            curl -sL "https://api.github.com/repos/$REPO/commits/$sha" \
+                | grep -oE '"filename": "skills/[^/]+/SKILL.md"' | sed -E 's|.*skills/([^/]+)/SKILL.md.*|\1|'
+        done | sort -u
+done
 ```
 
 #### 1b. Catalog entries removed or renamed upstream
 
 **PowerShell (Windows):**
 ```powershell
-# All live skills upstream
-$tree = Invoke-RestMethod "https://api.github.com/repos/hosseinmirzapur/opencode-skills/git/trees/main?recursive=1"
-$live = $tree.tree |
-    Where-Object { $_.path -match '^skills/[^/]+/SKILL\.md$' } |
-    ForEach-Object { ($_.path -split '/')[1] } |
-    Sort-Object -Unique
+# All live skills across both upstream repos
+$repos = @(
+    @{ name = "hosseinmirzapur/opencode-skills";  branch = "main" },
+    @{ name = "NeoLabHQ/context-engineering-kit"; branch = "master" }
+)
+$live = @()
+foreach ($r in $repos) {
+    $tree = Invoke-RestMethod "https://api.github.com/repos/$($r.name)/git/trees/$($r.branch)?recursive=1"
+    $live += $tree.tree |
+        Where-Object { $_.path -match '^skills/[^/]+/SKILL\.md$' } |
+        ForEach-Object { ($_.path -split '/')[1] }
+}
+$live = $live | Sort-Object -Unique
 
 # Skills already listed in this guide's catalog
 $doc = Get-Content "AI_AGENT_SKILLS_IMPLEMENTATION.md" -Raw
@@ -1366,7 +1546,7 @@ $catalog = [regex]::Matches($section, '(?m)^\| ([a-z0-9][a-z0-9-]*) \|') |
     ForEach-Object { $_.Groups[1].Value } |
     Sort-Object -Unique
 
-# checklist-design comes from a different repo, so it is expected to be listed here
+# checklist-design comes from a third repo, so it is expected to be listed here
 $removed = $catalog | Where-Object { $_ -notin $live -and $_ -ne 'checklist-design' }
 Write-Host "Catalog entries no longer upstream ($($removed.Count)):"
 $removed
@@ -1374,9 +1554,13 @@ $removed
 
 **Bash (macOS/Linux):**
 ```bash
-LIVE=$(curl -sL "https://api.github.com/repos/hosseinmirzapur/opencode-skills/git/trees/main?recursive=1" \
-    | grep -oE '"path": "skills/[^/]+/SKILL.md"' \
-    | sed -E 's|.*skills/([^/]+)/SKILL.md.*|\1|' | sort -u)
+LIVE=$(
+  curl -sL "https://api.github.com/repos/hosseinmirzapur/opencode-skills/git/trees/main?recursive=1" \
+    | grep -oE '"path": "skills/[^/]+/SKILL.md"' | sed -E 's|.*skills/([^/]+)/SKILL.md.*|\1|'
+  curl -sL "https://api.github.com/repos/NeoLabHQ/context-engineering-kit/git/trees/master?recursive=1" \
+    | grep -oE '"path": "skills/[^/]+/SKILL.md"' | sed -E 's|.*skills/([^/]+)/SKILL.md.*|\1|'
+)
+LIVE=$(echo "$LIVE" | sort -u)
 
 CATALOG=$(awk '/^## Skills Catalog/{f=1} f&&/^## /&&!/^## Skills Catalog/{exit} f' \
     AI_AGENT_SKILLS_IMPLEMENTATION.md \
@@ -1420,6 +1604,7 @@ Match the skill name and description against these categories. Pick the first ca
 | Content & Marketing | copy, seo, email, marketing, content, blog, social, ads, cold-email |
 | AI & Machine Learning | ml, ai, fine-tun, rag, prompt, llm, model, embedding, vector |
 | Data & Visualization | data, pandas, visualization, chart, d3, report, analytics, etl |
+| Token Optimization & Context Engineering | token, context, prompt, compress, compact, budget, window, subagent, memory, retrieval, cache, concis |
 | CLI & Tools | cli, command, mcp, tool, terminal, shell |
 | Game Development | game, unity, godot, unreal, shader, 3d |
 
@@ -1441,6 +1626,7 @@ Add the new skill to role packages based on its category:
 | Content & Marketing | content |
 | AI & Machine Learning | data |
 | Data & Visualization | data |
+| Token Optimization & Context Engineering | optimize (base: context-engineering, write-concisely, prompt-engineer, multi-agent-patterns) |
 | CLI & Tools | fullstack, backend |
 | Game Development | (standalone) |
 
@@ -1505,6 +1691,7 @@ To create custom skills for your team:
 ### Skill Sources
 - Checklist-Design Skills: https://github.com/Checklist-Design/skills
 - OpenCode Skills Collection: https://github.com/hosseinmirzapur/opencode-skills
+- Context Engineering Kit: https://github.com/NeoLabHQ/context-engineering-kit
 
 ## Support
 
@@ -1517,7 +1704,7 @@ For issues or questions:
 ---
 
 **Last Updated**: September 11, 2026
-**Version**: 3.0.0
+**Version**: 4.0.0
 **Author**: Ricardo Moses
-**Catalog Synced**: 2026-09-11 (99 skills tracked)
+**Catalog Synced**: 2026-09-11 (114 skills tracked)
 **Self-Update**: Run the "Keeping the Catalog Updated" section to pull new upstream skills

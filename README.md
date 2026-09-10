@@ -6,7 +6,7 @@ A universal guide for implementing and managing AI agent skills across 7 major c
 
 This guide covers how to install, configure, and manage a skill library following the [Agent Skills standard](https://agentskills.io). It is written to be read by any AI coding agent: the agent detects which tool it is, then follows the correct paths and commands for that agent.
 
-The library ships with 99 curated skills drawn from a 322+ skill collection, organized into role-based packages so you install what fits your work instead of everything.
+The library ships with 114 curated skills drawn from a 322+ skill collection plus a context-engineering kit, organized into role-based packages so you install what fits your work instead of everything.
 
 ## Who This Is For
 
@@ -21,7 +21,7 @@ The library ships with 99 curated skills drawn from a 322+ skill collection, org
 | Agent Detection | Self-identifying which agent is reading the guide |
 | Supported Agents | Directory paths, instruction files, and SKILL.md support per agent |
 | Agent Skills Standard | The portable YAML frontmatter + markdown body format |
-| Skills Catalog | 99 skills organized by category with role package tags |
+| Skills Catalog | 114 skills organized by category with role package tags |
 | Installation | Role-based install scripts (OpenCode, Claude Code, Cursor, Codex, Windsurf, Copilot, Gemini) |
 | Directory Structure | Where skills live on disk per agent |
 | Cross-Tool Compatibility | Which frontmatter fields work across agents |
@@ -36,21 +36,22 @@ Pick the role that matches your work. Each installs a curated set of skills.
 
 | Role | Skills | Best For |
 |------|--------|----------|
-| `fullstack` | 20 | Most developers (frontend + backend + tools) |
-| `frontend` | 16 | UI/UX development, React, Vue, Angular |
-| `backend` | 15 | API development, servers, databases |
-| `devops` | 13 | Infrastructure, CI/CD, monitoring, SRE |
-| `mobile` | 12 | iOS, Android, Flutter, React Native |
-| `data` | 10 | Data engineering, ML, analytics |
-| `security` | 9 | Application security, penetration testing |
-| `architect` | 11 | System design, tech leads |
-| `content` | 7 | Copywriting, SEO, marketing |
+| `fullstack` | 24 | Most developers (frontend + backend + tools) |
+| `frontend` | 20 | UI/UX development, React, Vue, Angular |
+| `backend` | 19 | API development, servers, databases |
+| `devops` | 17 | Infrastructure, CI/CD, monitoring, SRE |
+| `mobile` | 16 | iOS, Android, Flutter, React Native |
+| `data` | 14 | Data engineering, ML, analytics |
+| `security` | 13 | Application security, penetration testing |
+| `architect` | 15 | System design, tech leads |
+| `content` | 11 | Copywriting, SEO, marketing |
+| `optimize` | 16 | Token cost and context window efficiency |
 
 Add individual skills on top of any role with the `$extras` array. No long lists to delete through.
 
 ## Skills Catalog
 
-99 skills across 12 categories. Expand any category to see each skill, its purpose, and the role packages that include it. `all` means the skill is part of every role package.
+114 skills across 13 categories. Expand any category to see each skill, its purpose, and the role packages that include it. `all` means the skill is part of every role package.
 
 <details>
 <summary><strong>Design & UI/UX</strong> (17 skills)</summary>
@@ -219,6 +220,30 @@ Add individual skills on top of any role with the `$extras` array. No long lists
 </details>
 
 <details>
+<summary><strong>Token Optimization & Context Engineering</strong> (16 skills)</summary>
+
+| Skill | Purpose | Packages |
+|-------|---------|----------|
+| `context-engineering` | Context components, mechanics, and constraints in agent systems | all |
+| `multi-agent-patterns` | Multi-agent architectures for context isolation | all |
+| `write-concisely` | Concise writing rules to cut output tokens | all |
+| `prompt-engineer` | Prompt design and refactoring for token efficiency | all |
+| `launch-sub-agent` | Dispatch an isolated subagent for a task | optimize |
+| `do-in-parallel` | Run independent tasks in parallel subagents | optimize |
+| `memorize` | Curate insights into CLAUDE.md (agentic memory) | optimize |
+| `decay` | Prune stale memory and context | optimize |
+| `reset` | Reset context cleanly between tasks | optimize |
+| `apply-anthropic-skill-best-practices` | Token-efficient skill authoring | optimize |
+| `prompt-engineering` | Advanced prompt patterns for agents, hooks, and skills | optimize |
+| `test-prompt` | Test and iterate prompts | optimize |
+| `setup-codemap-cli` | Semantic code retrieval to cut file reads | optimize |
+| `setup-serena-mcp` | Serena MCP for semantic code retrieval | optimize |
+| `output-skill` | Full-output enforcement, handles token-limit splits | optimize |
+| `graphify` | Turn a codebase into a queryable knowledge graph | optimize |
+
+</details>
+
+<details>
 <summary><strong>Data & Visualization</strong> (3 skills)</summary>
 
 | Skill | Purpose | Packages |
@@ -265,12 +290,12 @@ If you use multiple agents or aren't sure which one, install skills to `.agents/
 
 The guide keeps itself current. The Skills Catalog carries a `Last synced` date, and the "Keeping the Catalog Updated" section holds scripts that:
 
-1. Detect skills added to the upstream repo since that date (via commit history)
+1. Detect skills added to the upstream repos since that date (via commit history)
 2. Detect catalog entries that were removed or renamed upstream
 3. Fetch each new skill's description
 4. Classify it into a category and role package
 
-Run the guide again after a while and the agent runs these checks before acting, so the catalog never drifts from upstream. The repo currently ships 99 curated skills out of 322+ available.
+Run the guide again after a while and the agent runs these checks before acting, so the catalog never drifts from upstream. The repo currently ships 114 curated skills out of 322+ available.
 
 ## Contributing
 
