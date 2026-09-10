@@ -1,5 +1,7 @@
 # AI Agent Skills Implementation Guide
 
+Built by [TheDevRicardo](https://thedevricardo.co.za).
+
 A universal guide for implementing and managing AI agent skills across 7 major coding agents. Works with OpenCode, Claude Code, Cursor, Codex, Windsurf, GitHub Copilot, and Gemini CLI.
 
 ## What This Is
@@ -316,6 +318,10 @@ Run the guide again after a while and the agent runs these checks before acting,
 
 See the Contributing section in the guide for how to create custom skills using the Agent Skills standard.
 
+## Author
+
+Built by [TheDevRicardo](https://thedevricardo.co.za).
+
 ## License
 
-MIT
+MIT. See [LICENSE](LICENSE).

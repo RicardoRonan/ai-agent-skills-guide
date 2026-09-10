@@ -1,5 +1,7 @@
 # AI Agent Skills Implementation Guide
 
+Built by [TheDevRicardo](https://thedevricardo.co.za).
+
 ## Overview
 
 This document describes the implementation of a comprehensive skill library following the [Agent Skills standard](https://agentskills.io), an open format installed globally across all projects. The skills enhance any compatible AI coding agent's ability to research, plan, and execute developer tasks with specialized knowledge.
@@ -1799,6 +1801,6 @@ For issues or questions:
 
 **Last Updated**: September 11, 2026
 **Version**: 4.0.0
-**Author**: Ricardo Moses
+**Author**: [TheDevRicardo](https://thedevricardo.co.za)
 **Catalog Synced**: 2026-09-11 (114 skills tracked)
 **Self-Update**: Run the "Keeping the Catalog Updated" section to pull new upstream skills
