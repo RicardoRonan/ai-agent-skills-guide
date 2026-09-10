@@ -6,7 +6,7 @@ A universal guide for implementing and managing AI agent skills across 7 major c
 
 This guide covers how to install, configure, and manage a skill library following the [Agent Skills standard](https://agentskills.io). It is written to be read by any AI coding agent: the agent detects which tool it is, then follows the correct paths and commands for that agent.
 
-The library ships with 90+ curated skills drawn from a 322+ skill collection, organized into role-based packages so you install what fits your work instead of everything.
+The library ships with 99 curated skills drawn from a 322+ skill collection, organized into role-based packages so you install what fits your work instead of everything.
 
 ## Who This Is For
 
@@ -21,11 +21,12 @@ The library ships with 90+ curated skills drawn from a 322+ skill collection, or
 | Agent Detection | Self-identifying which agent is reading the guide |
 | Supported Agents | Directory paths, instruction files, and SKILL.md support per agent |
 | Agent Skills Standard | The portable YAML frontmatter + markdown body format |
-| Skills Catalog | 90+ skills organized by category with role package tags |
+| Skills Catalog | 99 skills organized by category with role package tags |
 | Installation | Role-based install scripts (OpenCode, Claude Code, Cursor, Codex, Windsurf, Copilot, Gemini) |
 | Directory Structure | Where skills live on disk per agent |
 | Cross-Tool Compatibility | Which frontmatter fields work across agents |
 | Avoiding AI Writing Tells | Rules for writing human-sounding skill content |
+| Keeping the Catalog Updated | Re-run procedure that detects and adds new upstream skills |
 | Contributing | How to create your own custom skills |
 | Resources | Links to specs, docs, and skill sources |
 
@@ -35,21 +36,21 @@ Pick the role that matches your work. Each installs a curated set of skills.
 
 | Role | Skills | Best For |
 |------|--------|----------|
-| `fullstack` | 18 | Most developers (frontend + backend + tools) |
-| `frontend` | 15 | UI/UX development, React, Vue, Angular |
-| `backend` | 14 | API development, servers, databases |
-| `devops` | 12 | Infrastructure, CI/CD, monitoring, SRE |
-| `mobile` | 10 | iOS, Android, Flutter, React Native |
+| `fullstack` | 20 | Most developers (frontend + backend + tools) |
+| `frontend` | 16 | UI/UX development, React, Vue, Angular |
+| `backend` | 15 | API development, servers, databases |
+| `devops` | 13 | Infrastructure, CI/CD, monitoring, SRE |
+| `mobile` | 12 | iOS, Android, Flutter, React Native |
 | `data` | 10 | Data engineering, ML, analytics |
-| `security` | 8 | Application security, penetration testing |
-| `architect` | 10 | System design, tech leads |
-| `content` | 6 | Copywriting, SEO, marketing |
+| `security` | 9 | Application security, penetration testing |
+| `architect` | 11 | System design, tech leads |
+| `content` | 7 | Copywriting, SEO, marketing |
 
 Add individual skills on top of any role with the `$extras` array. No long lists to delete through.
 
 ## Skills Catalog
 
-90+ skills across these categories:
+99 skills across these categories:
 
 - **Design & UI/UX**: checklist-design, design-review, shadcn-ui, color-expert, and more
 - **Code Quality & Security**: code-reviewer, security-reviewer, best-practices, fullstack-guardian
@@ -75,6 +76,17 @@ The full catalog with purposes and package tags is in the guide.
 ## Universal Fallback
 
 If you use multiple agents or aren't sure which one, install skills to `.agents/skills/` at your project root. Nearly every compatible agent reads from that directory.
+
+## Self-Updating Catalog
+
+The guide keeps itself current. The Skills Catalog carries a `Last synced` date, and the "Keeping the Catalog Updated" section holds scripts that:
+
+1. Detect skills added to the upstream repo since that date (via commit history)
+2. Detect catalog entries that were removed or renamed upstream
+3. Fetch each new skill's description
+4. Classify it into a category and role package
+
+Run the guide again after a while and the agent runs these checks before acting, so the catalog never drifts from upstream. The repo currently ships 99 curated skills out of 322+ available.
 
 ## Contributing
 

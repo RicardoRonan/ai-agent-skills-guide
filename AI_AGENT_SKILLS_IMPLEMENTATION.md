@@ -61,6 +61,9 @@ This means skills cost almost nothing in context until they are needed.
 
 All available skills organized by category. See the Installation section to pick a role package or build a custom set.
 
+> **Catalog sync:** `Last synced: 2026-09-11` | `Upstream: hosseinmirzapur/opencode-skills` | `Tracked: 99 skills`.
+> If you are an agent running this guide, run the **Keeping the Catalog Updated** section at the end before trusting these tables. The upstream repo adds skills regularly.
+
 ### Design & UI/UX
 | Skill | Purpose | Packages |
 |-------|---------|----------|
@@ -164,7 +167,7 @@ All available skills organized by category. See the Installation section to pick
 | php-pro | PHP patterns, modern PHP 8+ | backend |
 | csharp-developer | C#/.NET patterns and best practices | backend |
 | cpp-pro | C++ modern patterns, performance | backend |
-| dart-expert | Dart/Flutter language patterns | mobile |
+| flutter-expert | Flutter/Dart app patterns | mobile |
 | rails-expert | Ruby on Rails patterns and conventions | backend |
 | laravel-specialist | Laravel patterns and best practices | backend |
 | spring-boot-engineer | Spring Boot patterns and configuration | backend |
@@ -222,15 +225,15 @@ Pick the role that matches your work. Each role installs a curated set of skills
 
 | Role | Skills | Best For |
 |------|--------|----------|
-| `fullstack` | 18 | Most developers (frontend + backend + tools) |
-| `frontend` | 15 | UI/UX development, React, Vue, Angular |
-| `backend` | 14 | API development, servers, databases |
-| `devops` | 12 | Infrastructure, CI/CD, monitoring, SRE |
-| `mobile` | 10 | iOS, Android, Flutter, React Native |
+| `fullstack` | 20 | Most developers (frontend + backend + tools) |
+| `frontend` | 16 | UI/UX development, React, Vue, Angular |
+| `backend` | 15 | API development, servers, databases |
+| `devops` | 13 | Infrastructure, CI/CD, monitoring, SRE |
+| `mobile` | 12 | iOS, Android, Flutter, React Native |
 | `data` | 10 | Data engineering, ML, analytics |
-| `security` | 8 | Application security, penetration testing |
-| `architect` | 10 | System design, tech leads |
-| `content` | 6 | Copywriting, SEO, marketing |
+| `security` | 9 | Application security, penetration testing |
+| `architect` | 11 | System design, tech leads |
+| `content` | 7 | Copywriting, SEO, marketing |
 
 You can add individual skills on top of any role. See the Skills Catalog for the full list.
 
@@ -305,7 +308,7 @@ $roleSkills = @{
     mobile    = @("code-reviewer","security-reviewer","best-practices",
                   "feature-forge","executing-plans","brainstorming",
                   "test-master","debugging-wizard",
-                  "react-native-expert","typescript-pro","verification-before-completion")
+                  "react-native-expert","flutter-expert","typescript-pro","verification-before-completion")
     data      = @("code-reviewer","best-practices","feature-forge","evaluation",
                   "python-pro","sql-pro","pandas-pro",
                   "d3-visualization","data-report","verification-before-completion")
@@ -402,7 +405,7 @@ case $ROLE in
   mobile)    SKILLS=(code-reviewer security-reviewer best-practices
                      feature-forge executing-plans brainstorming
                      test-master debugging-wizard
-                     react-native-expert typescript-pro verification-before-completion) ;;
+                     react-native-expert flutter-expert typescript-pro verification-before-completion) ;;
   data)      SKILLS=(code-reviewer best-practices feature-forge evaluation
                      python-pro sql-pro pandas-pro
                      d3-visualization data-report verification-before-completion) ;;
@@ -480,7 +483,7 @@ case $ROLE in
   mobile)    SKILLS=(code-reviewer security-reviewer best-practices
                      feature-forge executing-plans brainstorming
                      test-master debugging-wizard
-                     react-native-expert typescript-pro verification-before-completion) ;;
+                     react-native-expert flutter-expert typescript-pro verification-before-completion) ;;
   data)      SKILLS=(code-reviewer best-practices feature-forge evaluation
                      python-pro sql-pro pandas-pro
                      d3-visualization data-report verification-before-completion) ;;
@@ -558,7 +561,7 @@ case $ROLE in
   mobile)    SKILLS=(code-reviewer security-reviewer best-practices
                      feature-forge executing-plans brainstorming
                      test-master debugging-wizard
-                     react-native-expert typescript-pro verification-before-completion) ;;
+                     react-native-expert flutter-expert typescript-pro verification-before-completion) ;;
   data)      SKILLS=(code-reviewer best-practices feature-forge evaluation
                      python-pro sql-pro pandas-pro
                      d3-visualization data-report verification-before-completion) ;;
@@ -631,7 +634,7 @@ case $ROLE in
   mobile)    SKILLS=(code-reviewer security-reviewer best-practices
                      feature-forge executing-plans brainstorming
                      test-master debugging-wizard
-                     react-native-expert typescript-pro verification-before-completion) ;;
+                     react-native-expert flutter-expert typescript-pro verification-before-completion) ;;
   data)      SKILLS=(code-reviewer best-practices feature-forge evaluation
                      python-pro sql-pro pandas-pro
                      d3-visualization data-report verification-before-completion) ;;
@@ -709,7 +712,7 @@ case $ROLE in
   mobile)    SKILLS=(code-reviewer security-reviewer best-practices
                      feature-forge executing-plans brainstorming
                      test-master debugging-wizard
-                     react-native-expert typescript-pro verification-before-completion) ;;
+                     react-native-expert flutter-expert typescript-pro verification-before-completion) ;;
   data)      SKILLS=(code-reviewer best-practices feature-forge evaluation
                      python-pro sql-pro pandas-pro
                      d3-visualization data-report verification-before-completion) ;;
@@ -785,7 +788,7 @@ case $ROLE in
   mobile)    SKILLS=(code-reviewer security-reviewer best-practices
                      feature-forge executing-plans brainstorming
                      test-master debugging-wizard
-                     react-native-expert typescript-pro verification-before-completion) ;;
+                     react-native-expert flutter-expert typescript-pro verification-before-completion) ;;
   data)      SKILLS=(code-reviewer best-practices feature-forge evaluation
                      python-pro sql-pro pandas-pro
                      d3-visualization data-report verification-before-completion) ;;
@@ -1303,6 +1306,159 @@ EXTRAS=("game-developer" "shopify-expert" "wordpress-pro")
 | Data | `python-pro`, `sql-pro`, `pandas-pro`, `d3-visualization`, `ml-pipeline` |
 | Design | `frontend-design`, `shadcn-ui`, `ui-ux-pro-max`, `color-expert` |
 
+## Keeping the Catalog Updated
+
+**Agent instructions:** If you are an agent running this guide, run this section before acting on the catalog. It detects skills added to the upstream repo since the last sync, classifies them, and updates the tables. This makes the guide self-updating.
+
+### Step 1: Detect New Skills
+
+There are two checks. The first finds skills that were **added upstream since the last sync** (the `Catalog Synced` date at the top of the Skills Catalog). The second finds catalog entries that were **removed or renamed**.
+
+#### 1a. New skills since last sync
+
+Set `SINCE` to the `Catalog Synced` date at the top of the Skills Catalog section.
+
+**PowerShell (Windows):**
+```powershell
+$since = "2026-09-11T00:00:00Z"   # <- set to the Catalog Synced date
+$repo  = "hosseinmirzapur/opencode-skills"
+$added = @()
+
+$commits = Invoke-RestMethod "https://api.github.com/repos/$repo/commits?path=skills&since=$since&per_page=100"
+foreach ($c in $commits) {
+    $detail = Invoke-RestMethod "https://api.github.com/repos/$repo/commits/$($c.sha)"
+    $added += $detail.files |
+        Where-Object { $_.status -eq 'added' -and $_.filename -match '^skills/[^/]+/SKILL\.md$' } |
+        ForEach-Object { ($_.filename -split '/')[1] }
+}
+$added = $added | Sort-Object -Unique
+Write-Host "Skills added since $since ($($added.Count)):"
+$added
+```
+
+**Bash (macOS/Linux):**
+```bash
+SINCE="2026-09-11T00:00:00Z"   # <- set to the Catalog Synced date
+REPO="hosseinmirzapur/opencode-skills"
+
+curl -sL "https://api.github.com/repos/$REPO/commits?path=skills&since=$SINCE&per_page=100" \
+    | grep -oE '"sha": "[a-f0-9]{40}"' | sed -E 's/.*"sha": "([a-f0-9]+)".*/\1/' | sort -u | while read sha; do
+        curl -sL "https://api.github.com/repos/$REPO/commits/$sha" \
+            | grep -oE '"filename": "skills/[^/]+/SKILL.md"' | sed -E 's|.*skills/([^/]+)/SKILL.md.*|\1|'
+    done | sort -u
+```
+
+#### 1b. Catalog entries removed or renamed upstream
+
+**PowerShell (Windows):**
+```powershell
+# All live skills upstream
+$tree = Invoke-RestMethod "https://api.github.com/repos/hosseinmirzapur/opencode-skills/git/trees/main?recursive=1"
+$live = $tree.tree |
+    Where-Object { $_.path -match '^skills/[^/]+/SKILL\.md$' } |
+    ForEach-Object { ($_.path -split '/')[1] } |
+    Sort-Object -Unique
+
+# Skills already listed in this guide's catalog
+$doc = Get-Content "AI_AGENT_SKILLS_IMPLEMENTATION.md" -Raw
+$section = [regex]::Match($doc, '(?s)## Skills Catalog.*?(?=\n## )').Value
+$catalog = [regex]::Matches($section, '(?m)^\| ([a-z0-9][a-z0-9-]*) \|') |
+    ForEach-Object { $_.Groups[1].Value } |
+    Sort-Object -Unique
+
+# checklist-design comes from a different repo, so it is expected to be listed here
+$removed = $catalog | Where-Object { $_ -notin $live -and $_ -ne 'checklist-design' }
+Write-Host "Catalog entries no longer upstream ($($removed.Count)):"
+$removed
+```
+
+**Bash (macOS/Linux):**
+```bash
+LIVE=$(curl -sL "https://api.github.com/repos/hosseinmirzapur/opencode-skills/git/trees/main?recursive=1" \
+    | grep -oE '"path": "skills/[^/]+/SKILL.md"' \
+    | sed -E 's|.*skills/([^/]+)/SKILL.md.*|\1|' | sort -u)
+
+CATALOG=$(awk '/^## Skills Catalog/{f=1} f&&/^## /&&!/^## Skills Catalog/{exit} f' \
+    AI_AGENT_SKILLS_IMPLEMENTATION.md \
+    | grep -oE '^\| [a-z0-9][a-z0-9-]* ' | sed -E 's/^\| ([a-z0-9-]+) .*/\1/' | sort -u \
+    | grep -v '^checklist-design$')
+
+echo "Catalog entries no longer upstream:"
+comm -13 <(echo "$LIVE") <(echo "$CATALOG")
+```
+
+If both checks come back empty, the catalog is current. Stop here.
+
+> **Why commit-date detection:** the live-minus-catalog diff would also report the ~200 upstream skills that were deliberately left out of this curated catalog. Commit-date detection only reports what actually changed since the last sync.
+
+
+### Step 2: Fetch Details for New Skills
+
+For each new skill, read its `name` and `description` from the upstream `SKILL.md` frontmatter:
+
+```bash
+# Replace SKILL_NAME with each new skill from Step 1
+curl -sL "https://raw.githubusercontent.com/hosseinmirzapur/opencode-skills/main/skills/SKILL_NAME/SKILL.md" \
+    | sed -n '1,15p'
+```
+
+The first block is YAML frontmatter. Extract the `description:` value. This becomes the "Purpose" column. Trim it to one short phrase.
+
+### Step 3: Classify Each New Skill
+
+Match the skill name and description against these categories. Pick the first category whose keywords appear.
+
+| Category | Match Keywords |
+|----------|---------------|
+| Design & UI/UX | design, ui, ux, figma, color, shadcn, frontend-design, css, layout, wireframe |
+| Code Quality & Security | review, security, lint, audit, vulnerability, secure, guardian, code-smell |
+| Development Workflow | plan, brainstorming, onboarding, workflow, tdd, test-driven, git, branch, review-feedback |
+| Architecture & Design | architect, api, graphql, microservice, cloud, system-design, schema |
+| Testing & Quality | test, debug, playwright, verification, qa, coverage |
+| Infrastructure & DevOps | devops, kubernetes, terraform, docker, ci, cd, monitoring, sre, redis, postgres, sql, spark, database |
+| Language & Frameworks | (language or framework name: python, javascript, typescript, vue, angular, react, next, nest, django, fastapi, laravel, rails, spring, golang, go, rust, java, kotlin, swift, php, csharp, cpp, dotnet, flutter, dart, wordpress, shopify) |
+| Content & Marketing | copy, seo, email, marketing, content, blog, social, ads, cold-email |
+| AI & Machine Learning | ml, ai, fine-tun, rag, prompt, llm, model, embedding, vector |
+| Data & Visualization | data, pandas, visualization, chart, d3, report, analytics, etl |
+| CLI & Tools | cli, command, mcp, tool, terminal, shell |
+| Game Development | game, unity, godot, unreal, shader, 3d |
+
+If no category fits, add a new one at the end of the catalog.
+
+### Step 4: Assign Packages
+
+Add the new skill to role packages based on its category:
+
+| Category | Default Packages |
+|----------|-----------------|
+| Design & UI/UX | frontend |
+| Code Quality & Security | all |
+| Development Workflow | all |
+| Architecture & Design | fullstack, backend, architect |
+| Testing & Quality | fullstack, backend |
+| Infrastructure & DevOps | devops |
+| Language & Frameworks | backend (or frontend, mobile, data, per language) |
+| Content & Marketing | content |
+| AI & Machine Learning | data |
+| Data & Visualization | data |
+| CLI & Tools | fullstack, backend |
+| Game Development | (standalone) |
+
+Also add the skill to the matching role array inside the install scripts (the `$roleSkills` hashtable for PowerShell, the `case` blocks for bash).
+
+### Step 5: Update the Catalog
+
+1. Insert each new skill as a row in its category table: `| skill-name | purpose | packages |`
+2. Update the sync marker at the top of the Skills Catalog section: set `Last synced` to today's date and bump `Tracked` to the new count.
+3. Update the version block at the bottom of this document (bump the minor version, update the date).
+4. Remove any rows reported as "no longer upstream" in Step 1.
+
+### Step 6: Verify
+
+Re-run Step 1. Both drift lists should be empty.
+
+> **Note for non-agent runs:** These steps are written for an AI agent reading this guide. A human can run the same scripts, then manually classify and paste the rows.
+
 ## Contributing
 
 To create custom skills for your team:
@@ -1360,6 +1516,8 @@ For issues or questions:
 
 ---
 
-**Last Updated**: September 10, 2026
-**Version**: 2.0.0
+**Last Updated**: September 11, 2026
+**Version**: 3.0.0
 **Author**: Ricardo Moses
+**Catalog Synced**: 2026-09-11 (99 skills tracked)
+**Self-Update**: Run the "Keeping the Catalog Updated" section to pull new upstream skills
