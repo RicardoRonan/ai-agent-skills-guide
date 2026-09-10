@@ -28,6 +28,8 @@ This guide works with **OpenCode, Claude Code, Cursor, Codex, Windsurf, GitHub C
 
 **If you cannot determine your agent**, use `.agents/skills/` at your project root. This directory is read by nearly every compatible agent.
 
+> **After installing**, see the **Skill Activation** section for when to load each skill, how to route by intent, and the token-smart loading rules.
+
 ## Supported Agents
 
 | Agent | Personal Skills Dir | Project Skills Dir | Instruction File | SKILL.md Support |
@@ -1070,14 +1072,94 @@ Skills are installed in your agent's directory. The internal structure is the sa
 | GitHub Copilot | `~/.copilot/skills/` | `.github/skills/` or `.agents/skills/` |
 | Gemini CLI | `~/.agents/skills/` | `.agents/skills/` |
 
-## Usage
+## Skill Activation
 
-### Automatic Skill Loading
+Skills are a cheap capability layer, but only if they load at the right moment. Each skill exposes just its `name` and `description` at startup (about 100 tokens). The full `SKILL.md` body, and any `references/`, load only when a task matches. Route on the descriptions and let the bodies load lazily.
 
-All supported agents automatically discover and load skills based on context. When you ask a question or give a task, the agent will:
-1. Match your request against skill `description` fields
-2. Load the relevant `SKILL.md` file
-3. Follow the skill's workflow and constraints
+### Core Principle: Load Lazily
+
+- Match the request against `description` fields first. Do not preload bodies.
+- Prefer the narrowest matching skill over several broad ones.
+- Skip skills for trivial asks (one-line fixes, formatting, syntax lookups).
+- Do not chain more than 2-3 skills unless the task genuinely spans domains.
+- Load a skill's `references/` only when the skill body tells you to.
+
+### Activation Triggers
+
+Match the request's intent and domain to a skill. Load only the narrowest fit.
+
+| When the user... | Load | Do not load |
+|------------------|------|-------------|
+| asks to write, rewrite, or edit copy, headlines, landing pages, or CTAs | `copywriting`, `copy-editing` | for code comments or commit messages |
+| wants cold outreach or a cold email | `cold-email` | for transactional email code |
+| wants email sequences or marketing emails | `emails` | for mail server setup |
+| mentions SEO, keywords, rankings, or meta tags | `seo` | for internal docs |
+| asks to design or audit a UI, page, screen, or flow | `checklist-design`, `design-review` | for backend-only work |
+| wants palettes, color, or contrast work | `color-expert` | for CSS bug fixes |
+| builds a component library or uses shadcn | `shadcn-ui` | for one-off inline styles |
+| targets Apple platforms or HIG | `apple-hig` | for web-only work |
+| asks to review a PR or diff | `code-reviewer` | for a full security audit |
+| asks for a security review, audit, or vulnerability check | `security-reviewer`, `secure-code-guardian` | for style-only review |
+| needs documentation or docstrings | `code-documenter` | for a quick inline note |
+| designs a system, service, or architecture | `architecture-designer` | for a single function |
+| designs a REST or OpenAPI surface | `api-designer` | for internal helpers |
+| designs a GraphQL schema | `graphql-architect` | for REST-only work |
+| decomposes into microservices | `microservices-architect` | for a monolith tweak |
+| plans cloud infrastructure | `cloud-architect` | for local scripts |
+| writes or fixes tests | `test-master`, `test-driven-development` | for manual QA notes |
+| debugs a crash, failing test, or regression | `debugging-wizard`, `systematic-debugging` | for a known typo |
+| writes browser or E2E tests | `playwright-expert` | for unit-level logic |
+| sets up CI/CD, Docker, or deploys | `devops-engineer` | for a local `npm run` |
+| works with Kubernetes | `kubernetes-specialist` | for plain Docker |
+| writes Terraform or IaC | `terraform-engineer` | for app config |
+| adds monitoring, alerting, or dashboards | `monitoring-expert` | for a one-off log line |
+| improves reliability or on-call | `sre-engineer` | for feature work |
+| tests resilience or injects failure | `chaos-engineer` | for happy-path tests |
+| tunes a slow query or index | `database-optimizer` | for schema brainstorming |
+| writes or optimizes SQL | `sql-pro` | for ORM-only changes |
+| works with PostgreSQL specifically | `postgres-pro` | for other engines |
+| works with Redis | `redis-core`, `redis-query-engine` | for caching trivia |
+| analyzes data with pandas | `pandas-pro` | for a single CSV read |
+| builds charts or visualizations | `d3-visualization` | for a static image |
+| builds React or Next.js UI | `react-expert`, `nextjs-developer` | for plain HTML |
+| builds Vue UI | `vue-expert` | for React work |
+| works with advanced TypeScript types | `typescript-pro` | for basic JS |
+| writes Python, Go, Rust, Java, PHP, or C# | the matching language skill | for a shell one-liner |
+| builds mobile apps | `react-native-expert`, `flutter-expert`, `swift-expert` | for responsive web |
+| gathers requirements, stories, or a spec | `feature-forge` | for a quick bug fix |
+| plans a multi-step change | `executing-plans` | for a one-file edit |
+| generates or compares ideas | `brainstorming` | for a fixed task |
+| weighs options and picks one | `evaluation` | for a stated requirement |
+| onboards to an unfamiliar codebase | `onboarding`, `spec-miner` | for known code |
+| reduces tokens, cost, or context usage | `context-engineering`, `write-concisely`, `prompt-engineer` | for feature work |
+| shrinks a bloated `CLAUDE.md` or prompt | `context-engineering`, `prompt-engineering` | for code comments |
+| runs multi-agent or parallel work | `multi-agent-patterns`, `launch-sub-agent`, `do-in-parallel` | for a single edit |
+| carries memory across a long session | `memorize`, `decay`, `reset` | for a short task |
+| cuts file reads with semantic search | `setup-codemap-cli`, `setup-serena-mcp` | for a one-file task |
+
+### Token-Smart Rules
+
+1. Route on intent, not a single keyword. "Review" could mean `code-reviewer`, `security-reviewer`, `design-review`, or `copy-editing`. Pick from the request's domain.
+2. One primary skill per domain. If two match, choose the narrower one and escalate only if the first body calls for it.
+3. Do not activate a skill that will not change your approach. Skills carry procedure and constraints, not trivia.
+4. Prefer subagent isolation for read-heavy exploration (`multi-agent-patterns`, `launch-sub-agent`, `do-in-parallel`) so raw file reads never bloat the main context.
+5. Apply `write-concisely` to all human-facing output.
+6. Do not re-activate a skill that is already in context.
+7. When the user asks for writing of any kind, load the matching writing skill before drafting.
+
+### Precedence
+
+When several skills match, order them: security, then correctness or quality, then the domain skill, then the process skill.
+
+Example: "Review this auth PR for security" loads `security-reviewer` first, then `code-reviewer`.
+
+### Activation Flow
+
+1. Parse the request for domain and intent.
+2. Match against the trigger table above.
+3. Load only the narrowest match, or the two narrowest in different domains.
+4. Follow the skill's workflow. Load `references/` only as the body instructs.
+5. If nothing matches, proceed without a skill.
 
 ### Manual Skill Loading
 
@@ -1095,29 +1177,41 @@ You can explicitly invoke a skill by name. The invocation syntax varies by agent
 
 ### Skill Examples
 
+#### Writing and Copy
+```
+Rewrite this landing page headline and tighten the value proposition
+```
+→ Agent loads `copywriting`, then `copy-editing`
+
+#### Token and Context Cleanup
+```
+This session is using too many tokens and my CLAUDE.md is 800 lines. Help me cut it down.
+```
+→ Agent loads `context-engineering`, then `write-concisely`
+
 #### Code Review
 ```
 Review this pull request for security vulnerabilities and code quality issues
 ```
-→ Agent loads `code-reviewer` skill
+→ Agent loads `security-reviewer`, then `code-reviewer`
 
 #### Architecture Design
 ```
 Design a microservices architecture for an e-commerce platform
 ```
-→ Agent loads `architecture-designer` skill
+→ Agent loads `architecture-designer`
 
 #### Debugging
 ```
 Help me debug this memory leak in my Node.js application
 ```
-→ Agent loads `debugging-wizard` skill
+→ Agent loads `debugging-wizard`
 
 #### UI/UX Review
 ```
 Audit this landing page against the Website Landing Page checklist
 ```
-→ Agent loads `checklist-design` skill
+→ Agent loads `checklist-design`
 
 ## If Your Agent is Claude Code
 

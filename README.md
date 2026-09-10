@@ -22,6 +22,7 @@ The library ships with 114 curated skills drawn from a 322+ skill collection plu
 | Supported Agents | Directory paths, instruction files, and SKILL.md support per agent |
 | Agent Skills Standard | The portable YAML frontmatter + markdown body format |
 | Skills Catalog | 114 skills organized by category with role package tags |
+| Skill Activation | When the agent loads each skill, intent routing, and token-smart rules |
 | Installation | Role-based install scripts (OpenCode, Claude Code, Cursor, Codex, Windsurf, Copilot, Gemini) |
 | Directory Structure | Where skills live on disk per agent |
 | Cross-Tool Compatibility | Which frontmatter fields work across agents |
@@ -48,6 +49,20 @@ Pick the role that matches your work. Each installs a curated set of skills.
 | `optimize` | 16 | Token cost and context window efficiency |
 
 Add individual skills on top of any role with the `$extras` array. No long lists to delete through.
+
+## How Skills Activate
+
+Skills load lazily. Only each skill's `name` and `description` are read at startup (about 100 tokens). The full instructions load only when a task matches, so an idle skill costs almost nothing.
+
+The guide's Skill Activation section gives the agent a trigger table mapping user intent to a skill, plus token-smart rules:
+
+- Route on intent, not a single keyword
+- Load the narrowest matching skill, not several broad ones
+- Skip skills for trivial asks
+- Prefer subagent isolation for read-heavy exploration so raw file reads stay out of the main context
+- Apply `write-concisely` to human-facing output
+
+Examples: asking to write or edit copy loads `copywriting` then `copy-editing`. Asking to cut token usage or shrink a bloated `CLAUDE.md` loads `context-engineering` then `write-concisely`. Asking to review an auth PR loads `security-reviewer` then `code-reviewer`.
 
 ## Skills Catalog
 
