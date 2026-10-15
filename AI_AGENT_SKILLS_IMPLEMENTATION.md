@@ -1343,6 +1343,131 @@ done
 
 ---
 
+## Install Step 4: Wire Up Always-On Skill Routing
+
+Installing skills is not enough — if the instruction file doesn't tell the agent to route to them, it will improvise. This step appends a compact, always-on **skill routing** block to your agent's global instruction file so every session loads the right skill by default.
+
+It is **idempotent**: the script checks for a marker comment before writing, so re-running the installer never duplicates the block. It also never overwrites your existing instruction file — it only appends.
+
+### Target instruction file per agent
+
+| Agent | File the script writes | Format |
+|-------|------------------------|--------|
+| OpenCode | `~/.config/opencode/AGENTS.md` | append |
+| Claude Code | `~/.claude/CLAUDE.md` | append |
+| Cursor | `~/.cursor/rules/skill-routing.mdc` | `.mdc` with `alwaysApply: true` |
+| Codex | `~/.codex/AGENTS.md` | append |
+| Windsurf | `~/.codeium/windsurf/.windsurfrules` | append |
+| GitHub Copilot | `.github/copilot-instructions.md` | append (project) |
+| Gemini CLI | `~/.gemini/GEMINI.md` | append |
+
+### The routing block
+
+This is the content written to the file. It encodes the core of the Skill Activation section so the agent always knows when to load which skill.
+
+```markdown
+<!-- ai-agent-skills-guide: skill-routing v1 -->
+## Skill Routing (always-on)
+
+Match each request to a skill's `description` and load only the narrowest match before acting.
+
+Always-on skills — apply without being asked:
+- `context-engineering` — default lens for any non-trivial task; every token/context decision.
+- `write-concisely` — all human-facing text: responses, docs, comments, commit messages.
+- `output-skill` — any code generation: no placeholders, no silent truncation.
+- `multi-agent-patterns` — whenever work could split into independent subtasks.
+
+Core routing rules:
+- Route on intent, not a single keyword. Pick from the request's domain.
+- One primary skill per domain; escalate only if the first skill's body calls for it.
+- Skip skills for trivial asks (one-line fix, syntax lookup).
+- Prefer subagent isolation for read-heavy exploration so raw reads stay out of main context.
+- Precedence when several match: security, then correctness/quality, then domain, then process.
+```
+
+### Run it (OpenCode — PowerShell)
+
+Append to the end of the OpenCode install script above, or run standalone:
+
+```powershell
+# STEP 4: Add always-on skill routing to the global instruction file (idempotent)
+$instrFile = "$env:USERPROFILE\.config\opencode\AGENTS.md"
+$marker = "ai-agent-skills-guide: skill-routing"
+$already = (Test-Path $instrFile) -and (Select-String -Path $instrFile -Pattern $marker -Quiet)
+if ($already) {
+    Write-Host "Skill routing already present in $instrFile - skipped"
+} else {
+    New-Item -ItemType Directory -Force -Path (Split-Path $instrFile) | Out-Null
+    Add-Content -Path $instrFile -Value @"
+
+<!-- $marker v1 -->
+## Skill Routing (always-on)
+
+Match each request to a skill's ``description`` and load only the narrowest match before acting.
+
+Always-on skills - apply without being asked:
+- ``context-engineering`` - default lens for any non-trivial task; every token/context decision.
+- ``write-concisely`` - all human-facing text: responses, docs, comments, commit messages.
+- ``output-skill`` - any code generation: no placeholders, no silent truncation.
+- ``multi-agent-patterns`` - whenever work could split into independent subtasks.
+
+Core routing rules:
+- Route on intent, not a single keyword. Pick from the request's domain.
+- One primary skill per domain; escalate only if the first skill's body calls for it.
+- Skip skills for trivial asks (one-line fix, syntax lookup).
+- Prefer subagent isolation for read-heavy exploration so raw reads stay out of main context.
+- Precedence when several match: security, then correctness/quality, then domain, then process.
+"@
+    Write-Host "Skill routing added to $instrFile"
+}
+```
+
+### Run it (all other agents — bash)
+
+Set `INSTR_FILE` to your agent's path from the table above, then append to the end of that agent's install script or run standalone:
+
+```bash
+# STEP 4: Add always-on skill routing to the instruction file (idempotent)
+# Set INSTR_FILE for your agent (see table). Examples:
+#   Codex:     "$HOME/.codex/AGENTS.md"
+#   Claude:    "$HOME/.claude/CLAUDE.md"
+#   Gemini:    "$HOME/.gemini/GEMINI.md"
+#   Windsurf:  "$HOME/.codeium/windsurf/.windsurfrules"
+INSTR_FILE="${INSTR_FILE:-$HOME/.codex/AGENTS.md}"
+MARKER="ai-agent-skills-guide: skill-routing"
+
+mkdir -p "$(dirname "$INSTR_FILE")"
+if grep -q "$MARKER" "$INSTR_FILE" 2>/dev/null; then
+    echo "Skill routing already present in $INSTR_FILE - skipped"
+else
+    cat >> "$INSTR_FILE" <<'EOF'
+
+<!-- ai-agent-skills-guide: skill-routing v1 -->
+## Skill Routing (always-on)
+
+Match each request to a skill's `description` and load only the narrowest match before acting.
+
+Always-on skills - apply without being asked:
+- `context-engineering` - default lens for any non-trivial task; every token/context decision.
+- `write-concisely` - all human-facing text: responses, docs, comments, commit messages.
+- `output-skill` - any code generation: no placeholders, no silent truncation.
+- `multi-agent-patterns` - whenever work could split into independent subtasks.
+
+Core routing rules:
+- Route on intent, not a single keyword. Pick from the request's domain.
+- One primary skill per domain; escalate only if the first skill's body calls for it.
+- Skip skills for trivial asks (one-line fix, syntax lookup).
+- Prefer subagent isolation for read-heavy exploration so raw reads stay out of main context.
+- Precedence when several match: security, then correctness/quality, then domain, then process.
+EOF
+    echo "Skill routing added to $INSTR_FILE"
+fi
+```
+
+> **Cursor** uses a `.mdc` file with frontmatter. Write `~/.cursor/rules/skill-routing.mdc` containing `alwaysApply: true` on the first line, followed by the routing block body.
+
+After this step, every session in every project starts with the routing rules loaded, so the installed skills are actually used instead of sitting idle.
+
 ## Directory Structure
 
 Skills are installed in your agent's directory. The internal structure is the same regardless of agent:

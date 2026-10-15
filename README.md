@@ -67,6 +67,8 @@ The guide's Skill Activation section gives the agent a trigger table mapping use
 - Prefer subagent isolation for read-heavy exploration so raw file reads stay out of the main context
 - Apply `write-concisely` to human-facing output
 
+**Install Step 4 makes these rules stick.** It appends a compact, always-on routing block to your agent's global instruction file (AGENTS.md, CLAUDE.md, etc.), so every session loads the right skill by default instead of improvising. It is idempotent — re-running the installer never duplicates the block or overwrites your existing instructions.
+
 Examples: asking to write or edit copy loads `copywriting` then `copy-editing`. Asking to cut token usage or shrink a bloated `CLAUDE.md` loads `context-engineering` then `write-concisely`. Asking to review an auth PR loads `security-reviewer` then `code-reviewer`.
 
 ## Skills Catalog
@@ -368,7 +370,8 @@ The source of truth, including the full upstream skill sets and the self-update 
 1. Open `AI_AGENT_SKILLS_IMPLEMENTATION.md`
 2. Follow the Agent Detection section to identify your agent
 3. Pick one or more roles and run the install script for your agent
-4. Skills are now available across all your projects
+4. Run Install Step 4 to write the always-on skill-routing rules into your instruction file (AGENTS.md / CLAUDE.md / etc.)
+5. Skills are now available — and actively routed to — across all your projects
 
 ## Universal Fallback
 
